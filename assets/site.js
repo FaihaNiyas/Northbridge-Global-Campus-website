@@ -259,6 +259,59 @@ function initFloat() {
   update();
 }
 
+/* -------------------------------------------------------------- reveal */
+/* A short fade-up as blocks scroll into view. Two rules keep it honest:
+
+   1. Nothing is hidden unless this script is actually running. The .js flag is
+      set in <head>, and the targets below are marked here — this file is loaded
+      at the end of <body>, so the marking happens before the first paint and
+      there is no flash of laid-out-then-hidden content.
+   2. Anything already in the viewport on load is shown immediately, so the
+      fold is never animated and content is never delayed.
+
+   Under prefers-reduced-motion nothing is marked at all. */
+function initReveal() {
+  const root = document.documentElement;
+  if (!root.classList.contains('js')) return;
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  if (!('IntersectionObserver' in window)) return;
+
+  const targets = $$([
+    '.steps li',
+    '.prose-grid > div',
+    '.contact-methods .method',
+    '.fact-list li',
+    '.form-wrap',
+    'main section > .shell > .measure'
+  ].join(','));
+  if (!targets.length) return;
+
+  const vh = window.innerHeight || root.clientHeight;
+
+  targets.forEach(el => {
+    // already on screen: leave it alone, it must not fade in
+    if (el.getBoundingClientRect().top < vh * 0.92) return;
+    el.classList.add('reveal');
+    // stagger siblings a little, capped at three steps
+    const sibs = el.parentElement ? Array.from(el.parentElement.children) : [];
+    const i = sibs.indexOf(el);
+    if (i > 0 && i < 4) el.setAttribute('data-d', String(i));
+  });
+
+  const marked = targets.filter(el => el.classList.contains('reveal'));
+  if (!marked.length) return;
+
+  const io = new IntersectionObserver((entries, obs) => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      entry.target.classList.add('is-in');
+      obs.unobserve(entry.target);
+    });
+  }, { rootMargin: '0px 0px -8% 0px', threshold: 0.06 });
+
+  marked.forEach(el => io.observe(el));
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   fillContactDetails();
   initNav();
@@ -266,3 +319,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initForms();
   initFloat();
 });
+
+/* Runs immediately rather than on DOMContentLoaded: this script sits at the
+   end of <body>, so the DOM is complete and marking happens before paint. */
+initReveal();
