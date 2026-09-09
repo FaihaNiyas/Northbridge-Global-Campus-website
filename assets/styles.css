@@ -73,9 +73,20 @@
 
   --ease: cubic-bezier(.22,.61,.36,1);
   --ease-out: cubic-bezier(.16,.84,.44,1);
+
+  /* measured height of the sticky bar, per breakpoint — anchor targets offset
+     by this so a heading never lands underneath the header */
+  --head-h: 86px;
 }
 
-@media (min-width:48em){ :root{ --pad:2rem; } }
+@media (min-width:48em){ :root{ --pad:2rem; --head-h:101px; } }
+@media (min-width:64em){ :root{ --head-h:108px; } }
+@media (min-width:75em){ :root{ --head-h:112px; } }
+
+/* Anything reachable by an in-page link clears the sticky header. */
+:where(section[id], #main, [id]:target){
+  scroll-margin-top:calc(var(--head-h) + 1.25rem);
+}
 
 /* ---------- reset ---------- */
 *,*::before,*::after{ box-sizing:border-box; }
@@ -159,7 +170,15 @@ section{ padding-block:3.5rem; }
 .band-navy a{ color:var(--gold-soft); }
 
 /* ============================================================================
-   HEADER — one sticky bar, ~112px at rest, condensing to ~92px on scroll.
+   HEADER — one sticky bar, solid white in every position.
+
+   It must never sample the page behind it: a translucent/blurred bar picked up
+   the navy hero and read as grey, and against that grey the logo's own white
+   canvas showed as a separate white rectangle. So the background stays opaque
+   #FFFFFF at all times and only the shadow and the gold hairline respond to
+   scrolling. Height is fixed too — the logo is not resized on scroll — so the
+   bar cannot shift the page as it condenses.
+
    The official mark is square (crest stacked over the wordmark), which forced a
    ~250px bar. assets/northbridge-logo-lockup.png is a horizontal display copy
    built from that same artwork — crest, motto ribbon and full wordmark, every
@@ -167,23 +186,15 @@ section{ padding-block:3.5rem; }
    ========================================================================= */
 .site-head{
   position:sticky; top:0; z-index:100;
-  background:var(--white);
+  background:var(--white);          /* opaque, always — no backdrop-filter */
   border-bottom:1px solid var(--gold-22);
-  transition:background-color .3s var(--ease), box-shadow .3s var(--ease),
-             border-color .3s var(--ease);
+  transition:box-shadow .3s var(--ease), border-color .3s var(--ease);
 }
 
-/* Once scrolled the bar turns translucent and blurs what passes beneath it,
-   and the gold hairline firms up so the edge stays defined over any surface. */
+/* Scrolled: the edge firms up. Background and height do not move. */
 .site-head.is-compact{
-  background:rgba(255,255,255,.80);
-  -webkit-backdrop-filter:saturate(180%) blur(14px);
-  backdrop-filter:saturate(180%) blur(14px);
   border-bottom-color:var(--gold-38);
   box-shadow:var(--shadow-sm);
-}
-@supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){
-  .site-head.is-compact{ background:rgba(255,255,255,.97); }
 }
 
 /* Logo and navigation share the one centred shell, vertically centred.
@@ -191,23 +202,21 @@ section{ padding-block:3.5rem; }
 .head-inner{
   display:flex; align-items:center; justify-content:space-between; gap:1.5rem;
   padding-block:.85rem;
-  transition:padding .3s var(--ease);
 }
-.site-head.is-compact .head-inner{ padding-block:.6rem; }
 
-/* --- brand --- */
+/* --- brand ---
+   The lockup is artwork on a white canvas. Because the bar behind it is the
+   same opaque white, the canvas disappears and only the mark reads. */
 .brand{ display:flex; align-items:center; text-decoration:none; min-width:0; border-radius:var(--radius-sm); }
 .brand-mark{
   display:block; width:168px; height:auto;
-  transition:width .3s var(--ease), opacity .2s var(--ease);
+  transition:opacity .2s var(--ease);
 }
 .brand:hover .brand-mark{ opacity:.86; }
 @media (min-width:30em){ .brand-mark{ width:186px; } }
 @media (min-width:48em){ .brand-mark{ width:210px; } }
 @media (min-width:64em){ .brand-mark{ width:232px; } }   /* ~80px tall */
 @media (min-width:75em){ .brand-mark{ width:244px; } }   /* ~84px tall */
-.site-head.is-compact .brand-mark{ width:168px; }
-@media (min-width:64em){ .site-head.is-compact .brand-mark{ width:196px; } }
 
 /* --- mobile menu button --- */
 .nav-toggle{
@@ -233,7 +242,17 @@ section{ padding-block:3.5rem; }
 /* Mobile: a proper panel rather than a bare list — carded, spaced, and it
    fades down under the bar instead of snapping into place. */
 @media (max-width:47.99em){
-  .site-nav{ display:none; padding-bottom:1rem; }
+  /* The open panel must drop BELOW the bar. Without wrapping it becomes a third
+     flex child of .head-inner and is squeezed in beside the menu button. */
+  .head-inner{ flex-wrap:wrap; }
+  .site-nav{ display:none; flex:0 0 100%; padding-bottom:1rem; }
+  /* on the narrowest phones trim the mark and the button so that wrapping is
+     reserved for the nav panel and the bar itself stays one row */
+  @media (max-width:21.5em){
+    .head-inner{ gap:.75rem; }
+    .brand-mark{ width:138px; }
+    .nav-toggle{ padding:.55rem .7rem; }
+  }
   .site-nav.is-open{ display:block; }
   .site-nav ul{
     margin-top:.25rem; padding:.4rem;
@@ -352,176 +371,155 @@ section{ padding-block:3.5rem; }
 @media (max-width:29.99em){ .btn-row .btn{ width:100%; } }
 
 /* ============================================================================
-   HERO — editorial split.
+   HERO — cinematic.
 
-   Desktop: an asymmetric grid. The copy sits in the left ~45.5%, its left edge
-   aligned to the shell gutter so it lines up with every section below. The
-   figure takes the right ~54.5% as a full-height panel that runs to the right
-   viewport edge — no border, no plate, no card — and its left edge is faded
-   into the navy ground so the photograph reads as part of the hero.
+   Desktop (>=64em): the photograph is the hero's full-width background, set
+   absolutely behind the copy. A navy gradient runs almost solid at the left
+   edge and decays to nothing around 80% across — she sits in the right third,
+   so her face and blazer never take a dark wash. Because one image spans the
+   whole hero there is no panel boundary and therefore no seam.
 
-   Mobile: copy first, image below the calls to action, edge to edge.
-
-   The photograph is never altered. All framing is object-fit/object-position,
-   and the only overlay is a navy gradient on the side she is not on.
+   Tablet and phone: the hero stacks. Copy sits on the navy-to-green ground,
+   and the photograph follows underneath in a wide frame — never a portrait
+   crop, and never behind the text where it would be unreadable.
    ========================================================================= */
 .hero{
   position:relative;
+  isolation:isolate;
   background:
-    radial-gradient(115% 100% at 86% 0%, rgba(0,75,60,.52) 0%, rgba(0,75,60,0) 62%),
-    linear-gradient(154deg, rgba(0,75,60,0) 32%, rgba(0,75,60,.76) 100%),
+    radial-gradient(120% 100% at 88% 0%, rgba(0,75,60,.50) 0%, rgba(0,75,60,0) 62%),
+    linear-gradient(154deg, rgba(0,75,60,0) 32%, rgba(0,75,60,.74) 100%),
     var(--navy);
   color:var(--white);
   overflow:hidden;
-  padding-block:0;        /* the grid owns the height; section padding must not add to it */
+  padding-block:0;        /* the inner block owns the height */
 }
 
-/* one hairline of gold along the foot of the hero, nothing more */
+/* the transition into the white section below: one gold hairline, nothing else */
 .hero::after{
   content:""; position:absolute; left:0; right:0; bottom:0; height:1px; z-index:3;
   background:linear-gradient(90deg, var(--gold-38), var(--gold-10) 55%, transparent);
   pointer-events:none;
 }
 
-.hero-grid{ display:grid; }
+.hero-inner{ position:relative; z-index:2; padding-block:2.75rem 2.5rem; }
+.hero-copy{ max-width:580px; }
 
-.hero-copy{ padding:2.75rem var(--pad) 2.5rem; }
-.hero-copy-inner{ max-width:34rem; }
-
-/* eyebrow: a plain gold label with a short rule, so it does not repeat the
-   pill shape used by the status badge just below it */
-.hero .hero-copy-inner .eyebrow{
+/* eyebrow — a plain gold label with a short rule, not a pill */
+.hero .hero-copy .eyebrow{
   display:inline-flex; align-items:center; gap:.7rem;
   background:none; border:0; border-radius:0; padding:0;
-  margin-bottom:1.15rem;
+  margin-bottom:1.35rem;
   color:var(--gold-soft);
   font-size:.71rem; letter-spacing:.2em; font-weight:700;
 }
-.hero .hero-copy-inner .eyebrow::before{
+.hero .hero-copy .eyebrow::before{
   content:""; flex:none; width:26px; height:1px; background:var(--gold);
 }
 @media (max-width:26em){
-  .hero .hero-copy-inner .eyebrow{ font-size:.66rem; letter-spacing:.13em; gap:.55rem; }
-  .hero .hero-copy-inner .eyebrow::before{ width:18px; }
+  .hero .hero-copy .eyebrow{ font-size:.66rem; letter-spacing:.13em; gap:.55rem; }
+  .hero .hero-copy .eyebrow::before{ width:18px; }
 }
 
 .hero h1{
   color:var(--white);
-  font-family:var(--serif); font-weight:500;      /* lighter than the body serif */
-  font-size:clamp(2rem,1rem + 2.4vw,2.85rem);
+  font-family:var(--serif);
+  font-weight:400;                                   /* the lighter serif cut */
+  font-size:clamp(2.1rem,1.1rem + 3.1vw,3.6rem);     /* ~58px on large desktop */
   line-height:1.1; letter-spacing:-.02em;
-  text-wrap:balance;                               /* two even lines, no orphan */
+  text-wrap:balance;                                 /* even lines, no orphan */
 }
 .hero .lede{
   color:var(--on-dark);
-  font-size:clamp(1.02rem,.97rem + .4vw,1.16rem);
-  line-height:1.62;
-  margin-top:1.1rem; max-width:30rem;
+  font-size:clamp(1.04rem,.99rem + .42vw,1.18rem);
+  line-height:1.7;
+  margin-top:1.35rem;
+  max-width:520px;
 }
+.hero .btn-row{ margin-top:2rem; }
 
-/* honest status note — no numbers, no claim beyond what the page already says */
+/* status — a small line with a gold dot, not a capsule */
 .hero-status{
-  display:inline-flex; align-items:center; gap:.6rem;
-  margin-top:1.4rem; padding:.42rem .9rem;
-  background:var(--on-dark-08);
-  border:1px solid var(--gold-38);
-  border-radius:999px;
-  color:var(--gold-soft);
-  font-size:.79rem; font-weight:600; letter-spacing:.04em;
+  display:flex; align-items:center; gap:.55rem;
+  margin-top:1.5rem;
+  color:var(--on-dark-60);
+  font-size:.85rem; letter-spacing:.01em;
 }
 .hero-status .dot{
-  flex:none; width:7px; height:7px; border-radius:50%; background:var(--gold);
+  flex:none; width:6px; height:6px; border-radius:50%; background:var(--gold);
 }
 
-.hero .btn-row{ margin-top:1.6rem; }
-/* slightly tighter than the site default so both CTAs hold one row */
-.hero .btn{ padding-inline:1.2rem; }
-
-/* trust strip — three plain statements, separated by short gold rules */
+/* trust strip — two plain statements, a small gold separator between them */
 .trust-strip{
-  list-style:none; margin:2rem 0 0; padding:0;
-  display:flex; flex-wrap:wrap; align-items:center; gap:.35rem .95rem;
+  list-style:none; margin:1.1rem 0 0; padding:0;
+  display:flex; flex-wrap:wrap; align-items:center; gap:.35rem 1rem;
   color:var(--on-dark);
-  font-size:.82rem; font-weight:600; letter-spacing:.03em;
+  font-size:.83rem; font-weight:600; letter-spacing:.03em;
 }
-.trust-strip li{ display:flex; align-items:center; gap:.95rem; }
+.trust-strip li{ display:flex; align-items:center; gap:1rem; }
 .trust-strip li:not(:last-child)::after{
   content:""; flex:none; width:4px; height:4px; border-radius:50%;
   background:var(--gold);
 }
-/* On phones the three items cannot share a line, and a wrapped line would
-   leave a dangling separator, so stack them instead. */
-@media (max-width:30em){
-  .trust-strip{ flex-direction:column; align-items:flex-start; gap:.4rem; }
-  .trust-strip li:not(:last-child)::after{ display:none; }
-}
 
-/* --- ambassador panel --- */
-.hero-figure{ margin:0; position:relative; overflow:hidden; }
-.hero-figure img{
+/* --- the photograph --- */
+.hero-media{ position:relative; }
+.hero-media img{
   width:100%;
   aspect-ratio:4/3;
   object-fit:cover;
-  object-position:92% center;   /* she sits right in the source frame */
+  object-position:92% center;      /* she sits right in the source frame */
   display:block;
-  /* Fade the edge she is NOT on so the photograph dissolves into the hero
-     ground instead of ending on a hard card edge. A mask reveals the hero's
-     own navy-to-green gradient, so the join cannot mismatch in colour. */
-  -webkit-mask-image:linear-gradient(180deg, transparent 0%, rgba(0,0,0,.55) 9%, #000 27%);
-          mask-image:linear-gradient(180deg, transparent 0%, rgba(0,0,0,.55) 9%, #000 27%);
 }
-/* Where masking is unavailable, fall back to a navy wash over the same edge.
-   Either way nothing is laid over her face, clothing or the blazer crest. */
-@supports not ((mask-image:linear-gradient(#000,#000)) or (-webkit-mask-image:linear-gradient(#000,#000))){
-  .hero-figure::before{
-    content:""; position:absolute; inset:0; z-index:1; pointer-events:none;
-    background:linear-gradient(180deg,
-      var(--navy) 0%, rgba(0,33,71,.62) 7%, rgba(0,33,71,.16) 20%, rgba(0,33,71,0) 34%);
-  }
+/* stacked layout: soften the top edge into the copy above it */
+.hero-media::after{
+  content:""; position:absolute; inset:0; pointer-events:none;
+  background:linear-gradient(180deg,
+    rgba(0,33,71,.92) 0%, rgba(0,33,71,.45) 8%, rgba(0,33,71,0) 24%);
 }
 
-/* tablet: a wider window keeps the stacked hero from getting tall, and brings
-   the whole wall lockup back into frame */
+/* tablet: a wider frame keeps the stacked hero from getting tall and brings
+   the whole wall lockup back into view */
 @media (min-width:40em) and (max-width:63.99em){
-  .hero-figure img{ aspect-ratio:16/9; object-position:92% center; }
+  .hero-media img{ aspect-ratio:16/9; object-position:92% center; }
 }
 
 @media (min-width:64em){
-  .hero-grid{
-    grid-template-columns:minmax(0,46%) minmax(0,54%);
-    align-items:stretch;
-    min-height:560px;
+  .hero-inner{
+    display:flex; align-items:center;      /* content vertically centred */
+    min-height:620px;
+    padding-block:4rem;
   }
-  .hero-copy{
-    display:flex; align-items:center;      /* vertically centred */
-    padding-block:3.5rem;
-    /* left edge lines up with the shell gutter used by every section below */
-    padding-left:max(var(--pad), calc((100vw - var(--shell)) / 2 + var(--pad)));
-    padding-right:2rem;
+  /* the photograph becomes the hero's background */
+  .hero-media{
+    position:absolute; inset:0; z-index:0;
   }
-  .hero-copy-inner{ max-width:none; }
-
-  /* full-height panel, bleeding to the right edge of the viewport */
-  .hero-figure{ aspect-ratio:auto; }
-  .hero-figure img{
-    position:absolute; inset:0;
+  .hero-media img{
     width:100%; height:100%;
     aspect-ratio:auto;
-    object-position:94% center;  /* keeps her whole, holds desk, lamp, windows */
-    -webkit-mask-image:linear-gradient(90deg, transparent 0%, rgba(0,0,0,.42) 13%, #000 45%);
-            mask-image:linear-gradient(90deg, transparent 0%, rgba(0,0,0,.42) 13%, #000 45%);
+    object-position:88% center;   /* keeps her whole; holds desk, wall, windows */
   }
-  @supports not ((mask-image:linear-gradient(#000,#000)) or (-webkit-mask-image:linear-gradient(#000,#000))){
-    .hero-figure::before{
-      background:linear-gradient(90deg,
-        var(--navy) 0%, rgba(0,33,71,.90) 7%, rgba(0,33,71,.44) 22%,
-        rgba(0,33,71,.12) 40%, rgba(0,33,71,0) 56%);
-    }
+  /* Strong navy at the left for reading contrast, decaying to clear before it
+     reaches her. The vertical wash is a couple of percent — enough to seat the
+     photograph in the brand, not enough to dull it. */
+  .hero-media::after{
+    background:
+      linear-gradient(90deg,
+        rgba(0,33,71,.975) 0%,
+        rgba(0,33,71,.965) 32%,
+        rgba(0,33,71,.925) 46%,   /* copy ends ~52%: keep this band clean */
+        rgba(0,33,71,.74)  57%,
+        rgba(0,33,71,.42)  65%,
+        rgba(0,33,71,.17)  72%,   /* she starts ~72%: light from here on */
+        rgba(0,33,71,.04)  80%,
+        rgba(0,33,71,0)    88%),
+      radial-gradient(85% 120% at 0% 100%, rgba(0,75,60,.42) 0%, rgba(0,75,60,0) 58%),
+      linear-gradient(180deg, rgba(0,33,71,.20) 0%, rgba(0,33,71,0) 26%);
   }
 }
-@media (min-width:75em){ .hero-grid{ min-height:660px; } }
+@media (min-width:75em){ .hero-inner{ min-height:660px; } }
 
-/* Inner-page banner: same ground, no figure, tighter. */
+/* Inner-page banner: same ground, no photograph, tighter. */
 .hero-page{ padding-block:2.75rem; }
 @media (min-width:64em){ .hero-page{ padding-block:3.75rem; } }
 .hero-page .lede{ max-width:36rem; }
@@ -535,18 +533,18 @@ section{ padding-block:3.5rem; }
 }
 
 /* --- hero motion: one short rise on load, nothing continuous ---
-   Pure opacity/transform, so no layout shift. The global reduced-motion block
-   collapses every duration to ~0, which shows all of it immediately. */
+   Opacity and transform only, so no layout shift. The global reduced-motion
+   block collapses every duration to ~0, which shows all of it immediately. */
 @keyframes hero-rise{ from{ opacity:0; transform:translateY(14px); } to{ opacity:1; transform:none; } }
-@keyframes hero-img{  from{ opacity:0; transform:scale(1.035); }    to{ opacity:1; transform:none; } }
+@keyframes hero-img{  from{ opacity:0; transform:scale(1.03); }     to{ opacity:1; transform:none; } }
 
-.hero-copy-inner > *{ animation:hero-rise .55s var(--ease-out) both; }
-.hero-copy-inner > *:nth-child(2){ animation-delay:.06s; }
-.hero-copy-inner > *:nth-child(3){ animation-delay:.12s; }
-.hero-copy-inner > *:nth-child(4){ animation-delay:.18s; }
-.hero-copy-inner > *:nth-child(5){ animation-delay:.24s; }
-.hero-copy-inner > *:nth-child(6){ animation-delay:.30s; }
-.hero-figure img{ animation:hero-img .85s var(--ease-out) both .08s; }
+.hero-copy > *{ animation:hero-rise .55s var(--ease-out) both; }
+.hero-copy > *:nth-child(2){ animation-delay:.06s; }
+.hero-copy > *:nth-child(3){ animation-delay:.12s; }
+.hero-copy > *:nth-child(4){ animation-delay:.18s; }
+.hero-copy > *:nth-child(5){ animation-delay:.24s; }
+.hero-copy > *:nth-child(6){ animation-delay:.30s; }
+.hero-media img{ animation:hero-img .9s var(--ease-out) both .05s; }
 
 /* ---------- section furniture ---------- */
 .eyebrow{
