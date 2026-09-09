@@ -118,10 +118,11 @@ section{ padding-block:3.25rem; }
 .band-navy a{ color:var(--gold-soft); }
 
 /* ============================================================================
-   HEADER — one sticky header with two states.
-   Default: the full official logo, a near-square lockup that needs real height.
-   .is-compact (added by site.js after scrolling): crest + typeset wordmark, so
-   navigation stays reachable without a 250px bar permanently on screen.
+   HEADER — one sticky bar, ~112px at rest, ~92px once scrolled.
+   The official mark is square (crest stacked over the wordmark), which forced a
+   ~250px bar. assets/northbridge-logo-lockup.png is a horizontal display copy
+   built from that same artwork — crest, motto ribbon and full wordmark, every
+   element preserved — so the bar can stay compact and the wordmark stay legible.
    ========================================================================= */
 .site-head{
   position:sticky; top:0; z-index:100;
@@ -131,37 +132,28 @@ section{ padding-block:3.25rem; }
 }
 .site-head.is-compact{ box-shadow:var(--shadow-sm); }
 
+/* Logo and navigation share the one centred shell, vertically centred.
+   The shell's padding-inline keeps the nav clear of the viewport edge. */
 .head-inner{
-  display:flex; align-items:center; justify-content:space-between; gap:1rem;
-  padding-block:.9rem;
+  display:flex; align-items:center; justify-content:space-between; gap:1.5rem;
+  padding-block:.85rem;
   transition:padding .28s var(--ease);
 }
-.site-head.is-compact .head-inner{ padding-block:.5rem; }
+.site-head.is-compact .head-inner{ padding-block:.6rem; }
 
-/* --- brand: two lockups, one shown at a time --- */
-.brand{ display:flex; align-items:center; gap:.75rem; text-decoration:none; min-width:0; }
-
-.brand-full{ display:block; }
-.brand-full img{ width:132px; height:auto; transition:width .28s var(--ease); }
-
-.brand-compact{ display:none; align-items:center; gap:.7rem; }
-.brand-compact img{ width:44px; height:auto; flex:none; }
-.brand-compact .n{
-  display:block; font-family:var(--serif); font-size:1.22rem; font-weight:600;
-  color:var(--navy); line-height:1; white-space:nowrap;
+/* --- brand --- */
+.brand{ display:flex; align-items:center; text-decoration:none; min-width:0; }
+.brand-mark{
+  display:block; width:168px; height:auto;
+  transition:width .28s var(--ease);
 }
-.brand-compact .s{
-  display:block; font-size:.58rem; letter-spacing:.2em; text-transform:uppercase;
-  color:var(--green); margin-top:.28rem; white-space:nowrap;
-}
-.site-head.is-compact .brand-full{ display:none; }
-.site-head.is-compact .brand-compact{ display:flex; }
+@media (min-width:30em){ .brand-mark{ width:186px; } }
+@media (min-width:48em){ .brand-mark{ width:210px; } }
+@media (min-width:64em){ .brand-mark{ width:232px; } }   /* ~80px tall */
+@media (min-width:75em){ .brand-mark{ width:244px; } }   /* ~84px tall */
+.site-head.is-compact .brand-mark{ width:168px; }
+@media (min-width:64em){ .site-head.is-compact .brand-mark{ width:196px; } }
 
-@media (min-width:48em){ .brand-full img{ width:150px; } }
-@media (min-width:64em){ .brand-full img{ width:190px; } }
-@media (min-width:75em){ .brand-full img{ width:230px; } }
-
-/* --- nav toggle --- */
 .nav-toggle{
   display:inline-flex; align-items:center; gap:.5rem;
   min-height:44px; padding:.55rem .95rem;
@@ -211,8 +203,8 @@ section{ padding-block:3.25rem; }
    ========================================================================= */
 .btn{
   display:inline-flex; align-items:center; justify-content:center; gap:.55rem;
-  min-height:48px; padding:.85rem 1.6rem;
-  font:inherit; font-size:1rem; font-weight:600; letter-spacing:.01em;
+  min-height:46px; padding:.75rem 1.4rem;
+  font:inherit; font-size:.98rem; font-weight:600; letter-spacing:.01em;
   text-decoration:none; text-align:center;
   border-radius:var(--radius);
   border:1.5px solid transparent;
@@ -269,7 +261,7 @@ section{ padding-block:3.25rem; }
 .hero .btn-secondary:hover{ background:var(--white); color:var(--navy); border-color:var(--white); }
 
 .btn-block{ width:100%; }
-.btn-row{ display:flex; flex-wrap:wrap; gap:.85rem; margin-top:2rem; }
+.btn-row{ display:flex; flex-wrap:wrap; gap:.7rem; margin-top:1.6rem; }
 @media (max-width:29.99em){ .btn-row .btn{ width:100%; } }
 
 .btn[aria-busy="true"]{ opacity:.75; pointer-events:none; }
@@ -282,26 +274,27 @@ section{ padding-block:3.25rem; }
     radial-gradient(115% 85% at 90% 6%, rgba(0,75,60,.55) 0%, rgba(0,33,71,0) 60%),
     var(--navy);
   color:var(--white);
-  padding-block:2.75rem 3rem;
+  padding-block:2.5rem 2.75rem;
   overflow:hidden;
 }
-@media (min-width:64em){ .hero{ padding-block:4.5rem 5rem; } }
+@media (min-width:64em){ .hero{ padding-block:3.25rem 3.5rem; } }
 
-.hero-grid{ display:grid; gap:2.5rem; align-items:center; }
-@media (min-width:64em){ .hero-grid{ grid-template-columns:1.04fr .96fr; gap:4rem; } }
+.hero-grid{ display:grid; gap:2rem; align-items:center; }
+@media (min-width:64em){ .hero-grid{ grid-template-columns:1.06fr .94fr; gap:2.75rem; } }
 
 .hero h1{
   color:var(--white);
-  font-size:clamp(2.05rem,5.2vw,3.5rem);
+  font-size:clamp(1.95rem,4.15vw,3.1rem);
   letter-spacing:-.015em;
+  text-wrap:balance;          /* "Practical skills for / Sri Lankan careers." */
 }
 .hero .lede{
   color:var(--on-dark);
   font-size:clamp(1.06rem,1.9vw,1.28rem);
-  margin-top:1.15rem; max-width:34rem;
+  margin-top:1rem; max-width:33rem;
 }
 .hero .motto{
-  margin-top:2rem; padding-top:1.35rem;
+  margin-top:1.6rem; padding-top:1.1rem;
   border-top:1px solid rgba(255,255,255,.22);
   color:var(--gold-soft);
   font-size:.76rem; letter-spacing:.24em; text-transform:uppercase;
@@ -311,16 +304,19 @@ section{ padding-block:3.25rem; }
 .hero-figure{ margin:0; position:relative; }
 .hero-figure img{
   width:100%;
-  aspect-ratio:16/10;
+  aspect-ratio:3/2;
   object-fit:cover;
-  object-position:85% center;   /* keeps her face and the wall mark in frame */
+  object-position:88% center;   /* her face, desk and wall stay in frame */
   border-radius:var(--radius-lg);
   border:1px solid rgba(255,255,255,.16);
   box-shadow:var(--shadow-lg);
   background:var(--navy-deep);
 }
-@media (min-width:40em){ .hero-figure img{ aspect-ratio:3/2; object-position:86% center; } }
-@media (min-width:64em){ .hero-figure img{ aspect-ratio:4/5; object-position:88% center; } }
+/* The source is a 1600x611 banner: she sits right, the wall lockup left.
+   A 3:2 window right-of-centre keeps her whole and holds the desk, lamp,
+   windows and wall behind her — the office setting, not a portrait crop. */
+@media (min-width:40em){ .hero-figure img{ aspect-ratio:3/2; object-position:90% center; } }
+@media (min-width:64em){ .hero-figure img{ aspect-ratio:3/2; object-position:90% center; } }
 /* fine gold edge drawn outside the picture so it never crops it */
 .hero-figure::after{
   content:""; position:absolute; inset:-6px;
@@ -463,20 +459,33 @@ h3{ font-size:1.18rem; }
 .note p{ color:var(--ink-80); }
 .note .btn-row{ margin-top:1.25rem; }
 
-/* ---------- floating WhatsApp ---------- */
+/* ---------- floating WhatsApp ----------
+   Fixed bottom-right. On short viewports that corner sits inside the hero,
+   where it covers the ambassador figure and competes with the hero's own
+   "Talk to us" call to action — so it stays out of the way until the hero has
+   been scrolled past (site.js adds .is-visible). The link, its aria-label and
+   its data-wa message are unchanged; without JS the href was never built, so
+   nothing that previously worked is lost. */
 .wa-float{
-  position:fixed; right:1rem; bottom:1rem; z-index:120;
-  display:inline-flex; align-items:center; gap:.6rem;
-  min-height:54px; padding:.85rem 1.25rem;
+  position:fixed; right:1.15rem; bottom:1.15rem; z-index:120;
+  display:inline-flex; align-items:center; gap:.55rem;
+  min-height:50px; padding:.75rem 1.15rem;
   background:var(--green); color:var(--white);
   border:1.5px solid var(--gold);
-  border-radius:999px; text-decoration:none; font-weight:600; font-size:1rem;
+  border-radius:999px; text-decoration:none; font-weight:600; font-size:.96rem;
   box-shadow:var(--shadow-btn);
-  transition:transform .2s var(--ease), box-shadow .2s var(--ease), background-color .2s var(--ease);
+  opacity:0; visibility:hidden; transform:translateY(10px);
+  transition:opacity .25s var(--ease), transform .25s var(--ease),
+             visibility .25s var(--ease), box-shadow .2s var(--ease),
+             background-color .2s var(--ease);
 }
-.wa-float:hover{ background:var(--green-deep); color:var(--white); transform:translateY(-2px); box-shadow:var(--shadow-btn-h); }
-.wa-float svg{ width:22px; height:22px; flex:none; }
-@media (max-width:29.99em){ .wa-float .txt{ display:none; } .wa-float{ padding:.9rem; } }
+.wa-float.is-visible{ opacity:1; visibility:visible; transform:translateY(0); }
+.wa-float.is-visible:hover{
+  background:var(--green-deep); color:var(--white);
+  transform:translateY(-2px); box-shadow:var(--shadow-btn-h);
+}
+.wa-float svg{ width:21px; height:21px; flex:none; }
+@media (max-width:29.99em){ .wa-float .txt{ display:none; } .wa-float{ padding:.8rem; } }
 
 /* ---------- footer ---------- */
 .site-foot{

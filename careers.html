@@ -41,23 +41,14 @@
 <header class="site-head">
   <div class="shell head-inner">
     <a class="brand" href="index.html" aria-label="Northbridge Global Campus — home">
-      <!-- Full official logo. Shown at rest; swapped for the compact lockup
-           once the page is scrolled, because the lockup is near-square and
-           would otherwise hold a 250px bar on screen permanently. -->
-      <span class="brand-full">
-        <img src="assets/northbridge-logo.png" width="520" height="520"
-             alt="Northbridge Global Campus" fetchpriority="high" decoding="async" />
-      </span>
-      <!-- Compact lockup: the crest alone, because at 44px the logo's own
-           wordmark would be illegible. -->
-      <span class="brand-compact">
-        <img src="assets/northbridge-crest.png" width="240" height="187"
-             alt="" decoding="async" />
-        <span>
-          <span class="n">Northbridge</span>
-          <span class="s">Global Campus</span>
-        </span>
-      </span>
+      <!-- Horizontal display lockup composed from the official artwork: crest,
+           motto ribbon and the full wordmark — every element preserved, nothing
+           redrawn. The square master forces a ~250px bar, so the header uses this
+           3:1 arrangement instead. assets/originals/northbridge-logo-original.png
+           remains the untouched master. -->
+      <img class="brand-mark" src="assets/northbridge-logo-lockup.png"
+           width="778" height="268"
+           alt="Northbridge Global Campus" fetchpriority="high" decoding="async" />
     </a>
     <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18"/></svg>

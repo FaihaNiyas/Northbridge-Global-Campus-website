@@ -201,10 +201,10 @@ function initForms() {
 }
 
 /* ------------------------------------------------------- compact header */
-/* The full logo lockup is near-square, so at rest the header is tall. Once the
-   visitor scrolls, swap to the crest + wordmark so navigation stays reachable
-   without a tall bar permanently covering the page. Purely a class toggle —
-   CSS does the rest, and the transition is disabled under reduced-motion. */
+/* The header is compact at rest; once the visitor scrolls it condenses a little
+   further and gains a shadow, so navigation stays readable over the page.
+   Purely a class toggle — CSS does the rest, and the transition is disabled
+   under reduced-motion. */
 function initHeader() {
   const head = $('.site-head');
   if (!head) return;
@@ -230,9 +230,39 @@ function initHeader() {
   update();   // correct state on load, e.g. when arriving at an #anchor
 }
 
+/* -------------------------------------------------- floating WhatsApp reveal */
+/* The button is fixed to the bottom-right corner. On anything shorter than a
+   tall desktop that corner falls inside the hero, so it covers the ambassador
+   figure and competes with the hero's own call to action. Hold it back until
+   the hero has been scrolled past. Pages with no hero show it straight away. */
+function initFloat() {
+  const wa = $('.wa-float');
+  if (!wa) return;
+
+  const hero = $('.hero');
+  if (!hero) { wa.classList.add('is-visible'); return; }
+
+  let ticking = false;
+
+  function update() {
+    const y = window.scrollY || document.documentElement.scrollTop || 0;
+    const revealAt = Math.max(hero.offsetTop + hero.offsetHeight - 150, 120);
+    wa.classList.toggle('is-visible', y > revealAt);
+    ticking = false;
+  }
+
+  window.addEventListener('scroll', () => {
+    if (!ticking) { ticking = true; window.requestAnimationFrame(update); }
+  }, { passive: true });
+  window.addEventListener('resize', () => { update(); }, { passive: true });
+
+  update();
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   fillContactDetails();
   initNav();
   initHeader();
   initForms();
+  initFloat();
 });
