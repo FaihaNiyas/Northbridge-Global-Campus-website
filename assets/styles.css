@@ -352,42 +352,180 @@ section{ padding-block:3.5rem; }
 @media (max-width:29.99em){ .btn-row .btn{ width:100%; } }
 
 /* ============================================================================
-   HERO — two columns on desktop, stacked on mobile.
-   Ground is a navy-to-green gradient built from the two official colours only.
+   HERO — editorial split.
+
+   Desktop: an asymmetric grid. The copy sits in the left ~45.5%, its left edge
+   aligned to the shell gutter so it lines up with every section below. The
+   figure takes the right ~54.5% as a full-height panel that runs to the right
+   viewport edge — no border, no plate, no card — and its left edge is faded
+   into the navy ground so the photograph reads as part of the hero.
+
+   Mobile: copy first, image below the calls to action, edge to edge.
+
+   The photograph is never altered. All framing is object-fit/object-position,
+   and the only overlay is a navy gradient on the side she is not on.
    ========================================================================= */
 .hero{
+  position:relative;
   background:
-    radial-gradient(120% 95% at 92% 2%, rgba(0,75,60,.50) 0%, rgba(0,75,60,0) 62%),
-    linear-gradient(157deg, rgba(0,75,60,0) 38%, rgba(0,75,60,.72) 100%),
+    radial-gradient(115% 100% at 86% 0%, rgba(0,75,60,.52) 0%, rgba(0,75,60,0) 62%),
+    linear-gradient(154deg, rgba(0,75,60,0) 32%, rgba(0,75,60,.76) 100%),
     var(--navy);
   color:var(--white);
-  padding-block:3rem 3.25rem;
   overflow:hidden;
-  position:relative;
+  padding-block:0;        /* the grid owns the height; section padding must not add to it */
 }
-@media (min-width:64em){ .hero{ padding-block:4.25rem 4.5rem; } }
 
 /* one hairline of gold along the foot of the hero, nothing more */
 .hero::after{
-  content:""; position:absolute; left:0; right:0; bottom:0; height:1px;
+  content:""; position:absolute; left:0; right:0; bottom:0; height:1px; z-index:3;
   background:linear-gradient(90deg, var(--gold-38), var(--gold-10) 55%, transparent);
   pointer-events:none;
 }
 
-.hero-grid{ display:grid; gap:2.25rem; align-items:center; }
-@media (min-width:64em){ .hero-grid{ grid-template-columns:1.02fr .98fr; gap:3rem; } }
+.hero-grid{ display:grid; }
+
+.hero-copy{ padding:2.75rem var(--pad) 2.5rem; }
+.hero-copy-inner{ max-width:34rem; }
+
+/* eyebrow: a plain gold label with a short rule, so it does not repeat the
+   pill shape used by the status badge just below it */
+.hero .hero-copy-inner .eyebrow{
+  display:inline-flex; align-items:center; gap:.7rem;
+  background:none; border:0; border-radius:0; padding:0;
+  margin-bottom:1.15rem;
+  color:var(--gold-soft);
+  font-size:.71rem; letter-spacing:.2em; font-weight:700;
+}
+.hero .hero-copy-inner .eyebrow::before{
+  content:""; flex:none; width:26px; height:1px; background:var(--gold);
+}
+@media (max-width:26em){
+  .hero .hero-copy-inner .eyebrow{ font-size:.66rem; letter-spacing:.13em; gap:.55rem; }
+  .hero .hero-copy-inner .eyebrow::before{ width:18px; }
+}
 
 .hero h1{
   color:var(--white);
-  font-size:clamp(2rem,1.25rem + 2.7vw,3.05rem);
-  line-height:1.08;
+  font-family:var(--serif); font-weight:500;      /* lighter than the body serif */
+  font-size:clamp(2rem,1rem + 2.4vw,2.85rem);
+  line-height:1.1; letter-spacing:-.02em;
+  text-wrap:balance;                               /* two even lines, no orphan */
 }
 .hero .lede{
   color:var(--on-dark);
-  font-size:clamp(1.05rem,1rem + .45vw,1.22rem);
-  line-height:1.65;
-  margin-top:1.15rem; max-width:32rem;
+  font-size:clamp(1.02rem,.97rem + .4vw,1.16rem);
+  line-height:1.62;
+  margin-top:1.1rem; max-width:30rem;
 }
+
+/* honest status note — no numbers, no claim beyond what the page already says */
+.hero-status{
+  display:inline-flex; align-items:center; gap:.6rem;
+  margin-top:1.4rem; padding:.42rem .9rem;
+  background:var(--on-dark-08);
+  border:1px solid var(--gold-38);
+  border-radius:999px;
+  color:var(--gold-soft);
+  font-size:.79rem; font-weight:600; letter-spacing:.04em;
+}
+.hero-status .dot{
+  flex:none; width:7px; height:7px; border-radius:50%; background:var(--gold);
+}
+
+.hero .btn-row{ margin-top:1.6rem; }
+/* slightly tighter than the site default so both CTAs hold one row */
+.hero .btn{ padding-inline:1.2rem; }
+
+/* trust strip — three plain statements, separated by short gold rules */
+.trust-strip{
+  list-style:none; margin:2rem 0 0; padding:0;
+  display:flex; flex-wrap:wrap; align-items:center; gap:.35rem .95rem;
+  color:var(--on-dark);
+  font-size:.82rem; font-weight:600; letter-spacing:.03em;
+}
+.trust-strip li{ display:flex; align-items:center; gap:.95rem; }
+.trust-strip li:not(:last-child)::after{
+  content:""; flex:none; width:4px; height:4px; border-radius:50%;
+  background:var(--gold);
+}
+/* On phones the three items cannot share a line, and a wrapped line would
+   leave a dangling separator, so stack them instead. */
+@media (max-width:30em){
+  .trust-strip{ flex-direction:column; align-items:flex-start; gap:.4rem; }
+  .trust-strip li:not(:last-child)::after{ display:none; }
+}
+
+/* --- ambassador panel --- */
+.hero-figure{ margin:0; position:relative; overflow:hidden; }
+.hero-figure img{
+  width:100%;
+  aspect-ratio:4/3;
+  object-fit:cover;
+  object-position:92% center;   /* she sits right in the source frame */
+  display:block;
+  /* Fade the edge she is NOT on so the photograph dissolves into the hero
+     ground instead of ending on a hard card edge. A mask reveals the hero's
+     own navy-to-green gradient, so the join cannot mismatch in colour. */
+  -webkit-mask-image:linear-gradient(180deg, transparent 0%, rgba(0,0,0,.55) 9%, #000 27%);
+          mask-image:linear-gradient(180deg, transparent 0%, rgba(0,0,0,.55) 9%, #000 27%);
+}
+/* Where masking is unavailable, fall back to a navy wash over the same edge.
+   Either way nothing is laid over her face, clothing or the blazer crest. */
+@supports not ((mask-image:linear-gradient(#000,#000)) or (-webkit-mask-image:linear-gradient(#000,#000))){
+  .hero-figure::before{
+    content:""; position:absolute; inset:0; z-index:1; pointer-events:none;
+    background:linear-gradient(180deg,
+      var(--navy) 0%, rgba(0,33,71,.62) 7%, rgba(0,33,71,.16) 20%, rgba(0,33,71,0) 34%);
+  }
+}
+
+/* tablet: a wider window keeps the stacked hero from getting tall, and brings
+   the whole wall lockup back into frame */
+@media (min-width:40em) and (max-width:63.99em){
+  .hero-figure img{ aspect-ratio:16/9; object-position:92% center; }
+}
+
+@media (min-width:64em){
+  .hero-grid{
+    grid-template-columns:minmax(0,46%) minmax(0,54%);
+    align-items:stretch;
+    min-height:560px;
+  }
+  .hero-copy{
+    display:flex; align-items:center;      /* vertically centred */
+    padding-block:3.5rem;
+    /* left edge lines up with the shell gutter used by every section below */
+    padding-left:max(var(--pad), calc((100vw - var(--shell)) / 2 + var(--pad)));
+    padding-right:2rem;
+  }
+  .hero-copy-inner{ max-width:none; }
+
+  /* full-height panel, bleeding to the right edge of the viewport */
+  .hero-figure{ aspect-ratio:auto; }
+  .hero-figure img{
+    position:absolute; inset:0;
+    width:100%; height:100%;
+    aspect-ratio:auto;
+    object-position:94% center;  /* keeps her whole, holds desk, lamp, windows */
+    -webkit-mask-image:linear-gradient(90deg, transparent 0%, rgba(0,0,0,.42) 13%, #000 45%);
+            mask-image:linear-gradient(90deg, transparent 0%, rgba(0,0,0,.42) 13%, #000 45%);
+  }
+  @supports not ((mask-image:linear-gradient(#000,#000)) or (-webkit-mask-image:linear-gradient(#000,#000))){
+    .hero-figure::before{
+      background:linear-gradient(90deg,
+        var(--navy) 0%, rgba(0,33,71,.90) 7%, rgba(0,33,71,.44) 22%,
+        rgba(0,33,71,.12) 40%, rgba(0,33,71,0) 56%);
+    }
+  }
+}
+@media (min-width:75em){ .hero-grid{ min-height:660px; } }
+
+/* Inner-page banner: same ground, no figure, tighter. */
+.hero-page{ padding-block:2.75rem; }
+@media (min-width:64em){ .hero-page{ padding-block:3.75rem; } }
+.hero-page .lede{ max-width:36rem; }
+.hero-page .motto{ max-width:36rem; }
 .hero .motto{
   margin-top:1.9rem; padding-top:1.2rem;
   border-top:1px solid var(--on-dark-16);
@@ -396,48 +534,19 @@ section{ padding-block:3.5rem; }
   font-weight:600;
 }
 
-/* Inner-page banner: same ground, no figure, tighter. */
-.hero-page{ padding-block:2.75rem; }
-@media (min-width:64em){ .hero-page{ padding-block:3.75rem; } }
-.hero-page .lede{ max-width:36rem; }
-.hero-page .motto{ max-width:36rem; }
+/* --- hero motion: one short rise on load, nothing continuous ---
+   Pure opacity/transform, so no layout shift. The global reduced-motion block
+   collapses every duration to ~0, which shows all of it immediately. */
+@keyframes hero-rise{ from{ opacity:0; transform:translateY(14px); } to{ opacity:1; transform:none; } }
+@keyframes hero-img{  from{ opacity:0; transform:scale(1.035); }    to{ opacity:1; transform:none; } }
 
-/* ambassador figure — landscape, with a soft gold plate offset behind it */
-.hero-figure{ margin:0; position:relative; }
-.hero-figure img{
-  width:100%;
-  aspect-ratio:3/2;
-  object-fit:cover;
-  object-position:88% center;   /* her face, desk and wall stay in frame */
-  border-radius:var(--radius-lg);
-  border:1px solid var(--on-dark-16);
-  box-shadow:var(--shadow-lg);
-  background:var(--navy-deep);
-  position:relative; z-index:1;
-}
-/* The source is a 1600x611 banner: she sits right, the wall lockup left.
-   A 3:2 window right-of-centre keeps her whole and holds the desk, lamp,
-   windows and wall behind her — the office setting, not a portrait crop. */
-@media (min-width:40em){ .hero-figure img{ object-position:90% center; } }
-
-/* fine gold edge drawn outside the picture so it never crops it */
-.hero-figure::after{
-  content:""; position:absolute; inset:-7px; z-index:0;
-  border:1px solid var(--gold-38);
-  border-radius:calc(var(--radius-lg) + 7px);
-  pointer-events:none;
-}
-/* a second, softer gold plate offset behind, for depth on desktop only */
-@media (min-width:64em){
-  .hero-figure::before{
-    content:""; position:absolute; z-index:0;
-    inset:16px -18px -18px 16px;
-    border-radius:var(--radius-lg);
-    background:var(--gold-10);
-    border:1px solid var(--gold-22);
-    pointer-events:none;
-  }
-}
+.hero-copy-inner > *{ animation:hero-rise .55s var(--ease-out) both; }
+.hero-copy-inner > *:nth-child(2){ animation-delay:.06s; }
+.hero-copy-inner > *:nth-child(3){ animation-delay:.12s; }
+.hero-copy-inner > *:nth-child(4){ animation-delay:.18s; }
+.hero-copy-inner > *:nth-child(5){ animation-delay:.24s; }
+.hero-copy-inner > *:nth-child(6){ animation-delay:.30s; }
+.hero-figure img{ animation:hero-img .85s var(--ease-out) both .08s; }
 
 /* ---------- section furniture ---------- */
 .eyebrow{
