@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Northbridge Global Campus — Practical Skills, Sri Lanka</title>
-<meta name="description" content="A registered Sri Lankan company building short, practical courses in business finance, workplace English, digital skills and AI at work." />
+<title>Northbridge Global Campus — Learning Beyond Theory, Sri Lanka</title>
+<meta name="description" content="Practical, engaging learning designed to build useful skills, stronger thinking, better performance and real career value." />
 
 <!-- Replace REPLACE-WITH-YOUR-DOMAIN.lk with your real domain everywhere it appears
      (one find-and-replace across all HTML files). Facebook and WhatsApp need
@@ -14,17 +14,17 @@
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="Northbridge Global Campus" />
 <meta property="og:locale" content="en_LK" />
-<meta property="og:title" content="Northbridge Global Campus — Practical Skills, Sri Lanka" />
-<meta property="og:description" content="A registered Sri Lankan company building short, practical courses in business finance, English, digital skills and AI at work." />
+<meta property="og:title" content="Northbridge Global Campus — Learning Beyond Theory, Sri Lanka" />
+<meta property="og:description" content="Practical, engaging learning designed to build useful skills, stronger thinking, better performance and real career value." />
 <meta property="og:url" content="https://REPLACE-WITH-YOUR-DOMAIN.lk/index.html" />
 <meta property="og:image" content="https://REPLACE-WITH-YOUR-DOMAIN.lk/assets/og-image.png" />
 <meta property="og:image:width" content="1200" />
 <meta property="og:image:height" content="630" />
-<meta property="og:image:alt" content="The Northbridge Global Campus crest beside the words Practical skills for Sri Lankan careers." />
+<meta property="og:image:alt" content="The Northbridge Global Campus crest and wordmark on a navy background." />
 
 <meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:title" content="Northbridge Global Campus — Practical Skills, Sri Lanka" />
-<meta name="twitter:description" content="A registered Sri Lankan company building short, practical courses in business finance, English, digital skills and AI at work." />
+<meta name="twitter:title" content="Northbridge Global Campus — Learning Beyond Theory, Sri Lanka" />
+<meta name="twitter:description" content="Practical, engaging learning designed to build useful skills, stronger thinking, better performance and real career value." />
 <meta name="twitter:image" content="https://REPLACE-WITH-YOUR-DOMAIN.lk/assets/og-image.png" />
 
 <meta name="theme-color" content="#012144" />
@@ -41,56 +41,51 @@
 
 <header class="site-head">
   <div class="shell head-inner">
-    <a class="brand" href="index.html" aria-label="Northbridge Global Campus — home">
-      <!-- Horizontal display lockup composed from the official artwork: crest,
-           motto ribbon and the full wordmark — every element preserved, nothing
-           redrawn. The square master forces a ~250px bar, so the header uses this
-           3:1 arrangement instead. assets/originals/northbridge-logo-original.png
-           remains the untouched master. -->
+    <a class="brand" href="index.html" aria-current="page" aria-label="Northbridge Global Campus &mdash; home">
       <img class="brand-mark" src="assets/northbridge-logo-lockup.png"
            width="778" height="268"
            alt="Northbridge Global Campus" fetchpriority="high" decoding="async" />
     </a>
+
     <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
       <span class="nav-toggle-label">Menu</span>
     </button>
+
     <nav class="site-nav" id="site-nav" aria-label="Main">
+      <!-- Shown only inside the mobile panel; hidden at >=48em by CSS. -->
+      <button class="nav-close" type="button">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+        <span>Close menu</span>
+      </button>
       <ul>
-        <li><a href="index.html" aria-current="page">Home</a></li>
+        <li><a href="#programmes">Programmes</a></li>
         <li><a href="about.html">About</a></li>
-        <li><a href="careers.html">Careers</a></li>
+        <li><a href="careers.html">Teach With Us</a></li>
         <li><a href="contact.html">Contact</a></li>
       </ul>
+      <a class="btn btn-primary nav-cta" href="contact.html#register-interest">Register Interest</a>
     </nav>
   </div>
 </header>
 
 <main id="main">
 
-  <!-- Cinematic hero. On desktop the ambassador photograph is the full-width
-       background of the hero; a navy gradient runs strong on the left for text
-       contrast and falls to nothing before it reaches her, so nothing dark is
-       laid over her face. Because the photograph spans the whole hero there is
-       no panel edge to blend, and the wall lockup is back in frame. On phones
-       and tablets the hero stacks: copy on the navy ground, photograph beneath
-       in a wide frame. The photograph itself is never altered — all framing is
-       object-fit / object-position. -->
+  <!-- Editorial hero: copy left, ambassador right. The photograph fills the
+       right of the hero and bleeds to the viewport edge; a navy gradient carries
+       its left side into the hero ground so there is no boxed-image edge, and it
+       falls away before it reaches her so nothing dark sits over her face. The
+       photograph itself is untouched — framing is object-fit/object-position. -->
   <section class="hero">
     <div class="shell hero-inner">
       <div class="hero-copy">
         <p class="eyebrow">NORTHBRIDGE GLOBAL CAMPUS &middot; SRI LANKA</p>
-        <h1>Practical skills for a changing world.</h1>
-        <p class="lede">Workplace-ready learning in business, English, digital skills and AI&mdash;built around what employers actually need.</p>
+        <h1>Learning that goes beyond theory.</h1>
+        <p class="lede">Practical, engaging learning designed to build useful skills, stronger thinking, better performance and real career value.</p>
         <div class="btn-row">
-          <a class="btn btn-primary" href="#what-we-are">Explore what we&rsquo;re building</a>
-          <a class="btn btn-secondary" href="contact.html">Contact Northbridge</a>
+          <a class="btn btn-primary" href="#programmes">Explore Our Programmes</a>
+          <a class="btn btn-secondary" href="#register-interest">Register Your Interest</a>
         </div>
-        <p class="hero-status"><span class="dot" aria-hidden="true"></span>Programmes currently in development</p>
-        <ul class="trust-strip">
-          <li>Registered in Sri Lanka</li>
-          <li>Global outlook</li>
-        </ul>
       </div>
     </div>
 
@@ -100,12 +95,12 @@
                 srcset="assets/northbridge-brand-ambassador-640.webp 640w,
                         assets/northbridge-brand-ambassador-1000.webp 1000w,
                         assets/northbridge-brand-ambassador-1600.webp 1600w"
-                sizes="(min-width:64em) 100vw, 100vw" />
+                sizes="(min-width:64em) 60vw, 100vw" />
         <img src="assets/northbridge-brand-ambassador-1000.jpg"
              srcset="assets/northbridge-brand-ambassador-640.jpg 640w,
                      assets/northbridge-brand-ambassador-1000.jpg 1000w,
                      assets/northbridge-brand-ambassador-1600.jpg 1600w"
-             sizes="100vw"
+             sizes="(min-width:64em) 60vw, 100vw"
              width="1600" height="611"
              alt="A Northbridge Global Campus student in a campus blazer working at a desk, with the Northbridge crest and wordmark on the wall behind her."
              fetchpriority="high" decoding="async" />
@@ -113,45 +108,47 @@
     </div>
   </section>
 
-  <section id="what-we-are">
+  <section id="learning">
     <div class="shell">
       <div class="measure">
-        <p class="eyebrow">What we are building</p>
-        <h2>Courses that change what you can do on Monday morning.</h2>
-        <p class="section-lede">Plenty of courses hand you a certificate. Ours are designed so that the week after you finish, you can do something at work you could not do before. That is the whole test we set ourselves.</p>
+        <p class="eyebrow">Why it works</p>
+        <h2>Learning designed for real life, work and career growth.</h2>
+        <p class="section-lede">Northbridge courses should be useful beyond the classroom. Learners should leave with skills, confidence, better thinking and something they can actually apply.</p>
       </div>
 
-      <ol class="steps">
+      <ul class="value-grid">
         <li>
-          <span class="num">First</span>
-          <h3>Short online courses</h3>
-          <p>Focused programmes you can complete alongside a full-time job, taught in the evenings and at weekends.</p>
+          <h3>Real-world examples</h3>
+          <p>Learn from situations people actually face.</p>
         </li>
         <li>
-          <span class="num">Then</span>
-          <h3>A working academy</h3>
-          <p>A wider set of connected programmes, with progression from one level to the next rather than a scatter of unrelated certificates.</p>
+          <h3>Practical activities</h3>
+          <p>Take part in exercises, challenges, discussions and projects.</p>
         </li>
         <li>
-          <span class="num">In time</span>
-          <h3>A campus with global reach</h3>
-          <p>Sri Lankan roots, international standards, and learners who can work with organisations anywhere.</p>
+          <h3>Practitioner-led learning</h3>
+          <p>Learn from people who understand the work.</p>
         </li>
-      </ol>
+        <li>
+          <h3>A useful outcome</h3>
+          <p>Leave with something you can apply, show or build.</p>
+        </li>
+      </ul>
     </div>
   </section>
 
-  <section class="band-paper">
+  <section class="band-paper" id="programmes">
     <div class="shell">
       <div class="measure">
-        <p class="eyebrow">Where we are starting</p>
-        <h2>The first subject areas.</h2>
-        <p class="section-lede">These are the areas we are preparing first. We are not taking enrolments yet — when dates and fees are confirmed, they will be published here and nowhere else first.</p>
+        <p class="eyebrow">Areas of learning</p>
+        <h2>Explore practical areas of learning.</h2>
+        <p class="section-lede">Our programmes are designed to help people build useful capability in business, communication, digital productivity and work.</p>
       </div>
+
       <div class="prose-grid">
         <div>
           <h3>Commercial finance for non-accountants</h3>
-          <p>Reading the numbers, understanding margins and cash, and holding your own in a budget conversation — for managers who were never trained in it.</p>
+          <p>Reading the numbers, understanding margins and cash, and holding your own in a budget conversation &mdash; for managers who were never trained in it.</p>
         </div>
         <div>
           <h3>Workplace English</h3>
@@ -159,71 +156,100 @@
         </div>
         <div>
           <h3>Working with AI</h3>
-          <p>Using AI tools sensibly in ordinary office work — drafting, summarising, checking — and knowing where they should not be trusted.</p>
+          <p>Using AI tools sensibly in ordinary office work &mdash; drafting, summarising, checking &mdash; and knowing where they should not be trusted.</p>
         </div>
         <div>
           <h3>Spreadsheets and reporting</h3>
           <p>Getting from a messy sheet to a report someone can make a decision from, without needing a data team.</p>
         </div>
       </div>
+
+      <div class="prog-foot">
+        <p class="prog-status"><span class="dot" aria-hidden="true"></span>More programme details will be announced soon.</p>
+        <a class="btn btn-primary" href="#register-interest">Register Your Interest</a>
+      </div>
+
+      <!-- The former "First / Then / In time" roadmap, reduced to a single line so
+           it supports the page instead of dominating it. No new milestones. -->
+      <p class="journey">
+        <span class="journey-lbl">The direction we are building in</span>
+        <span>Short online courses</span>
+        <span>A connected academy</span>
+        <span>A campus with global reach</span>
+      </p>
     </div>
   </section>
 
-  <section class="band-navy">
+  <section id="how-we-learn">
     <div class="shell">
       <div class="measure">
-        <p class="eyebrow">Who we are</p>
-        <h2>A young institution, and we say so plainly.</h2>
-        <p class="section-lede">We would rather tell you exactly where we stand than dress it up. Here is what is true today.</p>
-        <ul class="fact-list">
-          <li>Northbridge Global Campus (Pvt) Ltd is a company incorporated in Sri Lanka.</li>
-          <li>We are building our first programmes now. Enrolments are not open yet.</li>
-          <li>Teaching is delivered by practitioners engaged for each course, not by a permanent faculty we do not yet have.</li>
-          <li>We hold our own domains, accounts and learner records, so nothing about your data sits with a third party we cannot answer for.</li>
-          <li>Any recognition or accreditation we obtain will be named on this site, with the awarding body, when it exists.</li>
-        </ul>
-        <div class="btn-row">
-          <a class="btn btn-secondary" href="about.html">Read more about us</a>
-        </div>
+        <p class="eyebrow">Our approach</p>
+        <h2>How we learn</h2>
+        <p class="section-lede">Learning should be practical, engaging and useful from the first session.</p>
       </div>
+
+      <ol class="how-list">
+        <li>
+          <h3>Real cases</h3>
+          <p>Use company examples, mini-cases and real workplace situations.</p>
+        </li>
+        <li>
+          <h3>Practical tools</h3>
+          <p>Use relevant tools, templates and frameworks.</p>
+        </li>
+        <li>
+          <h3>Learning by doing</h3>
+          <p>Practise through exercises, challenges, discussions and projects.</p>
+        </li>
+        <li>
+          <h3>Tangible outcomes</h3>
+          <p>Every programme should lead to a useful output or practical application.</p>
+        </li>
+      </ol>
     </div>
   </section>
 
-  <section>
+  <section class="band-navy philosophy">
+    <div class="shell">
+      <p class="eyebrow">Our philosophy</p>
+      <p class="philosophy-line">A course should leave you better than it found you.</p>
+      <p class="philosophy-sub">Northbridge is built around practical learning that helps people become more capable, confident and ready to apply what they know.</p>
+    </div>
+  </section>
+
+  <section id="register-interest">
     <div class="shell">
       <div class="measure">
         <p class="eyebrow">Get in touch</p>
-        <h2>Ask us anything — there is a person at the other end.</h2>
-        <p class="section-lede">Whether you are a learner wanting to know when a course opens, an employer with a team to train, or a professional who would like to teach with us, message us and we will reply within one working day.</p>
+        <h2>Let&rsquo;s start with what you need.</h2>
+        <p class="section-lede">Whether you want to learn, teach with Northbridge, develop your team or simply ask a question, we will help you find the right next step.</p>
       </div>
+
+      <ul class="enquiry-grid">
+        <li>I want to learn</li>
+        <li>I want to teach with Northbridge</li>
+        <li>I represent an organisation</li>
+        <li>I want to hear about upcoming programmes</li>
+      </ul>
 
       <div class="contact-methods">
         <a class="method" data-wa="Hello Northbridge, I found you online and would like to know more." href="#">
           <span class="ico"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.9 9.9 0 0 0 4.79 1.22h.01c5.46 0 9.91-4.45 9.91-9.91C21.96 6.45 17.5 2 12.04 2Zm5.8 14.03c-.24.68-1.42 1.31-1.95 1.36-.5.05-.97.23-3.27-.68-2.75-1.08-4.5-3.87-4.64-4.05-.13-.18-1.11-1.48-1.11-2.82s.7-2 .95-2.28c.25-.27.54-.34.72-.34h.52c.17 0 .39-.06.61.47.24.56.8 1.95.87 2.09.07.14.12.3.02.48-.09.18-.14.3-.28.46-.14.16-.29.36-.42.48-.14.14-.28.29-.12.57.16.27.72 1.18 1.54 1.91 1.06.94 1.95 1.23 2.22 1.37.27.14.43.12.59-.07.16-.19.68-.79.86-1.06.18-.27.36-.23.61-.14.24.09 1.55.73 1.82.86.27.14.45.2.51.32.07.11.07.64-.17 1.32Z"/></svg></span>
-          <span>
-            <span class="lbl">WhatsApp</span>
-            <span class="val">Message us</span>
-          </span>
+          <span><span class="lbl">WhatsApp</span><span class="val">Message us</span></span>
         </a>
         <a class="method" data-tel href="#">
           <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.2a2 2 0 0 1 2.1-.5c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2Z"/></svg></span>
-          <span>
-            <span class="lbl">Phone</span>
-            <span class="val" data-tel-text>Loading…</span>
-          </span>
+          <span><span class="lbl">Phone</span><span class="val" data-tel-text>Loading&hellip;</span></span>
         </a>
         <a class="method" data-email href="#">
           <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 6 10-6"/></svg></span>
-          <span>
-            <span class="lbl">Email</span>
-            <span class="val" data-email-text>Loading…</span>
-          </span>
+          <span><span class="lbl">Email</span><span class="val" data-email-text>Loading&hellip;</span></span>
         </a>
       </div>
 
       <div class="btn-row">
-        <a class="btn btn-primary" href="contact.html">Send us a message</a>
-        <a class="btn btn-secondary" href="careers.html">Teach or work with us</a>
+        <a class="btn btn-primary" href="contact.html#register-interest">Register Your Interest</a>
+        <a class="btn btn-secondary" href="careers.html">Teach with Northbridge</a>
       </div>
     </div>
   </section>
@@ -238,26 +264,34 @@
         <p class="foot-intro">Your bridge to global success. Practical, workplace-ready education, built in Sri Lanka.</p>
       </div>
       <div>
-        <p class="lbl">Pages</p>
+        <p class="lbl">Explore</p>
         <ul>
           <li><a href="index.html">Home</a></li>
+          <li><a href="index.html#programmes">Programmes</a></li>
           <li><a href="about.html">About</a></li>
-          <li><a href="careers.html">Careers</a></li>
+          <li><a href="careers.html">Teach With Us</a></li>
           <li><a href="contact.html">Contact</a></li>
         </ul>
       </div>
       <div>
-        <p class="lbl">Contact</p>
+        <p class="lbl">Get in touch</p>
         <ul>
           <li><a data-wa="Hello Northbridge, I would like to know more." href="#">WhatsApp us</a></li>
-          <li><a data-tel href="#"><span data-tel-text>Loading…</span></a></li>
-          <li><a data-email href="#"><span data-email-text>Loading…</span></a></li>
+          <li><a data-tel href="#"><span data-tel-text>Loading&hellip;</span></a></li>
+          <li><a data-email href="#"><span data-email-text>Loading&hellip;</span></a></li>
         </ul>
       </div>
+
+      <!-- POSITION RESERVED — legal column and social links.
+           Privacy, Terms and Refund/Cancellation pages, the company
+           registration number and any social accounts are NOT confirmed yet, so
+           nothing is rendered here rather than shipping placeholder links.
+           See MEETING-DECISIONS.md items L1, L2 and B7. Add the column in this
+           slot once the real content exists. -->
     </div>
     <div class="foot-bottom">
-      <span>© <span data-year>2026</span> Northbridge Global Campus (Pvt) Ltd. Registered in Sri Lanka.</span>
-      <span class="foot-motto">Discere · Conectere · Excellere</span>
+      <span>&copy; <span data-year>2026</span> Northbridge Global Campus (Pvt) Ltd. Registered in Sri Lanka.</span>
+      <span class="foot-motto">Discere &middot; Conectere &middot; Excellere</span>
     </div>
   </div>
 </footer>

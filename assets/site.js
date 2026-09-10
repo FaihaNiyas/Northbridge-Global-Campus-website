@@ -44,25 +44,67 @@ function fillContactDetails() {
 }
 
 /* ------------------------------------------------------------ navigation */
+/* One panel, three ways out: the Menu/Close button, the dedicated close button
+   inside the panel, any navigation link, or the Escape key. While it is open the
+   background is locked so the page behind cannot scroll away under the panel. */
 function initNav() {
   const btn = $('.nav-toggle');
   const nav = $('#site-nav');
   if (!btn || !nav) return;
 
-  btn.addEventListener('click', () => {
-    const open = nav.classList.toggle('is-open');
+  const label = $('.nav-toggle-label', btn);
+  const closeBtn = $('.nav-close', nav);
+
+  function setOpen(open) {
+    nav.classList.toggle('is-open', open);
     btn.setAttribute('aria-expanded', String(open));
-    $('.nav-toggle-label', btn).textContent = open ? 'Close' : 'Menu';
-  });
+    if (label) label.textContent = open ? 'Close' : 'Menu';
+    document.body.classList.toggle('nav-open', open);
+  }
+
+  btn.addEventListener('click', () => setOpen(!nav.classList.contains('is-open')));
+
+  if (closeBtn) {
+    closeBtn.addEventListener('click', () => { setOpen(false); btn.focus(); });
+  }
+
+  // following a link should not leave the panel open behind the new page
+  $$('a', nav).forEach(a => a.addEventListener('click', () => setOpen(false)));
 
   // Escape closes the panel and returns focus to the button
   document.addEventListener('keydown', e => {
     if (e.key === 'Escape' && nav.classList.contains('is-open')) {
-      nav.classList.remove('is-open');
-      btn.setAttribute('aria-expanded', 'false');
-      $('.nav-toggle-label', btn).textContent = 'Menu';
+      setOpen(false);
       btn.focus();
     }
+  });
+
+  // widening past the mobile breakpoint must not leave the body locked
+  window.addEventListener('resize', () => {
+    if (window.innerWidth >= 960 && nav.classList.contains('is-open')) setOpen(false);
+  }, { passive: true });
+}
+
+/* ------------------------------------------------- conditional form fields */
+/* A field carrying data-when="Option A|Option B" is shown only while the form's
+   enquiry-type select holds one of those values. Hidden fields are skipped by
+   validation and left out of the message. With JavaScript off nothing is
+   hidden, so the field simply stays visible and optional. */
+function initConditionalFields() {
+  $$('form[data-form-name]').forEach(form => {
+    const conditionals = $$('[data-when]', form);
+    if (!conditionals.length) return;
+    const trigger = $('select[name="Enquiry type"]', form);
+    if (!trigger) return;
+
+    function sync() {
+      conditionals.forEach(f => {
+        const wanted = f.dataset.when.split('|');
+        f.hidden = !wanted.includes(trigger.value);
+      });
+    }
+    trigger.addEventListener('change', sync);
+    sync();
   });
 }
 
@@ -73,7 +115,9 @@ const RULES = {
   email:   v => v.trim() === '' || /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim()) || 'Please check the email address.',
   select:  v => v !== ''                  || 'Please choose an option.',
   message: v => v.trim().length >= 10     || 'Please tell us a little more — at least a sentence.',
-  consent: v => v === true                || 'Please tick the box so we know we may reply to you.'
+  consent: v => v === true                || 'Please tick the box so we know we may reply to you.',
+  url:     v => v.trim() === '' || /^https?:\/\/[^\s.]+\.[^\s]{2,}$/.test(v.trim())
+                                          || 'Please give a full link, starting with https://'
 };
 
 function validateField(field) {
@@ -92,13 +136,23 @@ function validateField(field) {
   }
   field.classList.add('has-error');
   input.setAttribute('aria-invalid', 'true');
-  $('.err', field).textContent = result;
+  const err = $('.err', field);
+  err.textContent = result;
+  // point the input at its own error text so assistive tech announces it
+  if (err.id) {
+    const described = (input.getAttribute('aria-describedby') || '').split(/\s+/).filter(Boolean);
+    if (!described.includes(err.id)) {
+      described.push(err.id);
+      input.setAttribute('aria-describedby', described.join(' '));
+    }
+  }
   return false;
 }
 
 function buildMessage(form) {
   const lines = [`Enquiry from the Northbridge website — ${form.dataset.formName}`, ''];
   $$('.field', form).forEach(field => {
+    if (field.hidden) return;               // a conditional field that is not in play
     const input = $('input, select, textarea', field);
     if (!input || input.type === 'checkbox') return;
     const label = $('label', field);
@@ -126,7 +180,7 @@ function initForms() {
       e.preventDefault();
       if (sending) return;                         // no duplicate submissions
 
-      const fields = $$('.field', form);
+      const fields = $$('.field', form).filter(f => f.hidden !== true);
       const bad = fields.filter(f => !validateField(f));
 
       if (bad.length) {
@@ -152,7 +206,7 @@ function initForms() {
         const link = `https://wa.me/${NB.whatsapp}?text=${encodeURIComponent(message)}`;
         status.innerHTML =
           `<div class="note ok" role="status"><h3>Almost done — one tap left</h3>
-           <p>Your details are ready to send. Tap below and WhatsApp will open with everything already written out. We usually reply within one working day.</p>
+           <p>Nothing has been sent yet. Tap below and WhatsApp will open with your details already written out &mdash; sending that message is what reaches us.</p>
            <div class="btn-row">
              <a class="btn btn-primary" href="${link}" target="_blank" rel="noopener">Send on WhatsApp</a>
              <a class="btn btn-secondary" href="mailto:${NB.email}?subject=${encodeURIComponent(form.dataset.formName)}&body=${encodeURIComponent(message)}">Send by email instead</a>
@@ -177,7 +231,7 @@ function initForms() {
         fields.forEach(f => f.classList.remove('has-error'));
         status.innerHTML =
           `<div class="note ok" role="status"><h3>Thank you — we have your message</h3>
-           <p>Someone from Northbridge will reply within one working day. If it is urgent, message us on WhatsApp and we will pick it up sooner.</p>
+           <p>Your message has reached Northbridge and someone will read it. If it is urgent, message us on WhatsApp as well.</p>
            <div class="btn-row"><a class="btn btn-secondary" data-wa href="#">Message on WhatsApp</a></div></div>`;
         fillContactDetails();
       } catch (err) {
@@ -315,6 +369,7 @@ function initReveal() {
 document.addEventListener('DOMContentLoaded', () => {
   fillContactDetails();
   initNav();
+  initConditionalFields();
   initHeader();
   initForms();
   initFloat();

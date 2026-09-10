@@ -76,12 +76,10 @@
 
   /* measured height of the sticky bar, per breakpoint — anchor targets offset
      by this so a heading never lands underneath the header */
-  --head-h: 86px;
+  --head-h: 74px;
 }
 
-@media (min-width:48em){ :root{ --pad:2rem; --head-h:101px; } }
-@media (min-width:64em){ :root{ --head-h:108px; } }
-@media (min-width:75em){ :root{ --head-h:112px; } }
+@media (min-width:48em){ :root{ --pad:2rem; --head-h:86px; } }
 
 /* Anything reachable by an in-page link clears the sticky header. */
 :where(section[id], #main, [id]:target){
@@ -200,23 +198,23 @@ section{ padding-block:3.5rem; }
 /* Logo and navigation share the one centred shell, vertically centred.
    The shell's padding-inline keeps the nav clear of the viewport edge. */
 .head-inner{
-  display:flex; align-items:center; justify-content:space-between; gap:1.5rem;
-  padding-block:.85rem;
+  display:flex; align-items:center; justify-content:space-between; gap:1.25rem;
+  padding-block:.7rem;
 }
+@media (min-width:48em){ .head-inner{ padding-block:.7rem; gap:1.5rem; } }
 
 /* --- brand ---
    The lockup is artwork on a white canvas. Because the bar behind it is the
    same opaque white, the canvas disappears and only the mark reads. */
 .brand{ display:flex; align-items:center; text-decoration:none; min-width:0; border-radius:var(--radius-sm); }
 .brand-mark{
-  display:block; width:168px; height:auto;
+  display:block; width:150px; height:auto;      /* ~52px tall */
   transition:opacity .2s var(--ease);
 }
 .brand:hover .brand-mark{ opacity:.86; }
-@media (min-width:30em){ .brand-mark{ width:186px; } }
-@media (min-width:48em){ .brand-mark{ width:210px; } }
-@media (min-width:64em){ .brand-mark{ width:232px; } }   /* ~80px tall */
-@media (min-width:75em){ .brand-mark{ width:244px; } }   /* ~84px tall */
+@media (min-width:30em){ .brand-mark{ width:164px; } }
+@media (min-width:48em){ .brand-mark{ width:176px; } }   /* ~61px tall -> 84px bar */
+@media (min-width:64em){ .brand-mark{ width:180px; } }   /* ~85px bar */
 
 /* --- mobile menu button --- */
 .nav-toggle{
@@ -236,12 +234,28 @@ section{ padding-block:3.5rem; }
 .site-nav ul{ list-style:none; margin:0; padding:0; }
 .site-nav a{
   display:block; text-decoration:none; color:var(--navy); font-weight:500;
-  font-size:1.02rem;
+  font-size:1.04rem;            /* ~16.6px */
 }
+
+/* Close button: only ever inside the mobile panel. */
+.nav-close{
+  display:inline-flex; align-items:center; justify-content:center; gap:.5rem;
+  min-height:44px; min-width:44px; width:100%;
+  margin-bottom:.4rem; padding:.6rem 1rem;
+  background:var(--white); color:var(--navy);
+  border:1.5px solid var(--navy-16); border-radius:var(--radius-sm);
+  font-family:var(--sans); font-size:.95rem; font-weight:600; cursor:pointer;
+  transition:border-color .2s var(--ease), background-color .2s var(--ease);
+}
+.nav-close:hover{ border-color:var(--gold); background:var(--gold-10); }
+.nav-close svg{ width:18px; height:18px; }
+
+/* One restrained gold call to action in the bar. */
+.nav-cta{ min-height:44px; padding:.6rem 1.15rem; font-size:.97rem; }
 
 /* Mobile: a proper panel rather than a bare list — carded, spaced, and it
    fades down under the bar instead of snapping into place. */
-@media (max-width:47.99em){
+@media (max-width:59.99em){
   /* The open panel must drop BELOW the bar. Without wrapping it becomes a third
      flex child of .head-inner and is squeezed in beside the menu button. */
   .head-inner{ flex-wrap:wrap; }
@@ -272,13 +286,19 @@ section{ padding-block:3.5rem; }
   .site-nav a[aria-current="page"]{
     color:var(--gold-text); font-weight:700; background:var(--gold-10);
   }
+  .site-nav .nav-cta{ display:flex; width:100%; margin-top:.6rem; }
 }
+
+/* While the panel is open the page behind it must not scroll. */
+body.nav-open{ overflow:hidden; }
+@media (min-width:60em){ body.nav-open{ overflow:visible; } }
 @keyframes nav-in{ from{ opacity:0; transform:translateY(-6px); } to{ opacity:1; transform:none; } }
 
 /* Desktop: quiet pills with a gold underline that grows from the left. */
-@media (min-width:48em){
+@media (min-width:60em){
   .nav-toggle{ display:none; }
-  .site-nav{ display:block !important; }
+  .nav-close{ display:none; }          /* never on desktop */
+  .site-nav{ display:flex !important; align-items:center; gap:1rem; }
   .site-nav ul{ display:flex; align-items:center; gap:.15rem; }
   .site-nav a{
     padding:.6rem .9rem; border-radius:var(--radius-sm); position:relative;
@@ -292,6 +312,9 @@ section{ padding-block:3.5rem; }
   }
   .site-nav a:hover{ background:var(--navy-04); color:var(--navy); }
   .site-nav a[aria-current="page"]{ color:var(--gold-text); font-weight:650; }
+  /* the CTA is a button, not a nav link — it must not grow an underline */
+  .site-nav .nav-cta::after{ content:none; }
+  .site-nav .nav-cta:hover{ background:var(--gold-soft); }
   .site-nav a:hover::after,
   .site-nav a:focus-visible::after,
   .site-nav a[aria-current="page"]::after{ transform:scaleX(1); }
@@ -371,17 +394,18 @@ section{ padding-block:3.5rem; }
 @media (max-width:29.99em){ .btn-row .btn{ width:100%; } }
 
 /* ============================================================================
-   HERO — cinematic.
+   HERO — editorial two columns.
 
-   Desktop (>=64em): the photograph is the hero's full-width background, set
-   absolutely behind the copy. A navy gradient runs almost solid at the left
-   edge and decays to nothing around 80% across — she sits in the right third,
-   so her face and blazer never take a dark wash. Because one image spans the
-   whole hero there is no panel boundary and therefore no seam.
+   Desktop: the copy sits in the left ~55% of the centred container; the
+   photograph fills the right and bleeds to the right viewport edge, so there is
+   no boxed-image edge anywhere. Its left side is masked rather than washed with
+   a flat colour, which lets the hero's own navy-to-green ground show through —
+   the join cannot mismatch, and nothing dark is laid over her face.
 
-   Tablet and phone: the hero stacks. Copy sits on the navy-to-green ground,
-   and the photograph follows underneath in a wide frame — never a portrait
-   crop, and never behind the text where it would be unreadable.
+   Tablet and phone: the hero stacks. Copy on the navy ground, photograph below
+   in a wide frame — never a portrait crop, never behind the text.
+
+   The photograph itself is never altered: framing is object-fit/object-position.
    ========================================================================= */
 .hero{
   position:relative;
@@ -395,7 +419,7 @@ section{ padding-block:3.5rem; }
   padding-block:0;        /* the inner block owns the height */
 }
 
-/* the transition into the white section below: one gold hairline, nothing else */
+/* the transition into the section below: one gold hairline, nothing else */
 .hero::after{
   content:""; position:absolute; left:0; right:0; bottom:0; height:1px; z-index:3;
   background:linear-gradient(90deg, var(--gold-38), var(--gold-10) 55%, transparent);
@@ -403,7 +427,7 @@ section{ padding-block:3.5rem; }
 }
 
 .hero-inner{ position:relative; z-index:2; padding-block:2.75rem 2.5rem; }
-.hero-copy{ max-width:580px; }
+.hero-copy{ max-width:600px; }
 
 /* eyebrow — a plain gold label with a short rule, not a pill */
 .hero .hero-copy .eyebrow{
@@ -425,7 +449,7 @@ section{ padding-block:3.5rem; }
   color:var(--white);
   font-family:var(--serif);
   font-weight:400;                                   /* the lighter serif cut */
-  font-size:clamp(2.1rem,1.1rem + 3.1vw,3.6rem);     /* ~58px on large desktop */
+  font-size:clamp(2rem,1.05rem + 2.5vw,3.05rem);
   line-height:1.1; letter-spacing:-.02em;
   text-wrap:balance;                                 /* even lines, no orphan */
 }
@@ -434,33 +458,15 @@ section{ padding-block:3.5rem; }
   font-size:clamp(1.04rem,.99rem + .42vw,1.18rem);
   line-height:1.7;
   margin-top:1.35rem;
-  max-width:520px;
+  max-width:34rem;
 }
 .hero .btn-row{ margin-top:2rem; }
+.hero .btn{ min-height:52px; }        /* 50-54px, comfortably over the 44 min */
 
-/* status — a small line with a gold dot, not a capsule */
-.hero-status{
-  display:flex; align-items:center; gap:.55rem;
-  margin-top:1.5rem;
-  color:var(--on-dark-60);
-  font-size:.85rem; letter-spacing:.01em;
-}
-.hero-status .dot{
-  flex:none; width:6px; height:6px; border-radius:50%; background:var(--gold);
-}
-
-/* trust strip — two plain statements, a small gold separator between them */
-.trust-strip{
-  list-style:none; margin:1.1rem 0 0; padding:0;
-  display:flex; flex-wrap:wrap; align-items:center; gap:.35rem 1rem;
-  color:var(--on-dark);
-  font-size:.83rem; font-weight:600; letter-spacing:.03em;
-}
-.trust-strip li{ display:flex; align-items:center; gap:1rem; }
-.trust-strip li:not(:last-child)::after{
-  content:""; flex:none; width:4px; height:4px; border-radius:50%;
-  background:var(--gold);
-}
+/* Inner-page banner: same ground, no photograph, tighter. */
+.hero-page{ padding-block:2.75rem; }
+@media (min-width:64em){ .hero-page{ padding-block:3.75rem; } }
+.hero-page .lede{ max-width:36rem; }
 
 /* --- the photograph --- */
 .hero-media{ position:relative; }
@@ -470,16 +476,22 @@ section{ padding-block:3.5rem; }
   object-fit:cover;
   object-position:92% center;      /* she sits right in the source frame */
   display:block;
+  /* fade the edge she is NOT on, so the photograph dissolves into the hero
+     ground instead of ending on a hard card edge */
+  -webkit-mask-image:linear-gradient(180deg, transparent 0%, rgba(0,0,0,.5) 8%, #000 26%);
+          mask-image:linear-gradient(180deg, transparent 0%, rgba(0,0,0,.5) 8%, #000 26%);
 }
-/* stacked layout: soften the top edge into the copy above it */
-.hero-media::after{
-  content:""; position:absolute; inset:0; pointer-events:none;
-  background:linear-gradient(180deg,
-    rgba(0,33,71,.92) 0%, rgba(0,33,71,.45) 8%, rgba(0,33,71,0) 24%);
+/* Where masking is unavailable, wash the same edge with navy instead. */
+@supports not ((mask-image:linear-gradient(#000,#000)) or (-webkit-mask-image:linear-gradient(#000,#000))){
+  .hero-media::before{
+    content:""; position:absolute; inset:0; z-index:1; pointer-events:none;
+    background:linear-gradient(180deg,
+      rgba(0,33,71,.92) 0%, rgba(0,33,71,.45) 8%, rgba(0,33,71,0) 24%);
+  }
 }
 
-/* tablet: a wider frame keeps the stacked hero from getting tall and brings
-   the whole wall lockup back into view */
+/* tablet: a wider frame keeps the stacked hero from getting tall and brings the
+   whole wall lockup back into view */
 @media (min-width:40em) and (max-width:63.99em){
   .hero-media img{ aspect-ratio:16/9; object-position:92% center; }
 }
@@ -488,49 +500,30 @@ section{ padding-block:3.5rem; }
   .hero-inner{
     display:flex; align-items:center;      /* content vertically centred */
     min-height:620px;
-    padding-block:4rem;
+    padding-block:3.5rem;
   }
-  /* the photograph becomes the hero's background */
+  .hero-copy{ max-width:55%; }
+  /* right-hand panel, bleeding to the viewport edge */
   .hero-media{
-    position:absolute; inset:0; z-index:0;
+    position:absolute; top:0; right:0; bottom:0; width:60vw; z-index:0;
   }
   .hero-media img{
     width:100%; height:100%;
     aspect-ratio:auto;
-    object-position:88% center;   /* keeps her whole; holds desk, wall, windows */
+    object-position:94% center;   /* keeps her whole; holds desk, lamp, windows */
+    /* clear until ~28% (past the copy column, so no wall lettering shows behind
+       the heading) and fully opaque by 52%, before she enters the frame */
+    -webkit-mask-image:linear-gradient(90deg, transparent 0%, transparent 24%, rgba(0,0,0,.10) 31%, rgba(0,0,0,.60) 43%, #000 53%);
+            mask-image:linear-gradient(90deg, transparent 0%, transparent 24%, rgba(0,0,0,.10) 31%, rgba(0,0,0,.60) 43%, #000 53%);
   }
-  /* Strong navy at the left for reading contrast, decaying to clear before it
-     reaches her. The vertical wash is a couple of percent — enough to seat the
-     photograph in the brand, not enough to dull it. */
-  .hero-media::after{
-    background:
-      linear-gradient(90deg,
-        rgba(0,33,71,.975) 0%,
-        rgba(0,33,71,.965) 32%,
-        rgba(0,33,71,.925) 46%,   /* copy ends ~52%: keep this band clean */
-        rgba(0,33,71,.74)  57%,
-        rgba(0,33,71,.42)  65%,
-        rgba(0,33,71,.17)  72%,   /* she starts ~72%: light from here on */
-        rgba(0,33,71,.04)  80%,
-        rgba(0,33,71,0)    88%),
-      radial-gradient(85% 120% at 0% 100%, rgba(0,75,60,.42) 0%, rgba(0,75,60,0) 58%),
-      linear-gradient(180deg, rgba(0,33,71,.20) 0%, rgba(0,33,71,0) 26%);
+  @supports not ((mask-image:linear-gradient(#000,#000)) or (-webkit-mask-image:linear-gradient(#000,#000))){
+    .hero-media::before{
+      background:linear-gradient(90deg,
+        var(--navy) 0%, rgba(0,33,71,.88) 18%, rgba(0,33,71,.40) 38%, rgba(0,33,71,0) 58%);
+    }
   }
 }
 @media (min-width:75em){ .hero-inner{ min-height:660px; } }
-
-/* Inner-page banner: same ground, no photograph, tighter. */
-.hero-page{ padding-block:2.75rem; }
-@media (min-width:64em){ .hero-page{ padding-block:3.75rem; } }
-.hero-page .lede{ max-width:36rem; }
-.hero-page .motto{ max-width:36rem; }
-.hero .motto{
-  margin-top:1.9rem; padding-top:1.2rem;
-  border-top:1px solid var(--on-dark-16);
-  color:var(--gold-soft);
-  font-size:.74rem; letter-spacing:.26em; text-transform:uppercase;
-  font-weight:600;
-}
 
 /* --- hero motion: one short rise on load, nothing continuous ---
    Opacity and transform only, so no layout shift. The global reduced-motion
@@ -542,8 +535,6 @@ section{ padding-block:3.5rem; }
 .hero-copy > *:nth-child(2){ animation-delay:.06s; }
 .hero-copy > *:nth-child(3){ animation-delay:.12s; }
 .hero-copy > *:nth-child(4){ animation-delay:.18s; }
-.hero-copy > *:nth-child(5){ animation-delay:.24s; }
-.hero-copy > *:nth-child(6){ animation-delay:.30s; }
 .hero-media img{ animation:hero-img .9s var(--ease-out) both .05s; }
 
 /* ---------- section furniture ---------- */
@@ -562,37 +553,7 @@ section{ padding-block:3.5rem; }
 .section-lede{ margin-top:1.15rem; font-size:1.08rem; color:var(--ink-80); }
 .band-navy .section-lede{ color:var(--on-dark); }
 
-/* numbered sequence */
-.steps{ list-style:none; margin:3rem 0 0; padding:0; display:grid; gap:1.25rem; }
-@media (min-width:48em){ .steps{ grid-template-columns:repeat(3,1fr); gap:1.5rem; } }
-.steps li{
-  position:relative;
-  background:var(--white);
-  border:1px solid var(--navy-08);
-  border-radius:var(--radius);
-  padding:1.75rem 1.6rem;
-  box-shadow:var(--shadow-sm);
-  transition:box-shadow .28s var(--ease), transform .28s var(--ease),
-             border-color .28s var(--ease);
-}
-/* the gold accent is a short rule, not a full top bar */
-.steps li::before{
-  content:""; position:absolute; top:-1px; left:1.6rem; width:40px; height:3px;
-  background:var(--gold); border-radius:0 0 3px 3px;
-}
-.steps li:hover{
-  box-shadow:var(--shadow-md); transform:translateY(-3px);
-  border-color:var(--gold-38);
-}
-.steps .num{
-  font-family:var(--sans); font-size:.72rem; font-weight:700;
-  letter-spacing:.18em; text-transform:uppercase;
-  color:var(--gold-text); display:block; margin-bottom:.6rem;
-}
-.steps h3{ margin-bottom:.5rem; }
-.steps p{ color:var(--ink-80); font-size:1rem; }
-
-/* prose blocks — quieter cards, distinct from .steps */
+/* prose blocks — the card treatment used for subject areas and commitments */
 .prose-grid{ display:grid; gap:1.25rem; margin-top:3rem; }
 @media (min-width:48em){ .prose-grid{ grid-template-columns:repeat(2,1fr); gap:1.5rem; } }
 .prose-grid > div{
@@ -628,6 +589,105 @@ section{ padding-block:3.5rem; }
 .aside{ margin-top:2.5rem; }
 .fine{ color:var(--ink-62); font-size:.98rem; }
 .band-navy .fine{ color:var(--on-dark-60); }
+
+/* --- four learner-value points: plain, not four more cards --- */
+.value-grid{
+  list-style:none; margin:3rem 0 0; padding:0;
+  display:grid; gap:2rem 2.5rem;
+}
+@media (min-width:40em){ .value-grid{ grid-template-columns:repeat(2,1fr); } }
+@media (min-width:64em){ .value-grid{ grid-template-columns:repeat(4,1fr); gap:2.25rem; } }
+.value-grid li{ padding-top:1.1rem; border-top:2px solid var(--gold-38); }
+.value-grid h3{ margin-bottom:.45rem; }
+.value-grid p{ color:var(--ink-80); font-size:1rem; }
+
+/* --- how we learn: a numbered sequence, quiet rules instead of boxes --- */
+.how-list{
+  list-style:none; counter-reset:how; margin:3rem 0 0; padding:0;
+  display:grid; gap:1.75rem 2.5rem;
+}
+@media (min-width:40em){ .how-list{ grid-template-columns:repeat(2,1fr); } }
+@media (min-width:64em){ .how-list{ grid-template-columns:repeat(4,1fr); } }
+.how-list li{ counter-increment:how; padding-top:1.1rem; border-top:1px solid var(--navy-16); }
+.how-list li::before{
+  content:counter(how,decimal-leading-zero);
+  display:block; margin-bottom:.55rem;
+  font-size:.78rem; font-weight:700; letter-spacing:.16em;
+  color:var(--gold-text);
+}
+.how-list h3{ margin-bottom:.45rem; }
+.how-list p{ color:var(--ink-80); font-size:1rem; }
+
+/* --- programme section footer: status line plus the interest CTA --- */
+.prog-foot{
+  display:flex; flex-wrap:wrap; align-items:center; gap:1rem 1.75rem;
+  margin-top:2.5rem;
+}
+.prog-status{
+  display:flex; align-items:center; gap:.6rem;
+  color:var(--ink-62); font-size:.95rem;
+}
+.prog-status .dot{
+  flex:none; width:7px; height:7px; border-radius:50%; background:var(--gold);
+}
+
+/* --- the journey line: the old roadmap, reduced to one supporting row --- */
+.journey{
+  display:flex; flex-wrap:wrap; align-items:center; gap:.5rem 1rem;
+  margin-top:2.75rem; padding-top:1.35rem;
+  border-top:1px solid var(--navy-08);
+  font-size:.88rem; color:var(--ink-62);
+}
+.journey .journey-lbl{
+  font-size:.7rem; letter-spacing:.16em; text-transform:uppercase;
+  font-weight:700; color:var(--gold-text);
+}
+.journey span + span:not(.journey-lbl)::before{
+  content:"\2192"; margin-right:.75rem; color:var(--gold);
+}
+.journey .journey-lbl + span::before{ content:none; }
+
+/* --- philosophy band --- */
+/* the band keeps the site's shell so its left edge lines up with every other
+   section; the statement itself is capped instead */
+.philosophy-line{
+  max-width:22ch;
+  font-family:var(--serif); font-weight:400;
+  font-size:clamp(1.75rem,1.1rem + 2.2vw,2.9rem);
+  line-height:1.18; letter-spacing:-.02em;
+  color:var(--white);
+  margin-top:.35rem;
+  text-wrap:balance;
+}
+.philosophy-sub{
+  margin-top:1.5rem; max-width:40rem;
+  color:var(--on-dark); font-size:1.06rem;
+}
+
+/* --- enquiry choices: a plain list of routes, not four more cards --- */
+.enquiry-grid{
+  list-style:none; margin:2.5rem 0 0; padding:0;
+  display:grid; gap:.75rem;
+}
+@media (min-width:40em){ .enquiry-grid{ grid-template-columns:repeat(2,1fr); gap:.85rem 1.5rem; } }
+.enquiry-grid li{
+  display:flex; align-items:center; gap:.85rem;
+  padding:.9rem 1.1rem;
+  background:var(--white);
+  border:1px solid var(--navy-08);
+  border-left:3px solid var(--gold);
+  border-radius:var(--radius-sm);
+  font-weight:600; color:var(--navy);
+}
+
+/* --- about: copy beside the crest --- */
+.split{ display:grid; gap:2.5rem; align-items:center; }
+@media (min-width:56em){ .split{ grid-template-columns:1.25fr .75fr; gap:4rem; } }
+.split-figure{ margin:0; }
+.split-figure img{
+  width:min(240px,60%); height:auto; margin-inline:auto;
+}
+@media (min-width:56em){ .split-figure img{ width:100%; max-width:240px; margin-inline:0; } }
 
 /* ---------- contact methods ---------- */
 .contact-methods{ display:grid; gap:1rem; margin-top:2.5rem; }
