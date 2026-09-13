@@ -27,7 +27,7 @@
 <meta name="twitter:description" content="How we work, and a plain statement of where we stand today — including what we do not yet have." />
 <meta name="twitter:image" content="https://REPLACE-WITH-YOUR-DOMAIN.lk/assets/og-image.png" />
 
-<meta name="theme-color" content="#012144" />
+<meta name="theme-color" content="#002147" />
 <link rel="icon" href="assets/favicon-32.png" sizes="32x32" />
 <link rel="icon" href="assets/favicon-16.png" sizes="16x16" />
 <link rel="apple-touch-icon" href="assets/apple-touch-icon.png" />
@@ -52,7 +52,8 @@
            alt="Northbridge Global Campus" fetchpriority="high" decoding="async" />
     </a>
     <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+      <svg class="icon-menu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true" focusable="false"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      <svg class="icon-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true" focusable="false"><path d="M6 6l12 12M18 6 6 18"/></svg>
       <span class="nav-toggle-label">Menu</span>
     </button>
     <nav class="site-nav" id="site-nav" aria-label="Main">
@@ -66,34 +67,41 @@
   </div>
 </header>
 
-<main id="main">
+<main id="main" tabindex="-1">
 
   <section class="hero hero-page">
-    <div class="shell">
+    <div class="shell hero-page-inner">
       <h1>About Northbridge.</h1>
-      <p class="lede">A Sri Lankan company building education that is judged by one thing: whether it changes what our learners can do at work.</p>
-      <p class="motto">Learn · Build · Lead · Go Global</p>
+      <div class="hero-page-body">
+        <p class="lede">A Sri Lankan company building education that is judged by one thing: whether it changes what our learners can do at work.</p>
+        <p class="motto">Learn · Build · Lead · Go Global</p>
+      </div>
     </div>
   </section>
 
   <section>
     <div class="shell">
-      <div class="measure">
-        <p class="eyebrow">Why we exist</p>
-        <h2>The gap between a qualification and a capability.</h2>
-        <p class="section-lede">Sri Lanka does not have a shortage of qualifications. What it has is a gap between holding a certificate and being able to do the work — reading a set of accounts, chairing a meeting in English, turning a spreadsheet into something a director can act on.</p>
+      <div class="section-head">
+        <div class="section-title">
+          <p class="eyebrow">Why we exist</p>
+          <h2>The gap between a qualification and a capability.</h2>
+        </div>
+        <div class="section-body">
+          <p class="section-lede">Sri Lanka does not have a shortage of qualifications. What it has is a gap between holding a certificate and being able to do the work — reading a set of accounts, chairing a meeting in English, turning a spreadsheet into something a director can act on.</p>
         <p class="section-lede">Northbridge exists to close that gap. Every course we build starts from a real task somebody is expected to perform at work, and works backwards to what has to be taught.</p>
+        </div>
       </div>
     </div>
   </section>
 
   <section class="band-paper">
     <div class="shell">
-      <div class="measure">
-        <p class="eyebrow">How we work</p>
-        <h2>Four commitments.</h2>
-      </div>
-      <div class="prose-grid">
+      <div class="split split-wide">
+        <div class="split-intro is-sticky">
+          <p class="eyebrow">How we work</p>
+          <h2>Four commitments.</h2>
+        </div>
+        <div class="prose-grid split-main">
         <div>
           <h3>Taught by people who do the work</h3>
           <p>Our teaching is delivered by practitioners — accountants, managers, specialists — engaged for a specific course. They bring what the job is like this year, not what a syllabus said a decade ago.</p>
@@ -110,33 +118,40 @@
           <h3>Careful with your information</h3>
           <p>We hold our own domains, systems and learner records. Your details are used to answer your enquiry and nothing else, and we do not sell them.</p>
         </div>
+        </div>
       </div>
     </div>
   </section>
 
   <section>
     <div class="shell">
-      <div class="measure">
-        <p class="eyebrow">Our name</p>
-        <h2>A bridge, a globe, a graduation cap.</h2>
-        <p class="section-lede">The crest is quartered. The <strong>N</strong> for Northbridge. A <strong>suspension bridge</strong>, because our job is to carry people from where they are to where they want to work. A <strong>globe</strong>, for the standard we hold ourselves to and the reach we want for our learners. And a <strong>graduation cap</strong>, for the learning itself.</p>
+      <div class="section-head">
+        <div class="section-title">
+          <p class="eyebrow">Our name</p>
+          <h2>A bridge, a globe, a graduation cap.</h2>
+        </div>
+        <div class="section-body">
+          <p class="section-lede">The crest is quartered. The <strong>N</strong> for Northbridge. A <strong>suspension bridge</strong>, because our job is to carry people from where they are to where they want to work. A <strong>globe</strong>, for the standard we hold ourselves to and the reach we want for our learners. And a <strong>graduation cap</strong>, for the learning itself.</p>
         <p class="section-lede">The motto reads <em>Discere · Conectere · Excellere</em> — to learn, to connect, to excel. It is the sequence we believe careers actually follow.</p>
+        </div>
       </div>
     </div>
   </section>
 
-  <section class="band-navy">
+  <section class="band-green">
     <div class="shell">
-      <div class="measure">
-        <p class="eyebrow">Where we stand today</p>
-        <h2>The plain facts.</h2>
-        <ul class="fact-list">
+      <div class="split">
+        <div class="split-intro">
+          <p class="eyebrow">Where we stand today</p>
+          <h2>The plain facts.</h2>
+        </div>
+        <ul class="fact-list split-main">
           <li>Northbridge Global Campus (Pvt) Ltd is incorporated in Sri Lanka.</li>
           <li>We are preparing our first programmes. Enrolments are not open, and we are not quoting fees or dates until they are settled.</li>
           <li>We do not currently hold accreditation from an awarding body. If and when we do, it will be named here alongside the body that granted it.</li>
           <li>We are a small core team, working with specialists course by course.</li>
         </ul>
-        <div class="btn-row">
+        <div class="btn-row split-after">
           <a class="btn btn-primary" href="contact.html">Ask us a question</a>
           <a class="btn btn-secondary" href="careers.html">Work with us</a>
         </div>

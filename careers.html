@@ -27,7 +27,7 @@
 <meta name="twitter:description" content="We engage practitioners course by course. No named vacancies right now — register your interest in one short form." />
 <meta name="twitter:image" content="https://REPLACE-WITH-YOUR-DOMAIN.lk/assets/og-image.png" />
 
-<meta name="theme-color" content="#012144" />
+<meta name="theme-color" content="#002147" />
 <link rel="icon" href="assets/favicon-32.png" sizes="32x32" />
 <link rel="icon" href="assets/favicon-16.png" sizes="16x16" />
 <link rel="apple-touch-icon" href="assets/apple-touch-icon.png" />
@@ -52,7 +52,8 @@
            alt="Northbridge Global Campus" fetchpriority="high" decoding="async" />
     </a>
     <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+      <svg class="icon-menu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true" focusable="false"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      <svg class="icon-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true" focusable="false"><path d="M6 6l12 12M18 6 6 18"/></svg>
       <span class="nav-toggle-label">Menu</span>
     </button>
     <nav class="site-nav" id="site-nav" aria-label="Main">
@@ -66,22 +67,28 @@
   </div>
 </header>
 
-<main id="main">
+<main id="main" tabindex="-1">
 
   <section class="hero hero-page">
-    <div class="shell">
+    <div class="shell hero-page-inner">
       <h1>Work with us.</h1>
-      <p class="lede">We are not advertising named vacancies at the moment. What we are doing is building a list of people we want to call first — and that list is genuinely how we hire.</p>
+      <div class="hero-page-body">
+        <p class="lede">We are not advertising named vacancies at the moment. What we are doing is building a list of people we want to call first — and that list is genuinely how we hire.</p>
+      </div>
     </div>
   </section>
 
   <section>
     <div class="shell">
-      <div class="measure">
-        <p class="eyebrow">How we engage people</p>
-        <h2>Mostly course by course, not desk by desk.</h2>
-        <p class="section-lede">Most of the people who teach at Northbridge keep their day jobs. We engage them for a specific course or a run of sessions, agree the scope and the fee up front, and pay for the work delivered. It suits practitioners who want to teach without giving up practice.</p>
+      <div class="section-head">
+        <div class="section-title">
+          <p class="eyebrow">How we engage people</p>
+          <h2>Mostly course by course, not desk by desk.</h2>
+        </div>
+        <div class="section-body">
+          <p class="section-lede">Most of the people who teach at Northbridge keep their day jobs. We engage them for a specific course or a run of sessions, agree the scope and the fee up front, and pay for the work delivered. It suits practitioners who want to teach without giving up practice.</p>
         <p class="section-lede">A small core team runs operations, admissions and growth. Those roles are permanent, and we fill them rarely and carefully.</p>
+        </div>
       </div>
 
       <div class="prose-grid">
@@ -107,37 +114,38 @@
 
   <section class="band-paper">
     <div class="shell">
-      <div class="measure">
+      <div class="split">
+      <div class="split-intro">
         <p class="eyebrow">Register your interest</p>
         <h2>Tell us what you would want to teach or run.</h2>
         <p class="section-lede">Fill this in and it comes straight to us. There is no application portal and no automated screening — a person reads it and replies within one working day. Fields marked * are required.</p>
       </div>
 
-      <div class="form-wrap">
+      <div class="form-wrap split-main">
         <form data-form-name="Careers — expression of interest" novalidate>
 
           <div class="field" data-rule="name">
-            <label for="c-name">Full name *</label>
-            <input id="c-name" name="Full name" type="text" autocomplete="name" required />
-            <p class="err"></p>
+            <label for="c-name">Full name <span class="req">*</span></label>
+            <input id="c-name" aria-describedby="c-name-err" name="Full name" type="text" autocomplete="name" required />
+            <p class="err" id="c-name-err"></p>
           </div>
 
           <div class="field" data-rule="phone">
-            <label for="c-phone">Phone number *</label>
-            <p class="hint">We may reply on WhatsApp if that is easier for you.</p>
-            <input id="c-phone" name="Phone" type="tel" inputmode="tel" autocomplete="tel" required />
-            <p class="err"></p>
+            <label for="c-phone">Phone number <span class="req">*</span></label>
+            <p class="hint" id="c-phone-hint">We may reply on WhatsApp if that is easier for you.</p>
+            <input id="c-phone" aria-describedby="c-phone-hint c-phone-err" name="Phone" type="tel" inputmode="tel" autocomplete="tel" required />
+            <p class="err" id="c-phone-err"></p>
           </div>
 
           <div class="field" data-rule="email">
             <label for="c-email">Email address <span class="opt">(optional)</span></label>
-            <input id="c-email" name="Email" type="email" inputmode="email" autocomplete="email" />
-            <p class="err"></p>
+            <input id="c-email" aria-describedby="c-email-err" name="Email" type="email" inputmode="email" autocomplete="email" />
+            <p class="err" id="c-email-err"></p>
           </div>
 
           <div class="field" data-rule="select">
-            <label for="c-area">Area of interest *</label>
-            <select id="c-area" name="Area of interest" required>
+            <label for="c-area">Area of interest <span class="req">*</span></label>
+            <select id="c-area" aria-describedby="c-area-err" name="Area of interest" required>
               <option value="">Please choose…</option>
               <option>Commercial finance and accounting</option>
               <option>Workplace English</option>
@@ -149,7 +157,7 @@
               <option>Employer or industry partnership</option>
               <option>Something else</option>
             </select>
-            <p class="err"></p>
+            <p class="err" id="c-area-err"></p>
           </div>
 
           <div class="field">
@@ -158,10 +166,10 @@
           </div>
 
           <div class="field" data-rule="message">
-            <label for="c-msg">What would you like to do with us? *</label>
-            <p class="hint">A few sentences is plenty. What you do now, and what you would want to teach or run.</p>
-            <textarea id="c-msg" name="Message" required></textarea>
-            <p class="err"></p>
+            <label for="c-msg">What would you like to do with us? <span class="req">*</span></label>
+            <p class="hint" id="c-msg-hint">A few sentences is plenty. What you do now, and what you would want to teach or run.</p>
+            <textarea id="c-msg" aria-describedby="c-msg-hint c-msg-err" name="Message" required></textarea>
+            <p class="err" id="c-msg-err"></p>
           </div>
 
           <div class="note note-lead">
@@ -170,9 +178,9 @@
           </div>
 
           <div class="field consent" data-rule="consent">
-            <input id="c-consent" name="Consent" type="checkbox" required />
-            <label for="c-consent">I am happy for Northbridge to hold these details and contact me about working together. *</label>
-            <p class="err"></p>
+            <input id="c-consent" aria-describedby="c-consent-err" name="Consent" type="checkbox" required />
+            <label for="c-consent">I am happy for Northbridge to hold these details and contact me about working together. <span class="req">*</span></label>
+            <p class="err" id="c-consent-err"></p>
           </div>
 
           <button class="btn btn-primary btn-block" type="submit">Send my details</button>
@@ -180,8 +188,9 @@
         </form>
       </div>
 
-      <div class="measure aside">
+      <div class="split-after">
         <p class="fine">Prefer not to use a form? Message us on WhatsApp, or call — details are on the <a href="contact.html">contact page</a>.</p>
+      </div>
       </div>
     </div>
   </section>

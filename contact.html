@@ -27,7 +27,7 @@
 <meta name="twitter:description" content="WhatsApp, phone, email, or a short form. A person reads every message and replies within one working day." />
 <meta name="twitter:image" content="https://REPLACE-WITH-YOUR-DOMAIN.lk/assets/og-image.png" />
 
-<meta name="theme-color" content="#012144" />
+<meta name="theme-color" content="#002147" />
 <link rel="icon" href="assets/favicon-32.png" sizes="32x32" />
 <link rel="icon" href="assets/favicon-16.png" sizes="16x16" />
 <link rel="apple-touch-icon" href="assets/apple-touch-icon.png" />
@@ -52,7 +52,8 @@
            alt="Northbridge Global Campus" fetchpriority="high" decoding="async" />
     </a>
     <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+      <svg class="icon-menu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true" focusable="false"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      <svg class="icon-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true" focusable="false"><path d="M6 6l12 12M18 6 6 18"/></svg>
       <span class="nav-toggle-label">Menu</span>
     </button>
     <nav class="site-nav" id="site-nav" aria-label="Main">
@@ -66,12 +67,14 @@
   </div>
 </header>
 
-<main id="main">
+<main id="main" tabindex="-1">
 
   <section class="hero hero-page">
-    <div class="shell">
+    <div class="shell hero-page-inner">
       <h1>Contact us.</h1>
-      <p class="lede">A person reads every message and replies within one working day. Choose whichever way suits you.</p>
+      <div class="hero-page-body">
+        <p class="lede">A person reads every message and replies within one working day. Choose whichever way suits you.</p>
+      </div>
     </div>
   </section>
 
@@ -92,7 +95,7 @@
         </a>
       </div>
 
-      <div class="measure aside">
+      <div class="aside">
         <p class="fine">We answer messages Monday to Saturday. Anything that arrives on a Sunday or a public holiday is picked up the next working day.</p>
       </div>
     </div>
@@ -100,37 +103,38 @@
 
   <section class="band-paper">
     <div class="shell">
-      <div class="measure">
+      <div class="split">
+      <div class="split-intro">
         <p class="eyebrow">Send a message</p>
         <h2>Tell us what you need.</h2>
         <p class="section-lede">Fields marked * are required. Everything else helps us give you a better answer.</p>
       </div>
 
-      <div class="form-wrap">
+      <div class="form-wrap split-main">
         <form data-form-name="General enquiry" novalidate>
 
           <div class="field" data-rule="name">
-            <label for="q-name">Full name *</label>
-            <input id="q-name" name="Full name" type="text" autocomplete="name" required />
-            <p class="err"></p>
+            <label for="q-name">Full name <span class="req">*</span></label>
+            <input id="q-name" aria-describedby="q-name-err" name="Full name" type="text" autocomplete="name" required />
+            <p class="err" id="q-name-err"></p>
           </div>
 
           <div class="field" data-rule="phone">
-            <label for="q-phone">Phone number *</label>
-            <p class="hint">We may reply on WhatsApp if that is easier for you.</p>
-            <input id="q-phone" name="Phone" type="tel" inputmode="tel" autocomplete="tel" required />
-            <p class="err"></p>
+            <label for="q-phone">Phone number <span class="req">*</span></label>
+            <p class="hint" id="q-phone-hint">We may reply on WhatsApp if that is easier for you.</p>
+            <input id="q-phone" aria-describedby="q-phone-hint q-phone-err" name="Phone" type="tel" inputmode="tel" autocomplete="tel" required />
+            <p class="err" id="q-phone-err"></p>
           </div>
 
           <div class="field" data-rule="email">
             <label for="q-email">Email address <span class="opt">(optional)</span></label>
-            <input id="q-email" name="Email" type="email" inputmode="email" autocomplete="email" />
-            <p class="err"></p>
+            <input id="q-email" aria-describedby="q-email-err" name="Email" type="email" inputmode="email" autocomplete="email" />
+            <p class="err" id="q-email-err"></p>
           </div>
 
           <div class="field" data-rule="select">
-            <label for="q-type">What is your enquiry about? *</label>
-            <select id="q-type" name="Enquiry type" required>
+            <label for="q-type">What is your enquiry about? <span class="req">*</span></label>
+            <select id="q-type" aria-describedby="q-type-err" name="Enquiry type" required>
               <option value="">Please choose…</option>
               <option>I want to know when courses open</option>
               <option>Training for my team or company</option>
@@ -139,24 +143,25 @@
               <option>Media or general question</option>
               <option>Something else</option>
             </select>
-            <p class="err"></p>
+            <p class="err" id="q-type-err"></p>
           </div>
 
           <div class="field" data-rule="message">
-            <label for="q-msg">Your message *</label>
-            <textarea id="q-msg" name="Message" required></textarea>
-            <p class="err"></p>
+            <label for="q-msg">Your message <span class="req">*</span></label>
+            <textarea id="q-msg" aria-describedby="q-msg-err" name="Message" required></textarea>
+            <p class="err" id="q-msg-err"></p>
           </div>
 
           <div class="field consent" data-rule="consent">
-            <input id="q-consent" name="Consent" type="checkbox" required />
-            <label for="q-consent">I am happy for Northbridge to use these details to reply to my enquiry. *</label>
-            <p class="err"></p>
+            <input id="q-consent" aria-describedby="q-consent-err" name="Consent" type="checkbox" required />
+            <label for="q-consent">I am happy for Northbridge to use these details to reply to my enquiry. <span class="req">*</span></label>
+            <p class="err" id="q-consent-err"></p>
           </div>
 
           <button class="btn btn-primary btn-block" type="submit">Send message</button>
           <div class="form-status" aria-live="polite"></div>
         </form>
+      </div>
       </div>
     </div>
   </section>

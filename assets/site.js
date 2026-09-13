@@ -49,21 +49,46 @@ function initNav() {
   const nav = $('#site-nav');
   if (!btn || !nav) return;
 
-  btn.addEventListener('click', () => {
-    const open = nav.classList.toggle('is-open');
+  const head = $('.site-head');
+  const desktop = window.matchMedia('(min-width: 48em)');
+  const isOpen = () => nav.classList.contains('is-open');
+
+  function setOpen(open, { returnFocus = false } = {}) {
+    nav.classList.toggle('is-open', open);
     btn.setAttribute('aria-expanded', String(open));
     $('.nav-toggle-label', btn).textContent = open ? 'Close' : 'Menu';
+    // lock the page behind the panel so it cannot scroll underneath
+    document.documentElement.classList.toggle('nav-open', open);
+    if (!open && returnFocus) btn.focus();
+  }
+
+  btn.addEventListener('click', () => setOpen(!isOpen()));
+
+  // choosing a destination closes the panel
+  nav.addEventListener('click', e => {
+    if (!isOpen()) return;
+    if (e.target.closest('a')) setOpen(false);
+    // a tap on the veil around the list (not the list itself) closes it too
+    else if (e.target === nav) setOpen(false, { returnFocus: true });
   });
 
   // Escape closes the panel and returns focus to the button
   document.addEventListener('keydown', e => {
-    if (e.key === 'Escape' && nav.classList.contains('is-open')) {
-      nav.classList.remove('is-open');
-      btn.setAttribute('aria-expanded', 'false');
-      $('.nav-toggle-label', btn).textContent = 'Menu';
-      btn.focus();
-    }
+    if (e.key === 'Escape' && isOpen()) setOpen(false, { returnFocus: true });
   });
+
+  // tabbing out of the header closes the panel rather than leaving it open
+  // over content that now has focus
+  if (head) {
+    head.addEventListener('focusout', e => {
+      if (isOpen() && e.relatedTarget && !head.contains(e.relatedTarget)) setOpen(false);
+    });
+  }
+
+  // growing past the phone layout never leaves the page scroll-locked
+  const onBreakpoint = () => { if (desktop.matches && isOpen()) setOpen(false); };
+  if (desktop.addEventListener) desktop.addEventListener('change', onBreakpoint);
+  else if (desktop.addListener) desktop.addListener(onBreakpoint);
 }
 
 /* ----------------------------------------------------------- form checks */
@@ -201,10 +226,9 @@ function initForms() {
 }
 
 /* ------------------------------------------------------- compact header */
-/* The header is compact at rest; once the visitor scrolls it condenses a little
-   further and gains a shadow, so navigation stays readable over the page.
-   Purely a class toggle — CSS does the rest, and the transition is disabled
-   under reduced-motion. */
+/* Once the visitor scrolls, the header gains a soft shadow and a firmer gold
+   hairline. Its height and background never change. Purely a class toggle —
+   CSS does the rest, and the transition is disabled under reduced-motion. */
 function initHeader() {
   const head = $('.site-head');
   if (!head) return;
@@ -282,7 +306,8 @@ function initReveal() {
     '.contact-methods .method',
     '.fact-list li',
     '.form-wrap',
-    'main section > .shell > .measure'
+    'main section > .shell > .section-head',
+    'main section > .shell > .split > .split-intro'
   ].join(','));
   if (!targets.length) return;
 

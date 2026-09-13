@@ -27,7 +27,7 @@
 <meta name="twitter:description" content="A registered Sri Lankan company building short, practical courses in business finance, English, digital skills and AI at work." />
 <meta name="twitter:image" content="https://REPLACE-WITH-YOUR-DOMAIN.lk/assets/og-image.png" />
 
-<meta name="theme-color" content="#012144" />
+<meta name="theme-color" content="#002147" />
 <link rel="icon" href="assets/favicon-32.png" sizes="32x32" />
 <link rel="icon" href="assets/favicon-16.png" sizes="16x16" />
 <link rel="apple-touch-icon" href="assets/apple-touch-icon.png" />
@@ -52,7 +52,8 @@
            alt="Northbridge Global Campus" fetchpriority="high" decoding="async" />
     </a>
     <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+      <svg class="icon-menu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true" focusable="false"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      <svg class="icon-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true" focusable="false"><path d="M6 6l12 12M18 6 6 18"/></svg>
       <span class="nav-toggle-label">Menu</span>
     </button>
     <nav class="site-nav" id="site-nav" aria-label="Main">
@@ -66,17 +67,14 @@
   </div>
 </header>
 
-<main id="main">
+<main id="main" tabindex="-1">
 
-  <!-- Cinematic hero. On desktop the ambassador photograph is the full-width
-       background of the hero; a navy gradient runs strong on the left for text
-       contrast and falls to nothing before it reaches her, so nothing dark is
-       laid over her face. Because the photograph spans the whole hero there is
-       no panel edge to blend, and the wall lockup is back in frame. On phones
-       and tablets the hero stacks: copy on the navy ground, photograph beneath
-       in a wide frame. The photograph itself is never altered — all framing is
-       object-fit / object-position. -->
-  <section class="hero">
+  <!-- Editorial hero. Desktop: copy on the left of the shell, the ambassador
+       photograph as a panel running to the right edge, its left edge faded
+       into the navy ground by a CSS mask (transparency only — the photograph
+       itself is never altered). Phones and tablets: copy first, photograph
+       beneath in a wide frame. All framing is object-fit / object-position. -->
+  <section class="hero hero-home">
     <div class="shell hero-inner">
       <div class="hero-copy">
         <p class="eyebrow">NORTHBRIDGE GLOBAL CAMPUS &middot; SRI LANKA</p>
@@ -86,11 +84,13 @@
           <a class="btn btn-primary" href="#what-we-are">Explore what we&rsquo;re building</a>
           <a class="btn btn-secondary" href="contact.html">Contact Northbridge</a>
         </div>
-        <p class="hero-status"><span class="dot" aria-hidden="true"></span>Programmes currently in development</p>
-        <ul class="trust-strip">
-          <li>Registered in Sri Lanka</li>
-          <li>Global outlook</li>
-        </ul>
+        <div class="hero-meta">
+          <p class="hero-status"><span class="dot" aria-hidden="true"></span>Programmes currently in development</p>
+          <ul class="trust-strip">
+            <li>Registered in Sri Lanka</li>
+            <li>Global outlook</li>
+          </ul>
+        </div>
       </div>
     </div>
 
@@ -100,25 +100,29 @@
                 srcset="assets/northbridge-brand-ambassador-640.webp 640w,
                         assets/northbridge-brand-ambassador-1000.webp 1000w,
                         assets/northbridge-brand-ambassador-1600.webp 1600w"
-                sizes="(min-width:64em) 100vw, 100vw" />
+                sizes="(min-width:64em) 1700px, (min-width:40em) 150vw, 175vw" />
         <img src="assets/northbridge-brand-ambassador-1000.jpg"
              srcset="assets/northbridge-brand-ambassador-640.jpg 640w,
                      assets/northbridge-brand-ambassador-1000.jpg 1000w,
                      assets/northbridge-brand-ambassador-1600.jpg 1600w"
-             sizes="100vw"
+             sizes="(min-width:64em) 1700px, (min-width:40em) 150vw, 175vw"
              width="1600" height="611"
              alt="A Northbridge Global Campus student in a campus blazer working at a desk, with the Northbridge crest and wordmark on the wall behind her."
-             fetchpriority="high" decoding="async" />
+             fetchpriority="high" decoding="sync" />
       </picture>
     </div>
   </section>
 
   <section id="what-we-are">
     <div class="shell">
-      <div class="measure">
-        <p class="eyebrow">What we are building</p>
-        <h2>Courses that change what you can do on Monday morning.</h2>
-        <p class="section-lede">Plenty of courses hand you a certificate. Ours are designed so that the week after you finish, you can do something at work you could not do before. That is the whole test we set ourselves.</p>
+      <div class="section-head">
+        <div class="section-title">
+          <p class="eyebrow">What we are building</p>
+          <h2>Courses that change what you can do on Monday morning.</h2>
+        </div>
+        <div class="section-body">
+          <p class="section-lede">Plenty of courses hand you a certificate. Ours are designed so that the week after you finish, you can do something at work you could not do before. That is the whole test we set ourselves.</p>
+        </div>
       </div>
 
       <ol class="steps">
@@ -143,10 +147,14 @@
 
   <section class="band-paper">
     <div class="shell">
-      <div class="measure">
-        <p class="eyebrow">Where we are starting</p>
-        <h2>The first subject areas.</h2>
-        <p class="section-lede">These are the areas we are preparing first. We are not taking enrolments yet — when dates and fees are confirmed, they will be published here and nowhere else first.</p>
+      <div class="section-head">
+        <div class="section-title">
+          <p class="eyebrow">Where we are starting</p>
+          <h2>The first subject areas.</h2>
+        </div>
+        <div class="section-body">
+          <p class="section-lede">These are the areas we are preparing first. We are not taking enrolments yet — when dates and fees are confirmed, they will be published here and nowhere else first.</p>
+        </div>
       </div>
       <div class="prose-grid">
         <div>
@@ -169,20 +177,22 @@
     </div>
   </section>
 
-  <section class="band-navy">
+  <section class="band-green">
     <div class="shell">
-      <div class="measure">
-        <p class="eyebrow">Who we are</p>
-        <h2>A young institution, and we say so plainly.</h2>
-        <p class="section-lede">We would rather tell you exactly where we stand than dress it up. Here is what is true today.</p>
-        <ul class="fact-list">
+      <div class="split">
+        <div class="split-intro">
+          <p class="eyebrow">Who we are</p>
+          <h2>A young institution, and we say so plainly.</h2>
+          <p class="section-lede">We would rather tell you exactly where we stand than dress it up. Here is what is true today.</p>
+        </div>
+        <ul class="fact-list split-main">
           <li>Northbridge Global Campus (Pvt) Ltd is a company incorporated in Sri Lanka.</li>
           <li>We are building our first programmes now. Enrolments are not open yet.</li>
           <li>Teaching is delivered by practitioners engaged for each course, not by a permanent faculty we do not yet have.</li>
           <li>We hold our own domains, accounts and learner records, so nothing about your data sits with a third party we cannot answer for.</li>
           <li>Any recognition or accreditation we obtain will be named on this site, with the awarding body, when it exists.</li>
         </ul>
-        <div class="btn-row">
+        <div class="btn-row split-after">
           <a class="btn btn-secondary" href="about.html">Read more about us</a>
         </div>
       </div>
@@ -191,10 +201,14 @@
 
   <section>
     <div class="shell">
-      <div class="measure">
-        <p class="eyebrow">Get in touch</p>
-        <h2>Ask us anything — there is a person at the other end.</h2>
-        <p class="section-lede">Whether you are a learner wanting to know when a course opens, an employer with a team to train, or a professional who would like to teach with us, message us and we will reply within one working day.</p>
+      <div class="section-head">
+        <div class="section-title">
+          <p class="eyebrow">Get in touch</p>
+          <h2>Ask us anything — there is a person at the other end.</h2>
+        </div>
+        <div class="section-body">
+          <p class="section-lede">Whether you are a learner wanting to know when a course opens, an employer with a team to train, or a professional who would like to teach with us, message us and we will reply within one working day.</p>
+        </div>
       </div>
 
       <div class="contact-methods">

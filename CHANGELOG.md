@@ -1,5 +1,22 @@
 # Changelog
 
+## v2.1 — Style-only refinement (14 September 2026, branch `feature/claude-style-v2`)
+
+Presentation only. Every visible word, heading, button label, form label,
+select option, validation message, alt text, title and meta/Open Graph text is
+identical to `main` — verified by an automated text extraction of every page
+(static HTML and rendered text) compared against `main`. Form field names,
+the WhatsApp handoff, canonical URLs, `robots.txt` and `sitemap.xml` are
+unchanged.
+
+| File | Change |
+|---|---|
+| `assets/styles.css` | Reorganised into tokens + sections. Spacing and type scales; shared split grid (title left, introduction right) for section heads, inner heroes and form sections; editorial home hero with the photograph as a right-hand panel whose left edge is faded by a CSS mask (no seam, wall lettering no longer behind the heading); 84px solid-white header; one button, card and form-field system; green band for "Who we are" / "Where we stand today"; reduced-motion now removes animations outright (previously the stagger delays still hid hero content). Derived `--navy-deep`, `--green-deep`, `--gold-soft` removed — hovers use transparency instead. |
+| `*.html` | Layout wrappers only (`section-head`, `split`, `hero-page-inner`, `hero-meta`); menu button gains a close icon; `<main tabindex="-1">` for the skip link; `theme-color` corrected from `#012144` to the official navy `#002147`. |
+| `careers.html`, `contact.html` | Hints and error messages linked to their inputs with `aria-describedby`; the existing `*` wrapped in a span for styling. |
+| `index.html` | Hero image `sizes` corrected for its cropped panel; `decoding="sync"` on the LCP image. |
+| `assets/site.js` | Mobile menu: closes on link select, veil tap, Escape, tabbing away and resize to desktop; locks page scroll while open. Reveal selectors updated for the new wrappers. No strings changed. |
+
 ## v2.0 — Visual modernisation (7 September 2026)
 
 A visual redesign. No page was removed, no copy was rewritten, and no
