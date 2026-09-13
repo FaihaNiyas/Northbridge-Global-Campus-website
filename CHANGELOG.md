@@ -1,5 +1,29 @@
 # Changelog
 
+## v3.0 — Approved content + Claude visual system (14 September 2026, branch `feature/chatgpt-content-claude-style-v3`)
+
+Built on `feature/lead-review-v2` (`cf47414`), which remains the sole authority
+for every visitor-facing word. The visual system from `feature/claude-style-v2`
+(`8f9c484`) was re-applied by hand to this branch's markup — that commit was
+made against `main` and its HTML carries the old wording, so none of its HTML
+was copied.
+
+Every heading, paragraph, CTA, navigation label, form label and option,
+validation and status message, consent line, footer line, alt text, title,
+meta description, Open Graph text, link destination and form field name is
+identical to `feature/lead-review-v2`, verified by automated extraction of the
+static and rendered text of all five pages. The file `careers.html` keeps its
+name; its visible label stays **Teach With Us**. `MEETING-DECISIONS.md` is
+unchanged.
+
+| File | Change |
+|---|---|
+| `assets/styles.css` | Claude v4 system (tokens, spacing and type scales, split grid, buttons, cards, forms, footer, reduced motion) adapted to this branch: nav breakpoint kept at 60em for four links plus the Register Interest CTA; mobile overlay panel holds the dedicated close button, links and CTA; new components styled in the same system — value points, numbered "How we learn", programme status line and journey row, green philosophy band, enquiry routes, crest figure; conditional form fields. |
+| `*.html` | Layout wrappers only (`section-head`, `split`, `hero-page-inner`, `nav-panel`); menu button gains a close icon; `<main tabindex="-1">`; `theme-color` corrected from `#012144` to the official navy `#002147`; philosophy and "Where we stand today" bands moved to green. |
+| `careers.html`, `contact.html` | Hints and errors linked to their controls with `aria-describedby`; existing `*` wrapped for styling. |
+| `index.html` | Hero image `sizes` corrected for its cropped panel; `decoding="sync"` on the LCP image. |
+| `assets/site.js` | Menu lock moved to `<html>` so the sticky header survives it; closes on veil tap and when focus leaves the header; breakpoint via `matchMedia`. Reveal selectors updated. No strings changed. |
+
 ## v2.0 — Visual modernisation (7 September 2026)
 
 A visual redesign. No page was removed, no copy was rewritten, and no

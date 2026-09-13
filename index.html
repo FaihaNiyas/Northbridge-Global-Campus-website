@@ -27,7 +27,7 @@
 <meta name="twitter:description" content="Practical, engaging learning designed to build useful skills, stronger thinking, better performance and real career value." />
 <meta name="twitter:image" content="https://REPLACE-WITH-YOUR-DOMAIN.lk/assets/og-image.png" />
 
-<meta name="theme-color" content="#012144" />
+<meta name="theme-color" content="#002147" />
 <link rel="icon" href="assets/favicon-32.png" sizes="32x32" />
 <link rel="icon" href="assets/favicon-16.png" sizes="16x16" />
 <link rel="apple-touch-icon" href="assets/apple-touch-icon.png" />
@@ -48,35 +48,39 @@
     </a>
 
     <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+      <svg class="icon-menu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true" focusable="false"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      <svg class="icon-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true" focusable="false"><path d="M6 6l12 12M18 6 6 18"/></svg>
       <span class="nav-toggle-label">Menu</span>
     </button>
 
     <nav class="site-nav" id="site-nav" aria-label="Main">
-      <!-- Shown only inside the mobile panel; hidden at >=48em by CSS. -->
-      <button class="nav-close" type="button">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
-        <span>Close menu</span>
-      </button>
-      <ul>
-        <li><a href="#programmes">Programmes</a></li>
-        <li><a href="about.html">About</a></li>
-        <li><a href="careers.html">Teach With Us</a></li>
-        <li><a href="contact.html">Contact</a></li>
-      </ul>
-      <a class="btn btn-primary nav-cta" href="contact.html#register-interest">Register Interest</a>
+      <!-- The panel is an overlay below 60em; at 60em and up its contents sit in
+           the bar. The close button renders only inside the overlay. -->
+      <div class="nav-panel">
+        <button class="nav-close" type="button">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+          <span>Close menu</span>
+        </button>
+        <ul>
+          <li><a href="#programmes">Programmes</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="careers.html">Teach With Us</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+        <a class="btn btn-primary nav-cta" href="contact.html#register-interest">Register Interest</a>
+      </div>
     </nav>
   </div>
 </header>
 
-<main id="main">
+<main id="main" tabindex="-1">
 
-  <!-- Editorial hero: copy left, ambassador right. The photograph fills the
-       right of the hero and bleeds to the viewport edge; a navy gradient carries
-       its left side into the hero ground so there is no boxed-image edge, and it
-       falls away before it reaches her so nothing dark sits over her face. The
-       photograph itself is untouched — framing is object-fit/object-position. -->
-  <section class="hero">
+  <!-- Editorial hero. Desktop: copy on the left of the shell, the ambassador
+       photograph as a panel running to the right edge, its left edge faded
+       into the navy ground by a CSS mask (transparency only — the photograph
+       itself is never altered). Phones and tablets: copy first, photograph
+       beneath in a wide frame. All framing is object-fit / object-position. -->
+  <section class="hero hero-home">
     <div class="shell hero-inner">
       <div class="hero-copy">
         <p class="eyebrow">NORTHBRIDGE GLOBAL CAMPUS &middot; SRI LANKA</p>
@@ -95,25 +99,29 @@
                 srcset="assets/northbridge-brand-ambassador-640.webp 640w,
                         assets/northbridge-brand-ambassador-1000.webp 1000w,
                         assets/northbridge-brand-ambassador-1600.webp 1600w"
-                sizes="(min-width:64em) 60vw, 100vw" />
+                sizes="(min-width:64em) 1700px, (min-width:40em) 150vw, 175vw" />
         <img src="assets/northbridge-brand-ambassador-1000.jpg"
              srcset="assets/northbridge-brand-ambassador-640.jpg 640w,
                      assets/northbridge-brand-ambassador-1000.jpg 1000w,
                      assets/northbridge-brand-ambassador-1600.jpg 1600w"
-             sizes="(min-width:64em) 60vw, 100vw"
+             sizes="(min-width:64em) 1700px, (min-width:40em) 150vw, 175vw"
              width="1600" height="611"
              alt="A Northbridge Global Campus student in a campus blazer working at a desk, with the Northbridge crest and wordmark on the wall behind her."
-             fetchpriority="high" decoding="async" />
+             fetchpriority="high" decoding="sync" />
       </picture>
     </div>
   </section>
 
   <section id="learning">
     <div class="shell">
-      <div class="measure">
-        <p class="eyebrow">Why it works</p>
-        <h2>Learning designed for real life, work and career growth.</h2>
-        <p class="section-lede">Northbridge courses should be useful beyond the classroom. Learners should leave with skills, confidence, better thinking and something they can actually apply.</p>
+      <div class="section-head">
+        <div class="section-title">
+          <p class="eyebrow">Why it works</p>
+          <h2>Learning designed for real life, work and career growth.</h2>
+        </div>
+        <div class="section-body">
+          <p class="section-lede">Northbridge courses should be useful beyond the classroom. Learners should leave with skills, confidence, better thinking and something they can actually apply.</p>
+        </div>
       </div>
 
       <ul class="value-grid">
@@ -139,10 +147,14 @@
 
   <section class="band-paper" id="programmes">
     <div class="shell">
-      <div class="measure">
-        <p class="eyebrow">Areas of learning</p>
-        <h2>Explore practical areas of learning.</h2>
-        <p class="section-lede">Our programmes are designed to help people build useful capability in business, communication, digital productivity and work.</p>
+      <div class="section-head">
+        <div class="section-title">
+          <p class="eyebrow">Areas of learning</p>
+          <h2>Explore practical areas of learning.</h2>
+        </div>
+        <div class="section-body">
+          <p class="section-lede">Our programmes are designed to help people build useful capability in business, communication, digital productivity and work.</p>
+        </div>
       </div>
 
       <div class="prose-grid">
@@ -182,10 +194,14 @@
 
   <section id="how-we-learn">
     <div class="shell">
-      <div class="measure">
-        <p class="eyebrow">Our approach</p>
-        <h2>How we learn</h2>
-        <p class="section-lede">Learning should be practical, engaging and useful from the first session.</p>
+      <div class="section-head">
+        <div class="section-title">
+          <p class="eyebrow">Our approach</p>
+          <h2>How we learn</h2>
+        </div>
+        <div class="section-body">
+          <p class="section-lede">Learning should be practical, engaging and useful from the first session.</p>
+        </div>
       </div>
 
       <ol class="how-list">
@@ -209,7 +225,7 @@
     </div>
   </section>
 
-  <section class="band-navy philosophy">
+  <section class="band-green philosophy">
     <div class="shell">
       <p class="eyebrow">Our philosophy</p>
       <p class="philosophy-line">A course should leave you better than it found you.</p>
@@ -219,10 +235,14 @@
 
   <section id="register-interest">
     <div class="shell">
-      <div class="measure">
-        <p class="eyebrow">Get in touch</p>
-        <h2>Let&rsquo;s start with what you need.</h2>
-        <p class="section-lede">Whether you want to learn, teach with Northbridge, develop your team or simply ask a question, we will help you find the right next step.</p>
+      <div class="section-head">
+        <div class="section-title">
+          <p class="eyebrow">Get in touch</p>
+          <h2>Let&rsquo;s start with what you need.</h2>
+        </div>
+        <div class="section-body">
+          <p class="section-lede">Whether you want to learn, teach with Northbridge, develop your team or simply ask a question, we will help you find the right next step.</p>
+        </div>
       </div>
 
       <ul class="enquiry-grid">

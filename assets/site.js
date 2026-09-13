@@ -44,9 +44,10 @@ function fillContactDetails() {
 }
 
 /* ------------------------------------------------------------ navigation */
-/* One panel, three ways out: the Menu/Close button, the dedicated close button
-   inside the panel, any navigation link, or the Escape key. While it is open the
-   background is locked so the page behind cannot scroll away under the panel. */
+/* One panel, several ways out: the Menu/Close button, the dedicated close button
+   inside the panel, any navigation link, a tap on the veil around the panel,
+   tabbing out of the header, or the Escape key. While it is open the page is
+   locked so it cannot scroll away under the panel. */
 function initNav() {
   const btn = $('.nav-toggle');
   const nav = $('#site-nav');
@@ -54,35 +55,51 @@ function initNav() {
 
   const label = $('.nav-toggle-label', btn);
   const closeBtn = $('.nav-close', nav);
+  const head = $('.site-head');
+  const desktop = window.matchMedia('(min-width: 60em)');
+  const isOpen = () => nav.classList.contains('is-open');
 
-  function setOpen(open) {
+  function setOpen(open, { returnFocus = false } = {}) {
     nav.classList.toggle('is-open', open);
     btn.setAttribute('aria-expanded', String(open));
     if (label) label.textContent = open ? 'Close' : 'Menu';
-    document.body.classList.toggle('nav-open', open);
+    // lock on <html>, not <body>: body clips horizontal overflow, and making it
+    // a scroll container would unstick the header
+    document.documentElement.classList.toggle('nav-open', open);
+    if (!open && returnFocus) btn.focus();
   }
 
-  btn.addEventListener('click', () => setOpen(!nav.classList.contains('is-open')));
+  btn.addEventListener('click', () => setOpen(!isOpen()));
 
   if (closeBtn) {
-    closeBtn.addEventListener('click', () => { setOpen(false); btn.focus(); });
+    closeBtn.addEventListener('click', () => setOpen(false, { returnFocus: true }));
   }
 
-  // following a link should not leave the panel open behind the new page
-  $$('a', nav).forEach(a => a.addEventListener('click', () => setOpen(false)));
+  nav.addEventListener('click', e => {
+    if (!isOpen()) return;
+    // following a link should not leave the panel open behind the new page
+    if (e.target.closest('a')) setOpen(false);
+    // a tap on the veil around the panel (not the panel itself) closes it too
+    else if (e.target === nav) setOpen(false, { returnFocus: true });
+  });
 
   // Escape closes the panel and returns focus to the button
   document.addEventListener('keydown', e => {
-    if (e.key === 'Escape' && nav.classList.contains('is-open')) {
-      setOpen(false);
-      btn.focus();
-    }
+    if (e.key === 'Escape' && isOpen()) setOpen(false, { returnFocus: true });
   });
 
-  // widening past the mobile breakpoint must not leave the body locked
-  window.addEventListener('resize', () => {
-    if (window.innerWidth >= 960 && nav.classList.contains('is-open')) setOpen(false);
-  }, { passive: true });
+  // tabbing out of the header closes the panel rather than leaving it open
+  // over content that now has focus
+  if (head) {
+    head.addEventListener('focusout', e => {
+      if (isOpen() && e.relatedTarget && !head.contains(e.relatedTarget)) setOpen(false);
+    });
+  }
+
+  // widening past the mobile breakpoint must not leave the page locked
+  const onBreakpoint = () => { if (desktop.matches && isOpen()) setOpen(false); };
+  if (desktop.addEventListener) desktop.addEventListener('change', onBreakpoint);
+  else if (desktop.addListener) desktop.addListener(onBreakpoint);
 }
 
 /* ------------------------------------------------- conditional form fields */
@@ -255,10 +272,9 @@ function initForms() {
 }
 
 /* ------------------------------------------------------- compact header */
-/* The header is compact at rest; once the visitor scrolls it condenses a little
-   further and gains a shadow, so navigation stays readable over the page.
-   Purely a class toggle — CSS does the rest, and the transition is disabled
-   under reduced-motion. */
+/* Once the visitor scrolls, the header gains a soft shadow and a firmer gold
+   hairline. Its height and background never change. Purely a class toggle —
+   CSS does the rest, and the transition is disabled under reduced-motion. */
 function initHeader() {
   const head = $('.site-head');
   if (!head) return;
@@ -331,12 +347,17 @@ function initReveal() {
   if (!('IntersectionObserver' in window)) return;
 
   const targets = $$([
-    '.steps li',
+    '.value-grid li',
+    '.how-list li',
+    '.enquiry-grid li',
     '.prose-grid > div',
     '.contact-methods .method',
     '.fact-list li',
     '.form-wrap',
-    'main section > .shell > .measure'
+    '.split-figure',
+    'main section > .shell > .section-head',
+    'main section > .shell > .split > .split-intro',
+    'main section > .shell > .split > .split-copy'
   ].join(','));
   if (!targets.length) return;
 

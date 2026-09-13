@@ -27,7 +27,7 @@
 <meta name="twitter:description" content="We work with lecturers, trainers, practitioners and freelancers who enjoy helping people learn. Register your interest in one short form." />
 <meta name="twitter:image" content="https://REPLACE-WITH-YOUR-DOMAIN.lk/assets/og-image.png" />
 
-<meta name="theme-color" content="#012144" />
+<meta name="theme-color" content="#002147" />
 <link rel="icon" href="assets/favicon-32.png" sizes="32x32" />
 <link rel="icon" href="assets/favicon-16.png" sizes="16x16" />
 <link rel="apple-touch-icon" href="assets/apple-touch-icon.png" />
@@ -48,43 +48,50 @@
     </a>
 
     <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+      <svg class="icon-menu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true" focusable="false"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      <svg class="icon-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true" focusable="false"><path d="M6 6l12 12M18 6 6 18"/></svg>
       <span class="nav-toggle-label">Menu</span>
     </button>
 
     <nav class="site-nav" id="site-nav" aria-label="Main">
-      <!-- Shown only inside the mobile panel; hidden at >=48em by CSS. -->
-      <button class="nav-close" type="button">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
-        <span>Close menu</span>
-      </button>
-      <ul>
-        <li><a href="index.html#programmes">Programmes</a></li>
-        <li><a href="about.html">About</a></li>
-        <li><a href="careers.html" aria-current="page">Teach With Us</a></li>
-        <li><a href="contact.html">Contact</a></li>
-      </ul>
-      <a class="btn btn-primary nav-cta" href="contact.html#register-interest">Register Interest</a>
+      <!-- The panel is an overlay below 60em; at 60em and up its contents sit in
+           the bar. The close button renders only inside the overlay. -->
+      <div class="nav-panel">
+        <button class="nav-close" type="button">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+          <span>Close menu</span>
+        </button>
+        <ul>
+          <li><a href="index.html#programmes">Programmes</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="careers.html" aria-current="page">Teach With Us</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+        <a class="btn btn-primary nav-cta" href="contact.html#register-interest">Register Interest</a>
+      </div>
     </nav>
   </div>
 </header>
 
-<main id="main">
+<main id="main" tabindex="-1">
   <section class="hero hero-page">
-    <div class="shell">
+    <div class="shell hero-page-inner">
       <h1>Teach. Build. Grow with Northbridge.</h1>
-      <p class="lede">We work with lecturers, trainers, industry practitioners and freelancers who genuinely enjoy helping people learn and improve.</p>
+      <div class="hero-page-body">
+        <p class="lede">We work with lecturers, trainers, industry practitioners and freelancers who genuinely enjoy helping people learn and improve.</p>
+      </div>
     </div>
   </section>
 
   <section>
     <div class="shell">
-      <div class="measure">
-        <p class="eyebrow">Ways to work with us</p>
-        <h2>Opportunities at Northbridge.</h2>
-      </div>
+      <div class="split split-wide">
+        <div class="split-intro">
+          <p class="eyebrow">Ways to work with us</p>
+          <h2>Opportunities at Northbridge.</h2>
+        </div>
 
-      <div class="prose-grid">
+        <div class="prose-grid split-main">
         <div>
           <h3>Course-by-course</h3>
           <p>Deliver selected programmes without leaving your professional practice.</p>
@@ -101,45 +108,46 @@
           <h3>Corporate opportunities</h3>
           <p>Support team training and business learning programmes.</p>
         </div>
+        </div>
       </div>
     </div>
   </section>
 
   <section class="band-paper" id="register-interest">
     <div class="shell">
-      <div class="measure">
+      <div class="split">
+      <div class="split-intro">
         <p class="eyebrow">Register your interest</p>
         <h2>Tell us what you could bring to Northbridge.</h2>
         <p class="section-lede">Share your background, areas of expertise and what you would like to teach or build with us. We review every submission and will contact you when there is a suitable opportunity.</p>
         <p class="section-lede fine">Fields marked * are required.</p>
       </div>
 
-      <div class="form-wrap">
+      <div class="form-wrap split-main">
         <form data-form-name="Teach With Us — expression of interest" novalidate>
 
           <div class="field" data-rule="name">
-            <label for="c-name">Full name *</label>
-            <input id="c-name" name="Full name" type="text" autocomplete="name" required />
+            <label for="c-name">Full name <span class="req">*</span></label>
+            <input id="c-name" aria-describedby="c-name-err" name="Full name" type="text" autocomplete="name" required />
             <p class="err" id="c-name-err"></p>
           </div>
 
           <div class="field" data-rule="phone">
-            <label for="c-phone">Phone or WhatsApp number *</label>
+            <label for="c-phone">Phone or WhatsApp number <span class="req">*</span></label>
             <p class="hint" id="c-phone-hint">We may reply on WhatsApp if that is easier for you.</p>
-            <input id="c-phone" name="Phone or WhatsApp" type="tel" inputmode="tel" autocomplete="tel"
-                   aria-describedby="c-phone-hint" required />
+            <input id="c-phone" aria-describedby="c-phone-hint c-phone-err" name="Phone or WhatsApp" type="tel" inputmode="tel" autocomplete="tel" required />
             <p class="err" id="c-phone-err"></p>
           </div>
 
           <div class="field" data-rule="email">
             <label for="c-email">Email address <span class="opt">(optional)</span></label>
-            <input id="c-email" name="Email" type="email" inputmode="email" autocomplete="email" />
+            <input id="c-email" aria-describedby="c-email-err" name="Email" type="email" inputmode="email" autocomplete="email" />
             <p class="err" id="c-email-err"></p>
           </div>
 
           <div class="field" data-rule="select">
-            <label for="c-area">Primary subject area *</label>
-            <select id="c-area" name="Primary subject area" required>
+            <label for="c-area">Primary subject area <span class="req">*</span></label>
+            <select id="c-area" aria-describedby="c-area-err" name="Primary subject area" required>
               <option value="">Please choose&hellip;</option>
               <option>Commercial finance and accounting</option>
               <option>Workplace English</option>
@@ -155,7 +163,7 @@
           <div class="field">
             <label for="c-topics">Topics you can teach <span class="opt">(optional)</span></label>
             <p class="hint" id="c-topics-hint">A short list is fine &mdash; for example &ldquo;cash flow, budgeting, pricing&rdquo;.</p>
-            <input id="c-topics" name="Topics you can teach" type="text" aria-describedby="c-topics-hint" />
+            <input id="c-topics" aria-describedby="c-topics-hint" name="Topics you can teach" type="text" />
           </div>
 
           <div class="field">
@@ -164,8 +172,8 @@
           </div>
 
           <div class="field" data-rule="select">
-            <label for="c-collab">Collaboration type *</label>
-            <select id="c-collab" name="Collaboration type" required>
+            <label for="c-collab">Collaboration type <span class="req">*</span></label>
+            <select id="c-collab" aria-describedby="c-collab-err" name="Collaboration type" required>
               <option value="">Please choose&hellip;</option>
               <option>Lecturer</option>
               <option>Trainer</option>
@@ -179,19 +187,19 @@
           <div class="field">
             <label for="c-exp">Relevant experience <span class="opt">(optional)</span></label>
             <p class="hint" id="c-exp-hint">Where you have worked or taught, and for how long.</p>
-            <textarea id="c-exp" name="Relevant experience" rows="4" aria-describedby="c-exp-hint"></textarea>
+            <textarea id="c-exp" aria-describedby="c-exp-hint" name="Relevant experience" rows="4"></textarea>
           </div>
 
           <div class="field" data-rule="message">
-            <label for="c-msg">Your teaching or programme idea *</label>
+            <label for="c-msg">Your teaching or programme idea <span class="req">*</span></label>
             <p class="hint" id="c-msg-hint">A few sentences is plenty. What you would want to teach or build with us.</p>
-            <textarea id="c-msg" name="Teaching or programme idea" aria-describedby="c-msg-hint" required></textarea>
+            <textarea id="c-msg" aria-describedby="c-msg-hint c-msg-err" name="Teaching or programme idea" required></textarea>
             <p class="err" id="c-msg-err"></p>
           </div>
 
           <div class="field" data-rule="url">
             <label for="c-link">LinkedIn or portfolio URL <span class="opt">(optional)</span></label>
-            <input id="c-link" name="LinkedIn or portfolio" type="url" inputmode="url" placeholder="https://" />
+            <input id="c-link" aria-describedby="c-link-err" name="LinkedIn or portfolio" type="url" inputmode="url" placeholder="https://" />
             <p class="err" id="c-link-err"></p>
           </div>
 
@@ -201,8 +209,8 @@
           </div>
 
           <div class="field consent" data-rule="consent">
-            <input id="c-consent" name="Consent" type="checkbox" required />
-            <label for="c-consent">I am happy for Northbridge to hold these details and contact me about working together. *</label>
+            <input id="c-consent" aria-describedby="c-consent-err" name="Consent" type="checkbox" required />
+            <label for="c-consent">I am happy for Northbridge to hold these details and contact me about working together. <span class="req">*</span></label>
             <p class="err" id="c-consent-err"></p>
           </div>
 
@@ -211,8 +219,9 @@
         </form>
       </div>
 
-      <div class="measure aside">
+      <div class="split-after">
         <p class="fine">Prefer not to use a form? Message us on WhatsApp, or call &mdash; details are on the <a href="contact.html">contact page</a>.</p>
+      </div>
       </div>
     </div>
   </section>

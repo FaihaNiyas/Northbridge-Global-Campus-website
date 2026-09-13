@@ -27,7 +27,7 @@
 <meta name="twitter:description" content="How we work, and a plain statement of where we stand today — including what we do not yet have." />
 <meta name="twitter:image" content="https://REPLACE-WITH-YOUR-DOMAIN.lk/assets/og-image.png" />
 
-<meta name="theme-color" content="#012144" />
+<meta name="theme-color" content="#002147" />
 <link rel="icon" href="assets/favicon-32.png" sizes="32x32" />
 <link rel="icon" href="assets/favicon-16.png" sizes="16x16" />
 <link rel="apple-touch-icon" href="assets/apple-touch-icon.png" />
@@ -48,52 +48,63 @@
     </a>
 
     <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+      <svg class="icon-menu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true" focusable="false"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      <svg class="icon-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true" focusable="false"><path d="M6 6l12 12M18 6 6 18"/></svg>
       <span class="nav-toggle-label">Menu</span>
     </button>
 
     <nav class="site-nav" id="site-nav" aria-label="Main">
-      <!-- Shown only inside the mobile panel; hidden at >=48em by CSS. -->
-      <button class="nav-close" type="button">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
-        <span>Close menu</span>
-      </button>
-      <ul>
-        <li><a href="index.html#programmes">Programmes</a></li>
-        <li><a href="about.html" aria-current="page">About</a></li>
-        <li><a href="careers.html">Teach With Us</a></li>
-        <li><a href="contact.html">Contact</a></li>
-      </ul>
-      <a class="btn btn-primary nav-cta" href="contact.html#register-interest">Register Interest</a>
+      <!-- The panel is an overlay below 60em; at 60em and up its contents sit in
+           the bar. The close button renders only inside the overlay. -->
+      <div class="nav-panel">
+        <button class="nav-close" type="button">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+          <span>Close menu</span>
+        </button>
+        <ul>
+          <li><a href="index.html#programmes">Programmes</a></li>
+          <li><a href="about.html" aria-current="page">About</a></li>
+          <li><a href="careers.html">Teach With Us</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+        <a class="btn btn-primary nav-cta" href="contact.html#register-interest">Register Interest</a>
+      </div>
     </nav>
   </div>
 </header>
 
-<main id="main">
+<main id="main" tabindex="-1">
   <section class="hero hero-page">
-    <div class="shell">
+    <div class="shell hero-page-inner">
       <h1>About Northbridge</h1>
-      <p class="lede">A modern learning company focused on what people can actually do with what they learn.</p>
+      <div class="hero-page-body">
+        <p class="lede">A modern learning company focused on what people can actually do with what they learn.</p>
+      </div>
     </div>
   </section>
 
   <section>
     <div class="shell">
-      <div class="measure">
-        <p class="eyebrow">Why we exist</p>
-        <h2>A qualification matters. Capability matters too.</h2>
-        <p class="section-lede">Northbridge focuses on the gap between knowing something and being able to use it confidently in real situations. Our programmes are designed around practical work, real examples and useful outcomes.</p>
+      <div class="section-head">
+        <div class="section-title">
+          <p class="eyebrow">Why we exist</p>
+          <h2>A qualification matters. Capability matters too.</h2>
+        </div>
+        <div class="section-body">
+          <p class="section-lede">Northbridge focuses on the gap between knowing something and being able to use it confidently in real situations. Our programmes are designed around practical work, real examples and useful outcomes.</p>
+        </div>
       </div>
     </div>
   </section>
 
   <section class="band-paper">
     <div class="shell">
-      <div class="measure">
-        <p class="eyebrow">How we work</p>
-        <h2>Four commitments.</h2>
-      </div>
-      <div class="prose-grid">
+      <div class="split split-wide">
+        <div class="split-intro is-sticky">
+          <p class="eyebrow">How we work</p>
+          <h2>Four commitments.</h2>
+        </div>
+        <div class="prose-grid split-main">
         <div>
           <h3>Practical by design</h3>
           <p>Learning should be useful, not just informative.</p>
@@ -110,13 +121,14 @@
           <h3>Focused on real improvement</h3>
           <p>Participants should leave with greater capability, confidence and something they can actually use.</p>
         </div>
+        </div>
       </div>
     </div>
   </section>
 
   <section id="our-name">
     <div class="shell">
-      <div class="split">
+      <div class="split split-crest">
         <div class="split-copy">
           <p class="eyebrow">Our name</p>
           <h2>A bridge to where you want to go.</h2>
@@ -131,18 +143,20 @@
     </div>
   </section>
 
-  <section class="band-navy">
+  <section class="band-green">
     <div class="shell">
-      <div class="measure">
-        <p class="eyebrow">Where we stand today</p>
-        <h2>The plain facts.</h2>
-        <ul class="fact-list">
+      <div class="split">
+        <div class="split-intro">
+          <p class="eyebrow">Where we stand today</p>
+          <h2>The plain facts.</h2>
+        </div>
+        <ul class="fact-list split-main">
           <li>Northbridge Global Campus (Pvt) Ltd is incorporated in Sri Lanka.</li>
           <li>We are preparing our first programmes. Enrolments are not open, and we are not quoting fees or dates until they are settled.</li>
           <li>We do not currently hold accreditation from an awarding body. If and when we do, it will be named here alongside the body that granted it.</li>
           <li>We are a small core team, working with specialists course by course.</li>
         </ul>
-        <div class="btn-row">
+        <div class="btn-row split-after">
           <a class="btn btn-primary" href="contact.html#register-interest">Register Your Interest</a>
           <a class="btn btn-secondary" href="careers.html">Teach With Us</a>
         </div>
