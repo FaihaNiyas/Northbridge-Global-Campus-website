@@ -95,6 +95,16 @@
   --shadow-sm: 0 1px 2px rgba(0,33,71,.05), 0 4px 14px rgba(0,33,71,.06);
   --shadow-md: 0 1px 3px rgba(0,33,71,.06), 0 10px 28px rgba(0,33,71,.09);
 
+  /* ---- box treatment — one edge system for every card and panel ----
+     gold top, green left, a light navy hairline right and bottom, and a very
+     soft navy/green shadow falling to the bottom-right */
+  --card-top:    2px solid var(--gold);
+  --card-left:   2px solid var(--green);
+  --card-edge:   1px solid rgba(0,33,71,.14);
+  --card-edge-hover: rgba(0,33,71,.30);
+  --card-shadow: 3px 4px 12px rgba(0,33,71,.06), 1px 1px 3px rgba(0,75,60,.05);
+  --card-shadow-hover: 4px 7px 18px rgba(0,33,71,.09), 1px 2px 4px rgba(0,75,60,.06);
+
   --ease: cubic-bezier(.22,.61,.36,1);
   --ease-out: cubic-bezier(.16,.84,.44,1);
 
@@ -659,27 +669,28 @@ h2 + .section-lede{ margin-top:var(--sp-5); }
 .split-figure{
   margin:0; display:grid; place-items:center;
   padding:var(--sp-7) var(--sp-5);
-  background:var(--white);
-  border:1px solid var(--navy-12); border-radius:var(--radius-lg);
-  box-shadow:var(--shadow-xs);
 }
 .split-figure img{ width:min(200px, 60%); height:auto; clip-path:inset(0 0 2.5% 0); }
 @media (min-width:64em){ .split-figure{ padding:var(--sp-9) var(--sp-6); } .split-figure img{ width:220px; } }
 
-/* card system — one border, radius, padding and elevation everywhere.
+/* card system — one edge treatment, radius and elevation for every box.
    Static cards have no hover state; only linked cards (.method) respond. */
 .prose-grid{ display:grid; gap:var(--sp-4); }
 @media (min-width:48em){ .prose-grid{ grid-template-columns:repeat(2,minmax(0,1fr)); gap:var(--sp-5); } }
 .prose-grid > div,
 .method,
-.form-wrap{
+.form-wrap,
+.split-figure{
   background:var(--white);
-  border:1px solid var(--navy-12);
+  border-top:var(--card-top);
+  border-left:var(--card-left);
+  border-right:var(--card-edge);
+  border-bottom:var(--card-edge);
   border-radius:var(--radius);
-  box-shadow:var(--shadow-xs);
+  box-shadow:var(--card-shadow);
 }
-.prose-grid > div{ padding:var(--sp-5); }
-@media (min-width:48em){ .prose-grid > div{ padding:var(--sp-6) var(--sp-6) calc(var(--sp-6) + .25rem); } }
+.prose-grid > div{ padding:var(--sp-5) var(--sp-5) calc(var(--sp-5) + .125rem); }
+@media (min-width:48em){ .prose-grid > div{ padding:1.75rem 1.875rem 1.875rem; } }
 .prose-grid h3{ margin-bottom:var(--sp-2); }
 .prose-grid p{ color:var(--ink-80); font-size:1rem; }
 
@@ -710,7 +721,10 @@ h2 + .section-lede{ margin-top:var(--sp-5); }
   color:var(--navy); text-decoration:none;
   transition:border-color .2s var(--ease), box-shadow .2s var(--ease), background-color .2s var(--ease);
 }
-.method:hover{ border-color:var(--navy-50); box-shadow:var(--shadow-sm); text-decoration:none; }
+.method:hover{
+  border-right-color:var(--card-edge-hover); border-bottom-color:var(--card-edge-hover);
+  box-shadow:var(--card-shadow-hover); text-decoration:none;
+}
 .method:focus-visible{ outline-offset:2px; }
 .method > span{ min-width:0; }
 .method .ico{
@@ -733,8 +747,6 @@ h2 + .section-lede{ margin-top:var(--sp-5); }
 /* ---------------------------------------------------------------- 9. FORMS */
 .form-wrap{
   padding:var(--sp-5) var(--sp-5) var(--sp-6);
-  border-radius:var(--radius-lg);
-  box-shadow:var(--shadow-sm);
 }
 @media (min-width:48em){ .form-wrap{ padding:var(--sp-7) var(--sp-7) var(--sp-7); } }
 .split:not(:has(.split-main)) .form-wrap,
