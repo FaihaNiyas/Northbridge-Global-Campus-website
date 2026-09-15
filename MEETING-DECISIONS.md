@@ -397,14 +397,25 @@ now · what must change after confirmation.
   to two required fields and a message.
 
 ### F14 — Teach With Us operating claims
-- **Decision needed:** confirm "Paid per engagement"; "We handle the platform,
-  the learners and the admin"; "a visible platform under your own name"; "with
-  Northbridge bringing the relationship and the structure"; "We come back to you
-  when there is a programme that fits".
-- **Evidence:** Copy Pack §4.2 ("it is already how you operate"); D2 (platform)
-  is still open.
-- **Now:** implemented as supplied.
-- **After confirmation:** remove any arrangement that is not in place.
+- **Decision needed:** (a) whether teaching engagements are paid, and on what
+  terms; (b) confirm "We handle the platform, the learners and the admin"; "a
+  visible platform under your own name"; "with Northbridge bringing the
+  relationship and the structure"; "We come back to you when there is a
+  programme that fits".
+- **Evidence:** Copy Pack §4.2 ("it is already how you operate"). No payment
+  terms have been confirmed by management; D2 (platform) is still open.
+- **Now — payment wording omitted pending confirmation:**
+  | Copy Pack wording | Implemented wording |
+  |---|---|
+  | Teach a programme: "Deliver one programme, or one session of one, without stepping away from your practice. Paid per engagement. We handle the platform, the learners and the admin — you bring the expertise." | "Deliver one programme, or one session of one, without stepping away from your practice. We handle the platform, the learners and the admin — you bring the expertise." |
+  | What you get from it: "paid engagements that fit around your practice, …" | "engagements that fit around your practice, …" (rest of the sentence unchanged) |
+
+  No other visitor-facing copy describes teaching as paid.
+- **Now — present as supplied draft copy:** the (b) statements above.
+- **After confirmation:** if payment terms are confirmed, restore "Paid per
+  engagement." to the Teach a programme card and "paid" to the benefits
+  sentence in `careers.html`, using the confirmed wording. Remove any (b)
+  arrangement that is not in place.
 
 ### F15 — Enquiry-type options and route names differ
 - **Decision needed:** whether to rename the Contact form's enquiry types to
