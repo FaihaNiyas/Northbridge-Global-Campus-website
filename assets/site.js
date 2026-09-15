@@ -297,6 +297,42 @@ function initForms() {
   });
 }
 
+/* ------------------------------------------------ focused fields in view */
+/* Browsers scroll a focused text field only far enough to show its caret and
+   ignore scroll-margin while doing so, so a field reached with Shift+Tab can
+   sit under the sticky header. Once any scrolling has settled (so validation's
+   smooth centring is left alone), the whole field — label, control and error —
+   is nudged clear of the header and the bottom of the viewport. */
+function initFieldClearance() {
+  const head = $('.site-head');
+  if (!head) return;
+
+  function whenScrollSettles(done) {
+    let last = -1, still = 0, frames = 0;
+    (function tick() {
+      const y = window.scrollY;
+      still = y === last ? still + 1 : 0;
+      last = y;
+      if (still >= 3 || ++frames > 90) done(); else window.requestAnimationFrame(tick);
+    })();
+  }
+
+  document.addEventListener('focusin', e => {
+    const input = e.target;
+    if (!input.matches || !input.matches('form input, form select, form textarea')) return;
+    whenScrollSettles(() => {
+      if (document.activeElement !== input) return;
+      const box = (input.closest('.field') || input).getBoundingClientRect();
+      const topLimit = head.getBoundingClientRect().bottom + 16;
+      const bottomLimit = window.innerHeight - 16;
+      let shift = 0;
+      if (box.top < topLimit) shift = box.top - topLimit;
+      else if (box.bottom > bottomLimit) shift = Math.min(box.bottom - bottomLimit, box.top - topLimit);
+      if (shift) window.scrollBy({ top: shift, behavior: 'instant' });
+    });
+  });
+}
+
 /* ------------------------------------------------------- compact header */
 /* Once the visitor scrolls, the header gains a soft shadow and a firmer gold
    hairline. Its height and background never change. Purely a class toggle —
@@ -423,6 +459,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initConditionalFields();
   initHeader();
   initForms();
+  initFieldClearance();
   initFloat();
 });
 

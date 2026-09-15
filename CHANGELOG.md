@@ -1,5 +1,16 @@
 # Changelog
 
+## v4.1 — Copy Pack v1 review and reconciliation (16 September 2026, branch `feature/copy-pack-v1`)
+
+Review pass on v4.0. No visitor-facing copy changed. Not deployed.
+
+| File | Change |
+|---|---|
+| `about.html` | Crest figure restored beside "Our name" exactly as in the approved baseline (same `assets/northbridge-crest.png`, dimensions, alt text, placement and responsive treatment). The artwork is unchanged and still pending correction (F17). |
+| `assets/styles.css` | Baseline crest-figure rules restored, with the tagline spacing used elsewhere. Links, buttons, form fields and FAQ questions inside the page and footer now carry the sticky-header `scroll-margin-top` that link targets already had, plus a `scroll-margin-bottom` clearing the floating WhatsApp button. Keyboard focus therefore clears both: Shift+Tab through the Home FAQ at 1440px had left focused questions entirely under the header, and at 1024–1440px the floating button partly covered focused FAQ questions. Anchor landing positions are unchanged. A root `scroll-padding` approach was tried and rejected because it made the page jump when the mobile menu opened or closed. The floating button also steps aside while a form field has focus, as it already does while the mobile menu is open (at 390px it covered part of the focused Teach With Us message field). |
+| `assets/site.js` | `initFieldClearance()`: browsers scroll a focused text field only to its caret and ignore `scroll-margin`, so a field reached with Shift+Tab could sit under the sticky header (for example Full name on Contact and Teach With Us at 1440px). Once scrolling settles, the focused field with its label and error message is moved clear of the header and the viewport bottom. It waits for scrolling to stop, so validation's smooth centring is unaffected. |
+| `MEETING-DECISIONS.md` | Copy source restated accurately (the separate detailed brief was not received; the Copy Pack DOCX/PDF was used). F7, F17, F18 and F19 corrected and expanded; exact metadata and sitemap restoration steps added. |
+
 ## v4.0 — Website Copy Pack v1 (15 September 2026, branch `feature/copy-pack-v1`)
 
 Implements `Northbridge_Website_Copy_Pack_v1` on Home, About, Teach With Us

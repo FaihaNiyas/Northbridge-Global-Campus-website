@@ -223,14 +223,28 @@ needs to change to make the site live.
 Added on branch `feature/copy-pack-v1` (15 September 2026). Sections A–E above
 are unchanged.
 
-**Copy source.** `Northbridge_Website_Copy_Pack_v1` (Version 1, 15 September
-2026, "Prepared for the Founder"), supplied as DOCX and PDF. Both files were
-read; their recommended copy is identical — the only differences are PDF text
-extraction artefacts (dropped "fi"/"fl" ligatures, page headers and numbers)
-and cover-page wording. The Copy Pack is **requested implementation copy, not
-independent verification**: nothing in it, and nothing already in this
-repository, has been checked against company records, contracts or operating
-practice. This branch has **not** been deployed.
+**Copy source.** The implementation instructions for this branch ended with
+"The detailed implementation brief and page copy follow:", but no brief or page
+copy followed — that separate brief was **never received** and has not been
+compared. The copy used instead is the Copy Pack found in the local Downloads
+folder:
+
+- `Northbridge_Website_Copy_Pack_v1.docx` — 38,101 bytes, SHA-256 `ffcd9fa6…6fec78`
+- `Northbridge_Website_Copy_Pack_v1.pdf` — 350,845 bytes, SHA-256 `2614e925…a029e7`
+
+(Version 1, 15 September 2026, "Prepared for the Founder".) The text of both
+files was extracted programmatically and compared; the PDF was read as
+extracted text, not inspected visually. Their RECOMMENDED copy is identical —
+the only differences are extraction artefacts (dropped "fi"/"fl" ligatures,
+page headers and numbers). Where the implementation instructions conflicted
+with the Copy Pack (the three outcome-claim replacements, WhatsApp button and
+explanation, CV note, no receipt claims, no absolute privacy promises, no
+placeholder URL metadata), the instructions were followed.
+
+The Copy Pack is **requested implementation copy, not independent
+verification**: nothing in it, and nothing already in this repository, has been
+checked against company records, contracts or operating practice. This branch
+has **not** been deployed.
 
 Each item: the decision needed · the evidence available · what the branch does
 now · what must change after confirmation.
@@ -299,7 +313,9 @@ now · what must change after confirmation.
 ### F7 — Outcome claims (employment, income, sales, productivity)
 - **Decision needed:** whether evidence exists for outcome statements.
 - **Evidence:** none — Copy Pack §1.3 itself notes there is no completed cohort.
-- **Now — replaced (neutral alternatives specified in the implementation brief):**
+- **Now — replaced (neutral alternatives specified in the implementation
+  instructions; these are the only outcome claims that were reworded, and no
+  outcome claim was omitted):**
   | Copy Pack wording | Implemented wording |
   |---|---|
   | Do a day’s work in an hour — and know exactly when not to trust it. | Use AI to work more efficiently — and know when to check its output. |
@@ -412,38 +428,107 @@ now · what must change after confirmation.
 - **Decision needed:** approve corrected artwork ("EXCELLERE").
 - **Evidence:** Copy Pack §3.3 and Part 9 — fix before the crest appears on the
   website.
-- **Now:** the standalone crest image and its alt text were removed from the
-  About "Our name" section. The header logo lockup, which also contains the
-  ribbon, is **unchanged** because asset files may not be modified.
+- **Now:** the crest figure beside About "Our name" is displayed exactly as in
+  the approved baseline. v4.0 had removed it; the v4.1 review restored it,
+  because the instruction was to preserve the approved design and defer the
+  artwork correction. Preserved: the file `assets/northbridge-crest.png`
+  (byte-identical, 240×187), its `width`/`height` attributes and baseline alt
+  text, the 7fr/4fr placement beside the copy from 64em (stacked below the copy
+  on narrower screens), 220px width on desktop and `min(200px, 60%)` below
+  64em, and the display-only 2.5% bottom clip. The artwork still reads
+  EXCELERE and has not been edited. The header logo lockup, which also contains
+  the ribbon, is unchanged.
+- **Note on the alt text:** the baseline alt text reads "…above a ribbon reading
+  Discere Conectere Excellere" — the intended spelling, not the spelling on the
+  artwork as it stands.
+- **Before publication:** the Copy Pack says the artwork must be corrected
+  *before* the crest appears on the website. This branch is not deployed; if it
+  is to be published before corrected artwork exists, decide whether the crest
+  may appear as is.
 - **After confirmation:** supply corrected artwork for both the crest and the
-  logo lockup; restore a crest figure on About if wanted.
+  logo lockup and replace the two files; no markup or CSS change is needed.
 
 ### F18 — Production domain and URL metadata
 - **Decision needed:** as B1 — the production domain.
 - **Evidence:** the Copy Pack reviewed a Netlify address
-  (`chipper-conkies-9e216e.netlify.app`), which is not stated to be production.
-- **Now:** canonical links, `og:url`, `og:image` (and its size/alt tags) and
-  `twitter:image` were **removed from all five pages**, because absolute URLs on
-  `REPLACE-WITH-YOUR-DOMAIN.lk` are invalid; `twitter:card` is `summary`. The
-  `Sitemap:` line was removed from `robots.txt`, and `sitemap.xml` (placeholder
-  URLs only) was deleted. Titles, descriptions and `og:title`/`og:description`
-  now match the new copy.
-- **After confirmation:** on each page add `<link rel="canonical">`, `og:url`,
-  `og:image` (absolute URL to `assets/og-image.png`, 1200×630, with alt text) and
-  set `twitter:card` to `summary_large_image`; recreate `sitemap.xml` listing
-  `index.html`, `about.html`, `careers.html` and `contact.html` (not `404.html`)
-  and add `Sitemap: https://<domain>/sitemap.xml` to `robots.txt`.
+  (`chipper-conkies-9e216e.netlify.app`). That is a review deployment and is not
+  stated to be production; do not use it for canonical or social URLs unless it
+  is explicitly confirmed as the production domain.
+- **What was removed, and why:** every URL removed on this branch pointed at
+  the placeholder `https://REPLACE-WITH-YOUR-DOMAIN.lk`; no valid URL was
+  removed. On all five pages (including `404.html`) the baseline carried a
+  canonical link, `og:url`, `og:image` with width/height/alt, `twitter:card`
+  `summary_large_image` and `twitter:image`. `robots.txt` carried
+  `Sitemap: https://REPLACE-WITH-YOUR-DOMAIN.lk/sitemap.xml`. `sitemap.xml`
+  listed exactly four URLs, all on the placeholder domain: `index.html`
+  (priority 1.0), `about.html` (0.8), `careers.html` (0.7), `contact.html` (0.9).
+- **Now:** titles, descriptions, `og:type`, `og:site_name`, `og:locale`,
+  `og:title`, `og:description`, `twitter:title` and `twitter:description` are
+  present and match the new copy; `twitter:card` is `summary` (no image); a
+  comment in each `<head>` marks where the URL tags belong.
+- **After confirmation — exact restoration** (replace `https://DOMAIN` with the
+  confirmed origin, no trailing slash):
+  1. In `index.html`, `about.html`, `careers.html` and `contact.html`, replace the
+     `<head>` comment with the following, using the page's own file name
+     (`index.html` for Home, matching the baseline):
+     ```html
+     <link rel="canonical" href="https://DOMAIN/about.html" />
+     <meta property="og:url" content="https://DOMAIN/about.html" />
+     <meta property="og:image" content="https://DOMAIN/assets/og-image.png" />
+     <meta property="og:image:width" content="1200" />
+     <meta property="og:image:height" content="630" />
+     <meta property="og:image:alt" content="The Northbridge Global Campus crest and wordmark on a navy background." />
+     ```
+     and change `twitter:card` to `summary_large_image`, adding
+     `<meta name="twitter:image" content="https://DOMAIN/assets/og-image.png" />`.
+  2. In `404.html` (which is `noindex`), add only the `og:image` group and
+     `twitter:image`; a canonical on the 404 page is not needed.
+  3. Recreate `sitemap.xml`:
+     ```xml
+     <?xml version="1.0" encoding="UTF-8"?>
+     <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+       <url><loc>https://DOMAIN/index.html</loc><priority>1.0</priority></url>
+       <url><loc>https://DOMAIN/about.html</loc><priority>0.8</priority></url>
+       <url><loc>https://DOMAIN/careers.html</loc><priority>0.7</priority></url>
+       <url><loc>https://DOMAIN/contact.html</loc><priority>0.9</priority></url>
+     </urlset>
+     ```
+  4. Add `Sitemap: https://DOMAIN/sitemap.xml` as the last line of `robots.txt`.
+  5. `assets/og-image.png` shows the crest; check its ribbon against F17 before
+     relying on it as the share image.
+  6. After publishing, re-scrape one URL in the Facebook Sharing Debugger (see
+     `README.md`).
 
 ### F19 — Contact destinations are placeholders
 - **Decision needed:** as B2–B4.
 - **Evidence:** `assets/site.js` — WhatsApp `94000000000`, phone
   `+94 00 000 0000`, email `hello@example.lk`.
-- **Now:** unchanged and labelled as placeholders in the config block. Every
-  WhatsApp handoff, including both forms, points at a number that reaches no one.
-  These are **not** production-ready. The Copy Pack's observation that the live
-  site shows "Loading…" was not reproduced locally; with JavaScript running the
-  placeholder values are filled in.
-- **After confirmation:** set the three values in `assets/site.js`.
+- **Now — enquiries are not operational.** The three values are unchanged and
+  labelled as placeholders in the config block; they are the only contact
+  destinations anywhere in the site files. As rendered with JavaScript on
+  (checked in a browser on all five pages, v4.1 review):
+  - `https://wa.me/94000000000` — footer "WhatsApp us" and the floating WhatsApp
+    button on every page; Contact hero "Message us on WhatsApp" and the WhatsApp
+    contact tile; the prefilled text of both forms and the "Continue to
+    WhatsApp" fallback link in the form status note.
+  - `tel:+94000000000` (shown as "+94 00 000 0000") — footer on every page and
+    the Contact phone tile.
+  - `mailto:hello@example.lk` — footer on every page, the Contact email tile and
+    the "Send by email instead" fallback in the form status note.
+  - The header has no contact link.
+
+  A visitor who completes either form reaches a WhatsApp chat with a number that
+  reaches no one, or an email to a reserved example domain. **Not
+  production-ready.**
+- **Without JavaScript:** every WhatsApp, phone and email link is `href="#"`, and
+  the phone and email labels read "Loading…" (the footer on every page and the
+  Contact tiles). This is baseline behaviour, not introduced on this branch,
+  and matches the Copy Pack's Part 9 observation of the live site. The forms
+  themselves also need JavaScript to prepare the WhatsApp message.
+- **After confirmation:** set `whatsapp`, `phoneDisplay`, `phoneDial` and `email`
+  in `assets/site.js`, then send one test message through each form to the real
+  number before publishing. Decide separately whether the HTML should carry
+  the confirmed details directly, so they still work without JavaScript.
 
 ### F20 — Deferred Copy Pack sections (not built on this branch)
 - **"Programmes" navigation label** (Part 9.4): still an in-page anchor; see A3.

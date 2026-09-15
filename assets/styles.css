@@ -155,6 +155,14 @@ h3{
 
 /* Anything reachable by an in-page link clears the sticky header. */
 [id]{ scroll-margin-top:calc(var(--head-h) + var(--sp-5)); }
+/* Controls reached with Tab or Shift+Tab, or focused by form validation, do the
+   same, and also stay clear of the floating WhatsApp button in the bottom
+   corner. Set on the page's own controls, not as scroll-padding on the root:
+   root padding made the page jump whenever the menu locked scrolling. */
+:is(main, .site-foot) :is(a[href], button, input, select, textarea, summary){
+  scroll-margin-top:calc(var(--head-h) + var(--sp-5));
+  scroll-margin-bottom:calc(52px + 2 * var(--sp-4));
+}
 
 /* ------------------------------------------------------ 3. ACCESSIBILITY */
 .skip{
@@ -802,6 +810,23 @@ h2 + .section-lede{ margin-top:var(--sp-5); }
 }
 .callout p{ color:var(--ink-80); font-size:1rem; line-height:1.65; }
 
+/* about: copy beside the crest */
+.split-crest{ align-items:center; }
+@media (min-width:64em){
+  .split.split-crest{ grid-template-columns:minmax(0,7fr) minmax(0,4fr); grid-template-rows:auto; }
+}
+.split-copy > .tagline{ margin-top:var(--sp-5); }
+/* The crest file is artwork on an opaque white canvas, so the panel is white
+   too and the canvas disappears. The bottom 2.5% of the frame is empty canvas
+   plus a one-pixel sliver left over from the original cut — clipped for
+   display only; the file and the artwork are untouched. */
+.split-figure{
+  margin:0; display:grid; place-items:center;
+  padding:var(--sp-7) var(--sp-5);
+}
+.split-figure img{ width:min(200px, 60%); height:auto; clip-path:inset(0 0 2.5% 0); }
+@media (min-width:64em){ .split-figure{ padding:var(--sp-9) var(--sp-6); } .split-figure img{ width:220px; } }
+
 /* fact list — hairline-separated statements with a small gold marker */
 .fact-list{ list-style:none; margin:0; padding:0; }
 .fact-list li{
@@ -1002,6 +1027,9 @@ h2 + .section-lede{ margin-top:var(--sp-5); }
 }
 .wa-float svg{ width:21px; height:21px; flex:none; }
 html.nav-open .wa-float{ visibility:hidden; opacity:0; }
+/* and while a form field has focus, so it never sits over the control being
+   filled in or its error message (browsers without :has() simply keep it) */
+html:has(form :focus) .wa-float{ visibility:hidden; opacity:0; }
 @media (max-width:29.99em){ .wa-float .txt{ display:none; } .wa-float{ padding:0; } }
 
 /* ------------------------------------------------------------ MOTION
