@@ -215,3 +215,244 @@ matters, and the files that change once it is approved.
 B1–B4 and D1 all live in one place: the `NB` config block at the top of
 `assets/site.js`, plus a single find-and-replace for the domain. No page markup
 needs to change to make the site live.
+
+---
+
+## F. Website Copy Pack v1 — items pending confirmation
+
+Added on branch `feature/copy-pack-v1` (15 September 2026). Sections A–E above
+are unchanged.
+
+**Copy source.** `Northbridge_Website_Copy_Pack_v1` (Version 1, 15 September
+2026, "Prepared for the Founder"), supplied as DOCX and PDF. Both files were
+read; their recommended copy is identical — the only differences are PDF text
+extraction artefacts (dropped "fi"/"fl" ligatures, page headers and numbers)
+and cover-page wording. The Copy Pack is **requested implementation copy, not
+independent verification**: nothing in it, and nothing already in this
+repository, has been checked against company records, contracts or operating
+practice. This branch has **not** been deployed.
+
+Each item: the decision needed · the evidence available · what the branch does
+now · what must change after confirmation.
+
+### F1 — Public approval of the five programme names and descriptions
+- **Decision needed:** approval to publish Business FinanceSense, SpeakSmart
+  English, WorkSmart with AI, Excel to Dashboard and Digital Sales Engine, with
+  their descriptor lines, descriptions and "You finish with" outputs.
+- **Evidence:** Copy Pack §1.2 and §2.4 describe them as the launch portfolio.
+  No sign-off record was supplied. Supersedes the recommendation in A1.
+- **Now:** implemented on `index.html#programmes` as draft content for this
+  feature branch (each card has an anchor), and as the options of the Contact
+  form's "Area you are interested in" field.
+- **After confirmation:** nothing if approved as written; otherwise edit the
+  five cards and the Contact form options. A2 (number of launch programmes) is
+  answered by this decision.
+
+### F2 — Deliverability of each programme output
+- **Decision needed:** confirm each output can actually be produced within a
+  programme (performance snapshot; delivered presentation and rewritten emails;
+  two workflows "rebuilt and timed before and after"; working dashboard from
+  real data; live funnel plus dashboard).
+- **Evidence:** Copy Pack only. No curriculum or lecturer confirmation.
+- **Now:** implemented as supplied; also repeated in the hero trust strip
+  ("Every programme ends in a real output"), Home method step 4 and the FAQ.
+- **After confirmation:** amend any output that cannot be guaranteed.
+
+### F3 — Delivery mode and schedule
+- **Decision needed:** confirm programmes are online, short, "designed around a
+  working week — evenings and weekends", and whether sessions run on Saturdays.
+- **Evidence:** Copy Pack only (hero eyebrow "· ONLINE", hero H1 "Learn it on
+  Saturday. Use it on Monday.", FAQ, About commitment "Built for real people").
+- **Now:** implemented as supplied. The H1 implies weekend sessions.
+- **After confirmation:** if delivery or schedule differs, revise the hero
+  eyebrow, H1, subhead, trust strip, programmes body, "Where this is going", FAQ
+  and About commitments. Links to A5 (teaching language).
+
+### F4 — Practitioner-led teaching claims
+- **Decision needed:** whether these can stand before any lecturer is engaged:
+  "Your lecturers are practising professionals … because they made those calls
+  last week"; "People who made the decision you are studying, recently, with
+  something at stake"; "the person teaching you did this work recently";
+  "Lecturer details are published for each programme before enrolment opens";
+  "building each programme carefully with experienced practitioners".
+- **Evidence:** Copy Pack only; C4 (named lecturers) is still open.
+- **Now:** implemented as supplied on Home, About and the FAQ.
+- **After confirmation:** soften to future tense ("will be taught by …") if no
+  practitioners are contracted at launch.
+
+### F5 — Certificate of completion
+- **Decision needed:** as C2 — whether learners receive a certificate of
+  completion and whether it may be called that.
+- **Evidence:** Copy Pack FAQ ("A Northbridge certificate of completion records
+  what you did") and Part 7, block 10. C2 remains unresolved.
+- **Now:** implemented in the Home FAQ answer "Then what am I actually getting?".
+- **After confirmation:** remove or rename the sentence if C2 decides otherwise.
+
+### F6 — Programme ladder and future programme areas
+- **Decision needed:** whether Commercial FinanceSense, Executive FinanceSense
+  and "further programmes in leadership, people and performance, creative work
+  with AI and entrepreneurship" may be announced.
+- **Evidence:** Copy Pack §2.4 ("it is already the plan"). No roadmap document.
+- **Now:** implemented under the programme cards and on the first card.
+- **After confirmation:** remove named future programmes that are not planned.
+
+### F7 — Outcome claims (employment, income, sales, productivity)
+- **Decision needed:** whether evidence exists for outcome statements.
+- **Evidence:** none — Copy Pack §1.3 itself notes there is no completed cohort.
+- **Now — replaced (neutral alternatives specified in the implementation brief):**
+  | Copy Pack wording | Implemented wording |
+  |---|---|
+  | Do a day’s work in an hour — and know exactly when not to trust it. | Use AI to work more efficiently — and know when to check its output. |
+  | Every programme is designed to add a service you can charge for. | Build practical skills you can apply to client work. |
+  | Graduates who can do things get hired ahead of graduates who know things. | Practical outputs give you concrete examples to discuss with potential employers. |
+- **Now — implemented as supplied, flagged:** "That is how work starts coming to
+  you"; "Sales funnels that actually convert"; "Skills like these change the size
+  of the projects you can credibly quote for, and they change how quickly you can
+  deliver them"; "emails that get answered the same day"; "Turn attention into
+  enquiries, and enquiries into paying customers".
+- **After confirmation:** keep the replacements until learner results exist;
+  revise the flagged lines if they cannot be defended.
+
+### F8 — Early access: CTA labels without an early-access list
+- **Decision needed:** whether an early-access list exists, how people join it,
+  and how often it is contacted.
+- **Evidence:** none. Both forms only prepare a WhatsApp message (see F12) and
+  the only consent collected is to reply to an enquiry (D3).
+- **Now:** the Copy Pack's CTA labels are used ("Get Early Access", "Get early
+  access"); they lead to the Contact form with "I want to learn" preselected.
+  **Omitted** because they promise a list or ongoing messages that do not exist:
+  "each early-access list closes when the cohort fills"; "we will send you what
+  is relevant — nothing else"; "Get early access and you will hear first";
+  "Register for early access and you will hear before anyone else".
+- **After confirmation:** once a list and a separate marketing opt-in (D3) exist,
+  restore those sentences and add the opt-in to the forms.
+
+### F9 — Data-handling and mailing promises
+- **Decision needed:** a verified data-handling and communications practice, and
+  a reviewed privacy policy (D5).
+- **Evidence:** none.
+- **Now — omitted:** "One short form. No spam, no daily emails, and we will not
+  pass your details to anyone." (Home, Start here) and "Your details stay with
+  Northbridge — we will not pass them to anyone, and we will not add you to a
+  mailing list unless you ask us to." (Contact form introduction).
+- **After confirmation:** publish only statements the policy supports, linked to
+  the policy page.
+
+### F10 — Who reads enquiries
+- **Decision needed:** who reads form and WhatsApp enquiries.
+- **Evidence:** none.
+- **Now — omitted:** "A person reads every message." (Home route "I have a
+  question"), "A person reads every message," (Contact route "Something else"),
+  "A practitioner reads every submission personally," (Teach With Us form).
+- **After confirmation:** restore if it is a staffed commitment.
+
+### F11 — Response times
+- **Decision needed:** as B6.
+- **Evidence:** none; B6 records that earlier response-time promises were
+  removed because nobody confirmed them.
+- **Now — omitted:** "We aim to reply within one working day. WhatsApp is usually
+  fastest." (Contact) and the reply windows inside the Copy Pack's post-submission
+  messages.
+- **After confirmation:** add the agreed wording to Contact and Teach With Us.
+
+### F12 — What the forms actually do
+- **Decision needed:** as D1 — whether a form endpoint will be configured.
+- **Evidence:** `assets/site.js` — `NB.formEndpoint` is `null`.
+- **Now:** both forms validate, then open WhatsApp with the details written out.
+  Nothing is sent or stored by the page, and opening WhatsApp does not send the
+  message. Submit buttons read "Continue to WhatsApp"; the text above them reads
+  "This form prepares a WhatsApp message. Review it and tap Send in WhatsApp to
+  send your enquiry." **Omitted:** the Copy Pack's post-submission confirmations
+  ("Thank you — that has reached us …", "Thank you — your message has reached us
+  …") because nothing has been received when they would appear. The Teach With
+  Us CV note now says the CV can be attached in the WhatsApp conversation.
+- **After confirmation:** if an endpoint is configured, change both button labels
+  and the handoff sentence, and review the endpoint success/failure messages in
+  `site.js` before enabling it.
+
+### F13 — Contact form introduction did not match the form
+- **Decision needed:** none unless the form is shortened.
+- **Evidence:** the Contact form has four required inputs plus a required
+  consent box.
+- **Now:** "Two required fields and a message." was not used; the existing
+  accurate sentence "Fields marked * are required." precedes the Copy Pack's
+  "Everything else just helps us give you a better answer."
+- **After confirmation:** use the Copy Pack sentence only if the form is reduced
+  to two required fields and a message.
+
+### F14 — Teach With Us operating claims
+- **Decision needed:** confirm "Paid per engagement"; "We handle the platform,
+  the learners and the admin"; "a visible platform under your own name"; "with
+  Northbridge bringing the relationship and the structure"; "We come back to you
+  when there is a programme that fits".
+- **Evidence:** Copy Pack §4.2 ("it is already how you operate"); D2 (platform)
+  is still open.
+- **Now:** implemented as supplied.
+- **After confirmation:** remove any arrangement that is not in place.
+
+### F15 — Enquiry-type options and route names differ
+- **Decision needed:** whether to rename the Contact form's enquiry types to
+  match the new routes ("I represent an organisation", "Something else").
+- **Evidence:** Copy Pack §2.9 and §5.1 name the routes; the form options are
+  existing routing values.
+- **Now:** form options and field names unchanged, so existing enquiry routing
+  is preserved; route links preselect the nearest option.
+- **After confirmation:** update option text in `contact.html` and the route map
+  in `initEnquiryPreselect()` in `assets/site.js` together.
+
+### F16 — Company registration number
+- **Decision needed:** as B5.
+- **Evidence:** Copy Pack marks it "[INSERT]".
+- **Now — omitted** from the footer and the About "plain facts" list, rather than
+  publishing the placeholder.
+- **After confirmation:** add "· Company No. …" to the footer bottom line on all
+  five pages and to the first About fact.
+
+### F17 — Crest motto artwork reads "EXCELERE"
+- **Decision needed:** approve corrected artwork ("EXCELLERE").
+- **Evidence:** Copy Pack §3.3 and Part 9 — fix before the crest appears on the
+  website.
+- **Now:** the standalone crest image and its alt text were removed from the
+  About "Our name" section. The header logo lockup, which also contains the
+  ribbon, is **unchanged** because asset files may not be modified.
+- **After confirmation:** supply corrected artwork for both the crest and the
+  logo lockup; restore a crest figure on About if wanted.
+
+### F18 — Production domain and URL metadata
+- **Decision needed:** as B1 — the production domain.
+- **Evidence:** the Copy Pack reviewed a Netlify address
+  (`chipper-conkies-9e216e.netlify.app`), which is not stated to be production.
+- **Now:** canonical links, `og:url`, `og:image` (and its size/alt tags) and
+  `twitter:image` were **removed from all five pages**, because absolute URLs on
+  `REPLACE-WITH-YOUR-DOMAIN.lk` are invalid; `twitter:card` is `summary`. The
+  `Sitemap:` line was removed from `robots.txt`, and `sitemap.xml` (placeholder
+  URLs only) was deleted. Titles, descriptions and `og:title`/`og:description`
+  now match the new copy.
+- **After confirmation:** on each page add `<link rel="canonical">`, `og:url`,
+  `og:image` (absolute URL to `assets/og-image.png`, 1200×630, with alt text) and
+  set `twitter:card` to `summary_large_image`; recreate `sitemap.xml` listing
+  `index.html`, `about.html`, `careers.html` and `contact.html` (not `404.html`)
+  and add `Sitemap: https://<domain>/sitemap.xml` to `robots.txt`.
+
+### F19 — Contact destinations are placeholders
+- **Decision needed:** as B2–B4.
+- **Evidence:** `assets/site.js` — WhatsApp `94000000000`, phone
+  `+94 00 000 0000`, email `hello@example.lk`.
+- **Now:** unchanged and labelled as placeholders in the config block. Every
+  WhatsApp handoff, including both forms, points at a number that reaches no one.
+  These are **not** production-ready. The Copy Pack's observation that the live
+  site shows "Loading…" was not reproduced locally; with JavaScript running the
+  placeholder values are filled in.
+- **After confirmation:** set the three values in `assets/site.js`.
+
+### F20 — Deferred Copy Pack sections (not built on this branch)
+- **"Programmes" navigation label** (Part 9.4): still an in-page anchor; see A3.
+- **Organisations and corporate section** (Part 6): deferred; see E1.
+- **Programme page template** (Part 7): no programme pages built; the FAQ line
+  "it will say so plainly on its own page" anticipates them.
+- **Policy pages** (Part 9.7): none built and none linked; see D5. No legal or
+  compliance wording was added.
+- **Payments, backend, CRM** : not in scope; see D1–D2.
+- **Homepage enrolment-status line above the fold** (Part 9.5): the hero now
+  leads with "Get Early Access", and the FAQ states enrolments are not open; no
+  extra status line was invented.

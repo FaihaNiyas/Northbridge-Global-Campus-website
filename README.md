@@ -43,8 +43,7 @@ northbridge-global-campus-final/
 ├── careers.html                  Careers  (expression-of-interest form)
 ├── contact.html                  Contact  (enquiry form)
 ├── 404.html                      Not found (noindex)
-├── robots.txt                    Points crawlers at the sitemap
-├── sitemap.xml                   The four public pages
+├── robots.txt                    Allows crawling (sitemap line removed until the domain is set)
 ├── README.md                     This file
 ├── CLAUDE-CODE-PROMPTS.md        Reusable prompts for future work
 ├── CHANGELOG.md                  What changed in this release
@@ -134,9 +133,10 @@ fallback shown only if the send fails. Nothing else changes.
 **Before you publish, do these two things.**
 
 1. Fill in the config block in `assets/site.js` as above.
-2. Find and replace `REPLACE-WITH-YOUR-DOMAIN.lk` with your real domain across
-   all files — 29 occurrences in the HTML plus `robots.txt` and `sitemap.xml`.
-   VS Code or Notepad++ will do it across the folder in one action.
+2. Once the production domain is confirmed, add the canonical, `og:url` and
+   social-image tags to each page, recreate `sitemap.xml` and add its `Sitemap:`
+   line to `robots.txt`. They were removed while the domain was a placeholder —
+   the exact steps are in `MEETING-DECISIONS.md`, item F18.
 
 Step 2 matters more than it looks. Facebook and WhatsApp need **absolute** URLs
 to build a link preview. Leave the placeholder in and shared links show no card

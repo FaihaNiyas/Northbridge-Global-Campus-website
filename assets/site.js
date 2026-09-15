@@ -7,23 +7,27 @@
 
 const NB = {
   /* Your WhatsApp number in full international format, digits only.
-     Sri Lanka example: 94771234567  (94 + number without the leading 0) */
+     Sri Lanka example: 94771234567  (94 + number without the leading 0)
+     PLACEHOLDER — not a working number. See MEETING-DECISIONS.md, B4. */
   whatsapp: '94000000000',
 
-  /* Shown on the page and used for tel: links. Keep the +94 spacing readable. */
+  /* Shown on the page and used for tel: links. Keep the +94 spacing readable.
+     PLACEHOLDERS — see MEETING-DECISIONS.md, B2. */
   phoneDisplay: '+94 00 000 0000',
   phoneDial:    '+94000000000',
 
+  /* PLACEHOLDER — see MEETING-DECISIONS.md, B3. */
   email: 'hello@example.lk',
 
   /* WHERE FORMS GO.
-     Leave as null and every form still works: it validates, then hands the
-     visitor a one-tap WhatsApp message with their details already written out.
-     That costs nothing and works from day one.
+     Leave as null and every form prepares a WhatsApp message: it validates,
+     then opens WhatsApp with the visitor's details already written out.
+     Nothing is sent from the page — the visitor must tap Send in WhatsApp.
 
-     When you are ready for forms to land in an inbox instead, create a free
+     When you are ready for forms to land in an inbox instead, create an
      endpoint (Formspree, Web3Forms, Getform or similar) and paste the URL here.
-     Nothing else needs to change. */
+     The submit buttons ("Continue to WhatsApp") and the explanation above them
+     must then be changed as well — see MEETING-DECISIONS.md, D1 and F12. */
   formEndpoint: null
 };
 
@@ -100,6 +104,25 @@ function initNav() {
   const onBreakpoint = () => { if (desktop.matches && isOpen()) setOpen(false); };
   if (desktop.addEventListener) desktop.addEventListener('change', onBreakpoint);
   else if (desktop.addListener) desktop.addListener(onBreakpoint);
+}
+
+/* ------------------------------------------------------ enquiry preselect */
+/* Route links elsewhere on the site add ?enquiry=learn|teach|business|general.
+   If the contact form has a matching option it is chosen for the visitor, who
+   can still change it. Unknown or missing values change nothing. */
+function initEnquiryPreselect() {
+  const select = $('select[name="Enquiry type"]');
+  if (!select) return;
+  const routes = {
+    learn: 'I want to learn',
+    teach: 'I want to teach',
+    business: 'I represent a business',
+    general: 'General enquiry'
+  };
+  const wanted = routes[new URLSearchParams(window.location.search).get('enquiry')];
+  if (!wanted) return;
+  const option = Array.from(select.options).find(o => o.text === wanted);
+  if (option) select.value = option.value;
 }
 
 /* ------------------------------------------------- conditional form fields */
@@ -210,32 +233,35 @@ function initForms() {
         return;
       }
 
+      const message = buildMessage(form);
+
+      // No endpoint configured: the form only prepares a WhatsApp message.
+      // Nothing is sent from this page and nothing is stored — opening WhatsApp
+      // does not send the message either; the visitor has to tap Send there.
+      // WhatsApp is opened straight from the submit gesture; the note below
+      // keeps a fallback link in case the browser blocked the new tab.
+      if (!NB.formEndpoint) {
+        const link = `https://wa.me/${NB.whatsapp}?text=${encodeURIComponent(message)}`;
+        const opened = window.open(link, '_blank');
+        if (opened) opened.opener = null;
+        status.innerHTML =
+          `<div class="note ok" role="status"><h3>Almost done — one tap left</h3>
+           <p>Nothing has been sent yet. WhatsApp opens with your message written out &mdash; review it and tap Send in WhatsApp to send your enquiry. If WhatsApp did not open, use the button below.</p>
+           <div class="btn-row">
+             <a class="btn btn-primary" href="${link}" target="_blank" rel="noopener">Continue to WhatsApp</a>
+             <a class="btn btn-secondary" href="mailto:${NB.email}?subject=${encodeURIComponent(form.dataset.formName)}&body=${encodeURIComponent(message)}">Send by email instead</a>
+           </div></div>`;
+        status.scrollIntoView({ block: 'center', behavior: 'smooth' });
+        return;
+      }
+
+      // Endpoint configured: post it.
       sending = true;
       submit.setAttribute('aria-busy', 'true');
       submit.dataset.label = submit.textContent;
       submit.textContent = 'Sending…';
       status.innerHTML = '';
 
-      const message = buildMessage(form);
-
-      // No endpoint configured: hand over to WhatsApp, prefilled.
-      if (!NB.formEndpoint) {
-        const link = `https://wa.me/${NB.whatsapp}?text=${encodeURIComponent(message)}`;
-        status.innerHTML =
-          `<div class="note ok" role="status"><h3>Almost done — one tap left</h3>
-           <p>Nothing has been sent yet. Tap below and WhatsApp will open with your details already written out &mdash; sending that message is what reaches us.</p>
-           <div class="btn-row">
-             <a class="btn btn-primary" href="${link}" target="_blank" rel="noopener">Send on WhatsApp</a>
-             <a class="btn btn-secondary" href="mailto:${NB.email}?subject=${encodeURIComponent(form.dataset.formName)}&body=${encodeURIComponent(message)}">Send by email instead</a>
-           </div></div>`;
-        status.scrollIntoView({ block: 'center', behavior: 'smooth' });
-        sending = false;
-        submit.removeAttribute('aria-busy');
-        submit.textContent = submit.dataset.label;
-        return;
-      }
-
-      // Endpoint configured: post it.
       try {
         const res = await fetch(NB.formEndpoint, {
           method: 'POST',
@@ -257,7 +283,7 @@ function initForms() {
           `<div class="note bad" role="alert"><h3>That did not go through</h3>
            <p>Something went wrong at our end, not yours. Your details are still in the form. Please try again, or send them straight to us:</p>
            <div class="btn-row">
-             <a class="btn btn-primary" href="${link}" target="_blank" rel="noopener">Send on WhatsApp</a>
+             <a class="btn btn-primary" href="${link}" target="_blank" rel="noopener">Continue to WhatsApp</a>
              <a class="btn btn-secondary" data-tel href="#">Call us</a>
            </div></div>`;
         fillContactDetails();
@@ -348,16 +374,19 @@ function initReveal() {
 
   const targets = $$([
     '.value-grid li',
-    '.how-list li',
-    '.enquiry-grid li',
     '.prose-grid > div',
+    '.prog-grid > li',
+    '.stage-list li',
+    '.steps-list li',
+    '.route-grid > li',
+    '.faq-item',
+    '.belief',
+    '.two-col > div',
     '.contact-methods .method',
     '.fact-list li',
     '.form-wrap',
-    '.split-figure',
     'main section > .shell > .section-head',
-    'main section > .shell > .split > .split-intro',
-    'main section > .shell > .split > .split-copy'
+    'main section > .shell > .split > .split-intro'
   ].join(','));
   if (!targets.length) return;
 
@@ -390,6 +419,7 @@ function initReveal() {
 document.addEventListener('DOMContentLoaded', () => {
   fillContactDetails();
   initNav();
+  initEnquiryPreselect();
   initConditionalFields();
   initHeader();
   initForms();

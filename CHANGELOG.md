@@ -1,5 +1,25 @@
 # Changelog
 
+## v4.0 — Website Copy Pack v1 (15 September 2026, branch `feature/copy-pack-v1`)
+
+Implements `Northbridge_Website_Copy_Pack_v1` on Home, About, Teach With Us
+(`careers.html`) and Contact, with the shared navigation and footer. Draft for
+review — **not deployed**. Copy that could not be supported, and every
+business fact still to be confirmed, is listed in `MEETING-DECISIONS.md`,
+section F.
+
+| File | Change |
+|---|---|
+| `index.html` | New hero, trust strip, "Why Northbridge is different", career-value section, five launch-programme cards (with anchors), "Where this is going", the Northbridge method, "Our one test", Straight answers FAQ (native `details`), "Start here" routes. |
+| `about.html` | New standfirst, "Why we exist" with the belief statement, four commitments, "Our name" with the motto, expanded plain facts. Standalone crest image removed pending corrected artwork (F17). |
+| `careers.html` | New hero, four ways in with "What you get from it", "What we look for" / "How we design a programme with you", new form introduction and CV note. |
+| `contact.html` | New hero with WhatsApp action, route cards, form introduction and message hint; programme options in the conditional field. |
+| `404.html` | Shared navigation, footer and metadata only. |
+| `assets/site.js` | Forms say what they do: "Continue to WhatsApp" opens WhatsApp with the message written out and shows no receipt claim; "Sending…" only when an endpoint is configured. Route links can preselect the enquiry type. Placeholder contact values labelled. |
+| `assets/styles.css` | Styles for the new blocks in the existing system (programme cards use the approved card treatment); unused journey, enquiry-list, how-list and crest-figure rules removed. |
+| `robots.txt`, `sitemap.xml` | Placeholder-domain sitemap reference removed and `sitemap.xml` deleted; canonical, `og:url` and social-image tags removed from all pages until the domain is confirmed (F18). |
+| `MEETING-DECISIONS.md` | Section F appended. |
+
 ## v3.0 — Approved content + Claude visual system (14 September 2026, branch `feature/chatgpt-content-claude-style-v3`)
 
 Built on `feature/lead-review-v2` (`cf47414`), which remains the sole authority
