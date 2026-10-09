@@ -582,14 +582,23 @@ records or operating practice. This branch has **not** been deployed.
 - **After confirmation:** drop the symbol if no claim is intended.
 
 ### G3 — FinBridge™ output line
-- **Decision needed:** confirm the output still fits the renamed programme.
-- **Evidence:** the instruction was to keep every "You finish with" line, so the
-  card kept "a one-page business performance snapshot, built by you from a real
-  set of accounts" from Business FinanceSense, while the description changed to
-  qualified accountants becoming effective at real work. The two may no longer
-  describe the same programme. Links to F2.
-- **Now:** implemented as supplied.
-- **After confirmation:** amend the output if it no longer matches.
+- **Decision needed:** confirm that the programme actually delivers the output
+  now published, and that it may be promised before any cohort has run.
+- **Evidence:** v4.3 first carried "a one-page business performance snapshot,
+  built by you from a real set of accounts" over from Business FinanceSense,
+  which was built for managers with no finance training. FinBridge™ is for
+  people who have already passed their accounting exams, for whom that output
+  is work they can do already, so it did not match the card's own promise,
+  "Don't just qualify. Become effective."
+- **Now — line chosen and published on this branch:** "a faster month-end
+  routine of your own, rebuilt step by step, and a short set of recommendations
+  you could take to a manager." It was chosen from two alternatives and uses
+  only what the card already claims (faster month-ends, turning numbers into
+  advice). It is **an outcome promise and still needs management confirmation**
+  that the programme delivers it — the deliverability question in **F2** applies
+  to it exactly as to the other four outputs.
+- **After confirmation:** amend the line if the programme cannot produce both
+  the rebuilt routine and the recommendations.
 
 ### G4 — The FinanceSense ladder is no longer published
 - **Decision needed:** confirm the Business → Commercial → Executive ladder is
