@@ -552,3 +552,91 @@ now · what must change after confirmation.
 - **Homepage enrolment-status line above the fold** (Part 9.5): the hero now
   leads with "Get Early Access", and the FAQ states enrolments are not open; no
   extra status line was invented.
+## G. Programme updates and Presence360 — items pending confirmation
+
+Added on branch `feature/programme-updates` (9 October 2026). Sections A–F
+above are unchanged. The copy in this release was supplied as instructions for
+this branch; as with section F it is **requested implementation copy, not
+independent verification**, and nothing here has been checked against company
+records or operating practice. This branch has **not** been deployed.
+
+### G1 — Programme renames
+- **Decision needed:** approval to publish the new names and area labels:
+  Business FinanceSense → **FinBridge™** (Accounting & Finance); SpeakSmart
+  English → **SpeakSmart** (Communication & Confidence); WorkSmart with AI
+  (AI & Smarter Work); Excel to Dashboard (Data & Performance); Digital Sales
+  Engine (Sales & Customer Growth). Supersedes the names approved in F1.
+- **Evidence:** the instructions for this branch. No sign-off record supplied.
+- **Now:** implemented on `index.html#programmes` and as the Contact form's
+  "Area you are interested in" options. The card anchors changed with them
+  (`#finbridge`, `#speaksmart`), so any link shared earlier to
+  `#business-financesense` or `#speaksmart-english` no longer resolves.
+- **After confirmation:** nothing if approved; otherwise edit the five cards,
+  the Contact options, the area map in `initEnquiryPreselect()` and the FAQ.
+
+### G2 — The "™" on FinBridge
+- **Decision needed:** confirm that FinBridge is claimed as a trademark, and
+  whether it is registered or unregistered.
+- **Evidence:** the instructions use "FinBridge™". No registration was supplied.
+- **Now:** published as "FinBridge™" wherever the programme is named.
+- **After confirmation:** drop the symbol if no claim is intended.
+
+### G3 — FinBridge™ output line
+- **Decision needed:** confirm the output still fits the renamed programme.
+- **Evidence:** the instruction was to keep every "You finish with" line, so the
+  card kept "a one-page business performance snapshot, built by you from a real
+  set of accounts" from Business FinanceSense, while the description changed to
+  qualified accountants becoming effective at real work. The two may no longer
+  describe the same programme. Links to F2.
+- **Now:** implemented as supplied.
+- **After confirmation:** amend the output if it no longer matches.
+
+### G4 — The FinanceSense ladder is no longer published
+- **Decision needed:** confirm the Business → Commercial → Executive ladder is
+  withdrawn, not merely unmentioned. Supersedes part of F6.
+- **Evidence:** the instructions removed both the card line and the paragraph.
+- **Now:** removed. "Further programmes in leadership, people and performance,
+  creative work with AI and entrepreneurship will follow" is unchanged and
+  still pending under F6.
+- **After confirmation:** restore a progression route if one exists.
+
+### G5 — Presence360: what the course is
+- **Decision needed:** confirm the course exists as described — a short,
+  practical, online crash course in personality development — and that the four
+  areas (how you look, sound, come across and lead) and the four steps are
+  right.
+- **Evidence:** the instructions for this branch only. No curriculum supplied.
+- **Now:** published on `presence360.html` and as a card under the programmes
+  grid. Deliberately **not** in the main navigation. No fees, dates, duration
+  or named coaches are stated, and the page says enrolments are not open.
+- **After confirmation:** correct anything that does not match the real course.
+
+### G6 — Presence360 delivery claims
+- **Decision needed:** confirm the course is delivered online and that it
+  includes role-plays, mock meetings and **video feedback**, and confirm that
+  video recordings of learners are acceptable and can be handled properly.
+- **Evidence:** the instructions. Video feedback implies recording people; no
+  data-handling practice is confirmed (see F9, D5).
+- **Now:** implemented as supplied.
+- **After confirmation:** remove or qualify anything not in place, and do not
+  describe recording until the handling of those recordings is settled.
+
+### G7 — Practitioner and coach wording
+- **Decision needed:** whether these can stand before anyone is engaged:
+  "Seasoned finance practitioners close those gaps" (FinBridge™) and "guided by
+  experienced coaches" (Presence360). Extends F4.
+- **Evidence:** the instructions; no lecturer or coach is contracted (C4).
+- **Now:** implemented as supplied.
+- **After confirmation:** soften to future tense if no one is engaged at launch.
+
+### G8 — Programme claims carried over
+- **Decision needed:** the new descriptions make claims of their own — slow
+  month-ends and "help the business decide" (FinBridge™); "until speaking up
+  feels natural" (SpeakSmart); "where your judgement still matters" (WorkSmart
+  with AI); "decide something in thirty seconds" (Excel to Dashboard); "too few
+  people become paying customers" and building "ads, WhatsApp and follow-up"
+  (Digital Sales Engine).
+- **Evidence:** the instructions only; no completed cohort exists (F7).
+- **Now:** implemented as supplied. The three neutral replacements agreed under
+  F7 are untouched.
+- **After confirmation:** revise any line that cannot be defended.

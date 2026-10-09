@@ -706,7 +706,7 @@ h2 + .section-lede{ margin-top:var(--sp-5); }
 .prog-num{
   margin-bottom:var(--sp-2);
   font-size:var(--fs-label); line-height:1rem; font-weight:700;
-  letter-spacing:.14em; color:var(--gold-text);
+  letter-spacing:.14em; text-transform:uppercase; color:var(--gold-text);
 }
 .prog-card h3{ font-size:1.3125rem; }
 .prog-promise{ margin-top:var(--sp-2); font-weight:600; font-size:1.0625rem; line-height:1.45; color:var(--navy); }
@@ -717,13 +717,23 @@ h2 + .section-lede{ margin-top:var(--sp-5); }
   font-size:var(--fs-small); line-height:1.6; color:var(--ink-80);
 }
 .prog-output > p{ max-width:68ch; }
-.prog-ladder{ margin-top:var(--sp-3); font-size:.875rem; font-weight:600; line-height:1.5; color:var(--gold-text); }
 
 .prog-after{ display:grid; gap:var(--sp-5); margin-top:var(--sp-8); }
 .prog-after .btn-row{ margin-top:0; }
 @media (min-width:64em){
   .prog-after{ grid-template-columns:minmax(0,8fr) minmax(0,4fr); column-gap:var(--col-gap); align-items:end; }
   .prog-after .btn-row{ justify-content:flex-end; }
+}
+
+/* the crash course sits under the five programmes as one full-width card */
+.prog-extra{ margin-top:var(--sp-5); gap:var(--sp-5); }
+.prog-extra > .btn{ align-self:flex-start; }
+@media (min-width:64em){
+  .prog-extra{
+    display:grid; grid-template-columns:minmax(0,8fr) minmax(0,4fr);
+    column-gap:var(--col-gap); align-items:center;
+  }
+  .prog-extra > .btn{ justify-self:end; align-self:center; }
 }
 
 /* where this is going — three stages under a shared rule; "Now" carries gold */
@@ -839,6 +849,16 @@ h2 + .section-lede{ margin-top:var(--sp-5); }
 .belief-list li{
   padding-top:var(--sp-4); border-top:2px solid var(--gold);
   font-family:var(--serif); font-size:1.375rem; font-weight:500; line-height:1.25; color:var(--navy);
+}
+
+/* a plain list marked with a short gold dash (Presence360) */
+.dash-list{ list-style:none; margin:0; padding:0; display:grid; gap:var(--sp-3); }
+.dash-list li{
+  display:grid; grid-template-columns:1.25rem minmax(0,1fr);
+  color:var(--ink-80); font-size:1rem; line-height:1.6;
+}
+.dash-list li::before{
+  content:""; width:.75rem; height:2px; margin-top:.75em; background:var(--gold);
 }
 
 /* a quiet highlighted paragraph (Teach With Us: what you get from it) */

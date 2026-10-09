@@ -107,22 +107,34 @@ function initNav() {
 }
 
 /* ------------------------------------------------------ enquiry preselect */
-/* Route links elsewhere on the site add ?enquiry=learn|teach|business|general.
-   If the contact form has a matching option it is chosen for the visitor, who
-   can still change it. Unknown or missing values change nothing. */
+/* Route links elsewhere on the site add ?enquiry=learn|teach|business|general,
+   and programme links may add ?area=… as well. If the contact form has a
+   matching option it is chosen for the visitor, who can still change it.
+   Unknown or missing values change nothing. */
 function initEnquiryPreselect() {
-  const select = $('select[name="Enquiry type"]');
-  if (!select) return;
-  const routes = {
+  const params = new URLSearchParams(window.location.search);
+
+  function choose(select, wanted) {
+    if (!select || !wanted) return;
+    const option = Array.from(select.options).find(o => o.text === wanted);
+    if (option) select.value = option.value;
+  }
+
+  choose($('select[name="Enquiry type"]'), {
     learn: 'I want to learn',
     teach: 'I want to teach',
     business: 'I represent a business',
     general: 'General enquiry'
-  };
-  const wanted = routes[new URLSearchParams(window.location.search).get('enquiry')];
-  if (!wanted) return;
-  const option = Array.from(select.options).find(o => o.text === wanted);
-  if (option) select.value = option.value;
+  }[params.get('enquiry')]);
+
+  choose($('select[name="Area of interest"]'), {
+    finbridge: 'FinBridge™',
+    speaksmart: 'SpeakSmart',
+    worksmart: 'WorkSmart with AI',
+    dashboard: 'Excel to Dashboard',
+    sales: 'Digital Sales Engine',
+    presence360: 'Presence360 crash course'
+  }[params.get('area')]);
 }
 
 /* ------------------------------------------------- conditional form fields */
