@@ -1,5 +1,16 @@
 # Changelog
 
+## v4.2 — Frosted-glass header (9 October 2026, branch `feature/glass-navbar`)
+
+The sticky header is now translucent and blurred where the browser supports it,
+so page content shows through as it scrolls under the bar. Not deployed.
+
+| File | Change |
+|---|---|
+| `assets/styles.css` | New `--glass`, `--glass-compact` and `--glass-edge` tokens, plus `--shadow-head` for the existing compact drop shadow. `.site-head` keeps its opaque white background as the fallback; inside `@supports` for `backdrop-filter` (both the `-webkit-` and standard property) the bar becomes translucent, blurred and saturated, with an inset top highlight. The compact state deepens the tint and combines the highlight with its drop shadow. `@media (prefers-reduced-transparency: reduce)` restores the opaque bar. `.nav-toggle` is now transparent. |
+| `assets/northbridge-logo-lockup-glass.png` | New file: the header lockup with its white canvas made transparent, so no white box sits over the blur. Only the canvas connected to the image border is cleared — interior whites, the N and the cap, stay solid; composited on white it matches the original to within an average of under one level. The original `northbridge-logo-lockup.png` and everything in `assets/originals/` are untouched. |
+| `index.html`, `about.html`, `careers.html`, `contact.html`, `404.html` | Header `<img class="brand-mark">` points at the new lockup. Nothing else changed. |
+
 ## v4.1 — Copy Pack v1 review and reconciliation (16 September 2026, branch `feature/copy-pack-v1`)
 
 Review pass on v4.0. No visitor-facing copy changed. Not deployed.

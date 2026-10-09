@@ -111,6 +111,14 @@
   /* Height of the sticky bar. Fixed per breakpoint, so the bar never changes
      size while scrolling and anchor targets can clear it exactly. */
   --head-h: 68px;
+
+  /* ---- frosted header ----
+     The two tints the translucent bar uses, the highlight along its top edge,
+     and the drop shadow the compact state already carried. */
+  --glass:         rgba(255,255,255,.70);
+  --glass-compact: rgba(255,255,255,.80);
+  --glass-edge:    rgba(255,255,255,.55);
+  --shadow-head:   0 6px 20px rgba(0,33,71,.07);
 }
 @media (min-width:48em){
   :root{ --pad:2rem; --section-y:5.5rem; --head-h:84px; --col-gap:3rem; }
@@ -197,10 +205,12 @@ h3{
 .tricolour i:nth-child(2){ flex:0 0 26%; background:var(--green); }
 .tricolour i:nth-child(3){ flex:0 0 12%; background:var(--gold); }
 
-/* One sticky bar, opaque white in every position. It never samples the page
-   behind it (no transparency, no backdrop blur), so the logo's own white
-   canvas always disappears into it. Only the hairline and a soft shadow
-   respond to scrolling; the height is fixed. */
+/* One sticky bar. Opaque white is the fallback, so on a browser without
+   backdrop-filter nothing is lost. Where the filter is supported the bar turns
+   translucent and blurs the page travelling under it, and the lockup it
+   carries has a transparent canvas so no white box sits over that blur. Only
+   the hairline, the tint and a soft shadow respond to scrolling; the height is
+   fixed. */
 .site-head{
   position:sticky; top:0; z-index:100;
   background:var(--white);
@@ -209,7 +219,35 @@ h3{
 }
 .site-head.is-compact{
   border-bottom-color:var(--gold-50);
-  box-shadow:0 6px 20px rgba(0,33,71,.07);
+  box-shadow:var(--shadow-head);
+}
+
+@supports ((-webkit-backdrop-filter:saturate(180%) blur(20px)) or (backdrop-filter:saturate(180%) blur(20px))){
+  .site-head{
+    background:var(--glass);
+    -webkit-backdrop-filter:saturate(180%) blur(20px);
+    backdrop-filter:saturate(180%) blur(20px);
+    box-shadow:inset 0 1px 0 var(--glass-edge);
+  }
+  /* scrolled: a firmer tint, and the drop shadow kept alongside the highlight */
+  .site-head.is-compact{
+    background:var(--glass-compact);
+    box-shadow:inset 0 1px 0 var(--glass-edge), var(--shadow-head);
+  }
+}
+
+/* Anyone who asks their system for less transparency gets the opaque bar. */
+@media (prefers-reduced-transparency: reduce){
+  .site-head{
+    background:var(--white);
+    -webkit-backdrop-filter:none;
+    backdrop-filter:none;
+    box-shadow:none;
+  }
+  .site-head.is-compact{
+    background:var(--white);
+    box-shadow:var(--shadow-head);
+  }
 }
 
 .head-inner{
@@ -217,8 +255,9 @@ h3{
   height:var(--head-h);
 }
 
-/* The lockup is the official artwork on a white canvas; on the white bar the
-   canvas vanishes and only the mark reads. Sized by width, ratio preserved. */
+/* The lockup is the official artwork with its canvas cleared, so only the mark
+   reads and the bar's blur carries on behind it. Sized by width, ratio
+   preserved. */
 .brand{ display:flex; align-items:center; flex:none; border-radius:var(--radius-sm); }
 .brand-mark{ display:block; width:140px; height:auto; }          /* ~48px tall */
 @media (min-width:48em){ .brand-mark{ width:180px; } }            /* ~62px tall */
@@ -229,7 +268,7 @@ h3{
 .nav-toggle{
   display:inline-flex; align-items:center; justify-content:center; gap:var(--sp-2);
   min-width:44px; height:44px; padding:0 .85rem;
-  background:var(--white); color:var(--navy);
+  background:transparent; color:var(--navy);
   border:1px solid var(--navy-20); border-radius:var(--radius-sm);
   font-family:var(--sans); font-size:var(--fs-small); font-weight:600; line-height:1;
   cursor:pointer;
