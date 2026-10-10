@@ -1,5 +1,11 @@
 # Changelog
 
+## v4.7 · Header logo fix (10 October 2026, branch `fix/logo-letter-centres`)
+
+| File | Change |
+|---|---|
+| `assets/northbridge-logo-lockup-glass.png` | Rebuilt so the centres of the letters in the wordmark (O, R, B, D, G, A, P) are transparent like the rest of the wordmark background. They had stayed solid white and showed as white dots on the frosted-glass header. The crest's white N, cap, outline and ribbon text stay solid. On white the logo matches the original artwork. |
+
 ## v4.6 — Simpler hero (10 October 2026, branch `feature/hero-no-chips`)
 
 | File | Change |
