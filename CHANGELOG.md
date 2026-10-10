@@ -1,5 +1,22 @@
 # Changelog
 
+## v4.3 — Programme updates and Presence360 (9 October 2026, branch `feature/programme-updates`)
+
+New programme details on the Home page and a page for the Presence360 crash
+course. The design, voice, hero and slogan are unchanged. Draft content —
+every item still to be confirmed is in `MEETING-DECISIONS.md`, section G.
+Not deployed.
+
+| File | Change |
+|---|---|
+| `index.html` | Programmes section: each card now carries an area on its number line, and the five cards are FinBridge™ (Accounting & Finance), SpeakSmart (Communication & Confidence), WorkSmart with AI (AI & Smarter Work), Excel to Dashboard (Data & Performance) and Digital Sales Engine (Sales & Customer Growth), with new descriptions. The FinBridge™ card has a new "You finish with" line — "a faster month-end routine of your own, rebuilt step by step, and a short set of recommendations you could take to a manager" — because the one carried over from Business FinanceSense was written for managers with no finance training; it is an outcome promise still to be confirmed (G3, F2). The other four "You finish with" lines are unchanged. The FinanceSense ladder line and sentence are gone; "Further programmes…" stays. New full-width Presence360 card under the grid, linking to the new page. Section lede drops "or follow the ladder". Meta descriptions and the hero lede now read "accounting and finance, communication, AI, data and digital sales". The prerequisite FAQ answer is rewritten and links to each programme card. Card ids: `#finbridge` and `#speaksmart` replace `#business-financesense` and `#speaksmart-english`. |
+| `presence360.html` | New page, built from existing components: hero with early-access and WhatsApp actions, "Why it matters", four "What we work on" cards, the four-step method, and a closing early-access row. The supplied wording is used as approved, including the page description and the course steps. Not in the main navigation. |
+| `assets/styles.css` | `.prog-num` is uppercase; new `.prog-extra` full-width card (copy left, action right from 64em); new `.dash-list` whose marker is a short gold dash. The `.prog-ladder` rule is removed with its markup. No new colour values. |
+| `contact.html` | "Area you are interested in" now lists FinBridge™ (value `FinBridge`), SpeakSmart, WorkSmart with AI, Excel to Dashboard, Digital Sales Engine and the Presence360 crash course. |
+| `assets/site.js` | `initEnquiryPreselect()` also reads `?area=` (finbridge, speaksmart, worksmart, dashboard, sales, presence360) and selects the matching area. Contact details untouched. |
+| `index.html`, `about.html`, `careers.html`, `contact.html`, `404.html`, `presence360.html` | Footer "Explore" gains a Presence360 link after Programmes; the 404 page lists it too. |
+| `MEETING-DECISIONS.md`, `README.md` | Section G added; README lists the new page. |
+
 ## v4.2 — Frosted-glass header (9 October 2026, branch `feature/glass-navbar`)
 
 The sticky header is now translucent and blurred where the browser supports it,

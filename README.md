@@ -24,6 +24,7 @@ testimonials anywhere in it.
 | Page | File | Purpose |
 |---|---|---|
 | Home | `index.html` | What Northbridge is, what is being built, how to get in touch. Two-column hero with the brand ambassador. |
+| Presence360 | `presence360.html` | The Presence360 personality-development crash course. Linked from the programmes section and the footer, deliberately not in the main navigation. |
 | About | `about.html` | Why the company exists, how it works, and a plain statement of where it stands today. |
 | Careers | `careers.html` | How people are engaged, plus an expression-of-interest form. No named vacancies. |
 | Contact | `contact.html` | WhatsApp, phone and email, plus a short enquiry form. |
@@ -39,6 +40,7 @@ the navigation. Add each on the day it has real content, not before.
 ```
 northbridge-global-campus-final/
 ├── index.html                    Home
+├── presence360.html              Presence360 crash course (not in the main nav)
 ├── about.html                    About
 ├── careers.html                  Careers  (expression-of-interest form)
 ├── contact.html                  Contact  (enquiry form)
