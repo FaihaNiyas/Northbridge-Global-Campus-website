@@ -166,7 +166,7 @@ const RULES = {
   phone:   v => /^[\d\s+()-]{7,}$/.test(v.trim()) || 'Please enter a phone number we can reach you on.',
   email:   v => v.trim() === '' || /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim()) || 'Please check the email address.',
   select:  v => v !== ''                  || 'Please choose an option.',
-  message: v => v.trim().length >= 10     || 'Please tell us a little more — at least a sentence.',
+  message: v => v.trim().length >= 10     || 'Please tell us a little more, at least a sentence.',
   consent: v => v === true                || 'Please tick the box so we know we may reply to you.',
   url:     v => v.trim() === '' || /^https?:\/\/[^\s.]+\.[^\s]{2,}$/.test(v.trim())
                                           || 'Please give a full link, starting with https://'
@@ -202,7 +202,7 @@ function validateField(field) {
 }
 
 function buildMessage(form) {
-  const lines = [`Enquiry from the Northbridge website — ${form.dataset.formName}`, ''];
+  const lines = [`Enquiry from the Northbridge website: ${form.dataset.formName}`, ''];
   $$('.field', form).forEach(field => {
     if (field.hidden) return;               // a conditional field that is not in play
     const input = $('input, select, textarea', field);
@@ -257,8 +257,8 @@ function initForms() {
         const opened = window.open(link, '_blank');
         if (opened) opened.opener = null;
         status.innerHTML =
-          `<div class="note ok" role="status"><h3>Almost done — one tap left</h3>
-           <p>Nothing has been sent yet. WhatsApp opens with your message written out &mdash; review it and tap Send in WhatsApp to send your enquiry. If WhatsApp did not open, use the button below.</p>
+          `<div class="note ok" role="status"><h3>Almost done, one tap left</h3>
+           <p>Nothing has been sent yet. WhatsApp opens with your message written out. Review it and tap Send in WhatsApp to send your enquiry. If WhatsApp did not open, use the button below.</p>
            <div class="btn-row">
              <a class="btn btn-primary" href="${link}" target="_blank" rel="noopener">Continue to WhatsApp</a>
              <a class="btn btn-secondary" href="mailto:${NB.email}?subject=${encodeURIComponent(form.dataset.formName)}&body=${encodeURIComponent(message)}">Send by email instead</a>
@@ -285,7 +285,7 @@ function initForms() {
         form.reset();
         fields.forEach(f => f.classList.remove('has-error'));
         status.innerHTML =
-          `<div class="note ok" role="status"><h3>Thank you — we have your message</h3>
+          `<div class="note ok" role="status"><h3>Thank you, we have your message</h3>
            <p>Your message has reached Northbridge and someone will read it. If it is urgent, message us on WhatsApp as well.</p>
            <div class="btn-row"><a class="btn btn-secondary" data-wa href="#">Message on WhatsApp</a></div></div>`;
         fillContactDetails();

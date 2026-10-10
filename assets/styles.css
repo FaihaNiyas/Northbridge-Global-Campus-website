@@ -445,19 +445,17 @@ html.nav-open{ overflow:hidden; }
 .hero h1{ color:var(--white); }
 .hero p{ color:var(--on-dark); }
 
-/* shared label style: small caps line with a short gold rule, never a pill */
+/* shared label style: small caps, no decorative rule */
 .eyebrow{
-  display:flex; align-items:center; gap:var(--sp-3);
+  display:block;
   margin-bottom:var(--sp-4);
   font-size:var(--fs-label); line-height:1rem; font-weight:700;
   letter-spacing:.14em; text-transform:uppercase;
   color:var(--gold-text);
 }
-.eyebrow::before{ content:""; flex:none; width:1.5rem; height:2px; background:var(--gold); }
 .hero .eyebrow{ color:var(--gold); }                       /* 6.8:1 on navy */
 @media (max-width:29.99em){
-  .hero-home .eyebrow{ font-size:.6875rem; letter-spacing:.08em; gap:var(--sp-2); text-wrap:balance; }
-  .hero-home .eyebrow::before{ width:1rem; }
+  .hero-home .eyebrow{ font-size:.6875rem; letter-spacing:.08em; text-wrap:balance; }
 }
 .band-green .eyebrow{ color:var(--on-dark); }              /* gold is < 4.5:1 on green */
 
@@ -488,23 +486,31 @@ html.nav-open{ overflow:hidden; }
 }
 .hero-home .btn-row{ margin-top:var(--sp-7); }
 
-/* trust strip — four short statements under a hairline; the tagline last */
+/* launch programmes as chips under a hairline, each linking to its card */
 .hero-meta{
   margin-top:var(--sp-7); padding-top:var(--sp-5);
   border-top:1px solid var(--on-dark-16);
 }
-.trust-strip{
-  list-style:none; margin:0; padding:0;
-  display:grid; gap:var(--sp-3) var(--sp-5);
-  font-size:.875rem; line-height:1.45; color:var(--on-dark);
+.hero-meta-lbl{
+  margin-bottom:var(--sp-3);
+  font-size:var(--fs-label); line-height:1rem; font-weight:700;
+  letter-spacing:.14em; text-transform:uppercase; color:var(--on-dark-72);
 }
-@media (min-width:30em){ .trust-strip{ grid-template-columns:repeat(2,minmax(0,1fr)); } }
-.trust-strip li{ display:flex; align-items:flex-start; gap:var(--sp-2); }
-.trust-strip li::before{
-  content:""; flex:none; width:6px; height:6px; margin-top:.5em;
-  background:var(--gold); transform:rotate(45deg);
+.prog-chips{ list-style:none; margin:0; padding:0; display:flex; flex-wrap:wrap; gap:var(--sp-2); }
+.prog-chips a{
+  display:inline-flex; align-items:center; min-height:44px; padding:.5rem 1rem;
+  border:1px solid var(--on-dark-40); border-radius:999px;
+  font-size:.875rem; font-weight:600; line-height:1.2; color:var(--white); text-decoration:none;
+  transition:background-color .2s var(--ease), border-color .2s var(--ease);
 }
-.trust-strip li:last-child{ color:var(--gold); font-weight:650; }   /* 6.8:1 on navy */
+.prog-chips a:hover{ background-color:var(--on-dark-08); border-color:var(--white); }
+.prog-chips a:focus-visible{ outline-color:var(--gold); }
+
+/* hero copy is centred inside its own column; the column keeps its place */
+.hero-home .hero-copy{ text-align:center; }
+.hero-home .lede{ margin-inline:auto; }
+.hero-home .btn-row,
+.hero-home .prog-chips{ justify-content:center; }
 
 .hero-media{ position:relative; }
 .hero-media img{
@@ -532,6 +538,9 @@ html.nav-open{ overflow:hidden; }
   .hero-media{
     position:absolute; top:0; bottom:0; right:0; z-index:1;
     left:calc(50% - .05 * (min(100%, var(--shell)) - 2 * var(--pad)));
+    /* On wide screens the panel is capped at 46rem so the wall sign in the
+       photo's left half never shows through the fade behind the heading. */
+    left:max(calc(50% - .05 * (min(100%, var(--shell)) - 2 * var(--pad))), calc(100% - 46rem));
   }
   .hero-media picture{ display:block; height:100%; }
   .hero-media img{
@@ -559,12 +568,6 @@ html.nav-open{ overflow:hidden; }
   padding-block:var(--sp-8) var(--sp-7);
 }
 .hero-page h1{ font-size:var(--fs-h1-page); font-weight:500; letter-spacing:-.018em; }
-.hero-page h1::before{
-  content:""; display:block; width:2.5rem; height:2px; margin-bottom:var(--sp-5);
-  background:var(--gold);
-}
-/* when an eyebrow introduces the title, its own rule replaces the h1 rule */
-.hero-page-title .eyebrow + h1::before{ display:none; }
 .hero-page .lede{ font-size:var(--fs-lede); line-height:1.65; max-width:36rem; }
 .hero-page-body > p + p{ margin-top:var(--sp-4); max-width:36rem; }
 .hero-page .btn-row{ margin-top:var(--sp-5); }
@@ -643,13 +646,12 @@ h2 + .section-lede{ margin-top:var(--sp-5); }
 .section-lede + .fine,
 .section-lede.fine{ margin-top:var(--sp-4); }
 
-/* a closing brand line: sans, a short gold rule, never a pill */
+/* a closing brand line: sans, no decorative rule */
 .tagline{
-  display:flex; align-items:center; gap:var(--sp-3);
+  display:block;
   margin-top:var(--sp-8);
   font-weight:650; font-size:1.0625rem; line-height:1.4; color:var(--navy);
 }
-.tagline::before{ content:""; flex:none; width:2.5rem; height:2px; background:var(--gold); }
 .section-body > .tagline{ margin-top:var(--sp-5); }
 
 /* ------------------------------------------------------ 8. CONTENT BLOCKS */
@@ -858,7 +860,7 @@ h2 + .section-lede{ margin-top:var(--sp-5); }
   color:var(--ink-80); font-size:1rem; line-height:1.6;
 }
 .dash-list li::before{
-  content:""; width:.75rem; height:2px; margin-top:.75em; background:var(--gold);
+  content:""; width:6px; height:6px; margin-top:.65em; border-radius:50%; background:var(--gold);
 }
 
 /* a quiet highlighted paragraph (Teach With Us: what you get from it) */

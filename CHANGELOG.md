@@ -1,5 +1,16 @@
 # Changelog
 
+## v4.5 — Landing polish, no dashes (10 October 2026, branch `feature/landing-polish`)
+
+| File | Change |
+|---|---|
+| All pages | Every em dash and spaced dash removed from visible copy, page titles and meta tags; sentences rewritten with commas, colons or full stops. Titles now use "Page \| Northbridge Global Campus". Hyphenated words (practitioner-led, early-access) are unchanged. |
+| `index.html` | Hero eyebrow is now "Online · For learners anywhere". Second hero button is "Chat on WhatsApp". The trust strip is replaced by a "Launch programmes" row of chips linking to each programme card and to Presence360. The slogan stays in the footer. |
+| `assets/styles.css` | Decorative gold dash lines removed (before eyebrows, before taglines, above inner-page titles); Presence360 list bullets are now small dots. New `.prog-chips` and `.hero-meta-lbl`. On wide screens the hero photo panel is capped at 46rem so the wall sign in the photo no longer shows faintly behind the text. |
+| `assets/site.js` | Dashes removed from five visible strings (form error, WhatsApp message header, form confirmation heading and text, endpoint success heading). |
+| `assets/styles.css` | Hero text (eyebrow, heading, paragraph, buttons and programme chips) is centred inside its column. The column and photo keep their positions. |
+
+
 ## v4.4 — Cleaner, shorter copy (10 October 2026, branch `feature/cleaner-copy`)
 
 The site read as text-heavy. Copy is cut by roughly half with no new claims;
