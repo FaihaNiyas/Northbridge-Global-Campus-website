@@ -1,5 +1,18 @@
 # Changelog
 
+## v4.4 — Cleaner, shorter copy (10 October 2026, branch `feature/cleaner-copy`)
+
+The site read as text-heavy. Copy is cut by roughly half with no new claims;
+design, colours, layout components and the programme facts are unchanged.
+
+| File | Change |
+|---|---|
+| `index.html` | About 1,900 → 770 words. Programmes now come straight after the hero. Programme descriptions cut to one sentence each (taglines and "You finish with" lines unchanged). Presence360 card shortened. "What it is worth to you", "Where this is going" and "The Northbridge method" sections removed; "Why Northbridge" keeps four one-line points. "Our one test" keeps its line with a one-sentence explanation. FAQ cut to six short answers (the promotion / pay-rise question removed). Hero lede and trust strip shortened. |
+| `about.html` | About 575 → 290 words. Each paragraph and commitment cut to its core sentence; plain facts kept, shortened. |
+| `careers.html` | Copy around the form roughly halved. The form itself is unchanged. |
+| `presence360.html` | "Why it matters" paragraphs shortened. |
+
+
 ## v4.3 — Programme updates and Presence360 (9 October 2026, branch `feature/programme-updates`)
 
 New programme details on the Home page and a page for the Presence360 crash
