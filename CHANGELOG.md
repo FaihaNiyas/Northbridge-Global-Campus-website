@@ -1,5 +1,13 @@
 # Changelog
 
+## v4.6 — Simpler hero (10 October 2026, branch `feature/hero-no-chips`)
+
+| File | Change |
+|---|---|
+| `index.html` | The "Launch programmes" label and the six programme chips are removed from the hero. The hero now ends with its two buttons; the programmes stay in their own section directly below. |
+| `assets/styles.css` | The now unused `.hero-meta`, `.hero-meta-lbl` and `.prog-chips` rules are removed. The hero keeps its minimum height, so the shorter copy sits vertically centred beside the photo with equal space above and below. |
+
+
 ## v4.5 — Landing polish, no dashes (10 October 2026, branch `feature/landing-polish`)
 
 | File | Change |
