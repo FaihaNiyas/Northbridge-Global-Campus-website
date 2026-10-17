@@ -1,5 +1,12 @@
 # Changelog
 
+## v4.8 · Six programmes in a 3 + 3 grid (17 October 2026, branch `feature/six-programmes`)
+
+| File | Change |
+|---|---|
+| `index.html` | Heading now reads "Six programmes. Six things you will be able to do by the end." Presence360 moves from its own full-width row into the programme grid as card 06 (Personality Development), with the same layout as the other five and an "About Presence360" link at the bottom. The `#presence360` anchor is kept. |
+| `assets/styles.css` | The programme grid is now six equal cards: three per row in two rows on laptops and desktops (1024px and wider), two per row on small tablets, one per row on phones. The old five-card spanning rules and the unused `.prog-extra` styles are removed. |
+
 ## v4.7 · Header logo fix (10 October 2026, branch `fix/logo-letter-centres`)
 
 | File | Change |

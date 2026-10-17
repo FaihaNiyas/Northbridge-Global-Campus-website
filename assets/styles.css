@@ -669,18 +669,16 @@ h2 + .section-lede{ margin-top:var(--sp-5); }
 .prose-grid p{ color:var(--ink-80); font-size:1rem; }
 .prose-grid .route-link{ margin-top:var(--sp-2); }
 
-/* launch programmes — five cards. Two columns on tablets (the odd card spans
-   the row); on wide screens three over two on a six-column grid */
+/* launch programmes: six equal cards, three per row in two rows on laptops
+   and desktops. Two per row on small tablets, one per row on phones */
 .prog-grid{ list-style:none; margin-inline:0; margin-bottom:0; padding:0; display:grid; gap:var(--sp-5); }
-@media (min-width:48em){
-  .prog-grid{ grid-template-columns:repeat(2,minmax(0,1fr)); }
-  .prog-grid > li:last-child:nth-child(odd){ grid-column:1 / -1; }
-}
-@media (min-width:75em){
-  .prog-grid{ grid-template-columns:repeat(6,minmax(0,1fr)); }
-  .prog-grid > li{ grid-column:span 2; }
-  .prog-grid > li:nth-child(4),
-  .prog-grid > li:nth-child(5):last-child{ grid-column:span 3; }
+@media (min-width:48em){ .prog-grid{ grid-template-columns:repeat(2,minmax(0,1fr)); } }
+@media (min-width:64em){ .prog-grid{ grid-template-columns:repeat(3,minmax(0,1fr)); } }
+/* on small laptops the three columns are narrower: slightly tighter padding
+   keeps every gold label on one line */
+@media (min-width:64em) and (max-width:74.99em){
+  .prog-grid > .prog-card{ padding:1.5rem 1.25rem 1.625rem; }
+  .prog-grid .prog-num{ letter-spacing:.08em; }
 }
 .prog-card{ display:flex; flex-direction:column; padding:var(--sp-5) var(--sp-5) var(--sp-6); }
 @media (min-width:48em){ .prog-card{ padding:1.75rem 1.875rem 1.875rem; } }
@@ -698,23 +696,13 @@ h2 + .section-lede{ margin-top:var(--sp-5); }
   font-size:var(--fs-small); line-height:1.6; color:var(--ink-80);
 }
 .prog-output > p{ max-width:68ch; }
+.prog-output .route-link{ font-size:1rem; }
 
 .prog-after{ display:grid; gap:var(--sp-5); margin-top:var(--sp-8); }
 .prog-after .btn-row{ margin-top:0; }
 @media (min-width:64em){
   .prog-after{ grid-template-columns:minmax(0,8fr) minmax(0,4fr); column-gap:var(--col-gap); align-items:end; }
   .prog-after .btn-row{ justify-content:flex-end; }
-}
-
-/* the crash course sits under the five programmes as one full-width card */
-.prog-extra{ margin-top:var(--sp-5); gap:var(--sp-5); }
-.prog-extra > .btn{ align-self:flex-start; }
-@media (min-width:64em){
-  .prog-extra{
-    display:grid; grid-template-columns:minmax(0,8fr) minmax(0,4fr);
-    column-gap:var(--col-gap); align-items:center;
-  }
-  .prog-extra > .btn{ justify-self:end; align-self:center; }
 }
 
 /* where this is going — three stages under a shared rule; "Now" carries gold */
