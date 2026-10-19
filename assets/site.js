@@ -8,16 +8,16 @@
 const NB = {
   /* Your WhatsApp number in full international format, digits only.
      Sri Lanka example: 94771234567  (94 + number without the leading 0)
-     PLACEHOLDER — not a working number. See MEETING-DECISIONS.md, B4. */
-  whatsapp: '94000000000',
+     Confirmed October 2026. */
+  whatsapp: '94778928895',
 
   /* Shown on the page and used for tel: links. Keep the +94 spacing readable.
-     PLACEHOLDERS — see MEETING-DECISIONS.md, B2. */
-  phoneDisplay: '+94 00 000 0000',
-  phoneDial:    '+94000000000',
+     Confirmed October 2026. */
+  phoneDisplay: '+94 77 892 8895',
+  phoneDial:    '+94778928895',
 
-  /* PLACEHOLDER — see MEETING-DECISIONS.md, B3. */
-  email: 'hello@example.lk',
+  /* Confirmed October 2026. */
+  email: 'info@northbridgeglobalcampus.com',
 
   /* WHERE FORMS GO.
      Leave as null and every form prepares a WhatsApp message: it validates,
