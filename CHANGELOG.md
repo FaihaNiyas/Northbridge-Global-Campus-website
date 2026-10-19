@@ -1,5 +1,13 @@
 # Changelog
 
+## v4.9 · Home page wording revision (19 October 2026, branch `content/home-wording`)
+
+From the Website Content Revision document (12 October 2026), home page section. Dashes in the supplied wording are replaced with commas so the site stays dash free.
+
+| File | Change |
+|---|---|
+| `index.html` | New hero introduction (also used for the search and social descriptions). Hero buttons are now "Explore Programmes" and "Get Early Access"; WhatsApp stays as the floating button. Programmes section: eyebrow "Learn by doing", heading "Explore our practical launch programmes." and a two sentence introduction. New taglines, descriptions and outcome lines for all six cards; the "You finish with:" label is dropped because the new outcome lines are full sentences. Presence360 is labelled "Personal Development" (the full "Personal and Professional Development" does not fit on one line in the card) with the line "Build your professional presence." New availability note under the grid. |
+
 ## v4.8 · Six programmes in a 3 + 3 grid (17 October 2026, branch `feature/six-programmes`)
 
 | File | Change |
