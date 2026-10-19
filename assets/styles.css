@@ -875,7 +875,7 @@ h2 + .section-lede{ margin-top:var(--sp-5); }
 
 /* contact methods — the one clickable card */
 .contact-methods{ display:grid; gap:var(--sp-3); }
-@media (min-width:48em){ .contact-methods{ grid-template-columns:repeat(3,minmax(0,1fr)); gap:var(--sp-4); } }
+@media (min-width:64em){ .contact-methods{ grid-template-columns:repeat(3,minmax(0,1fr)); gap:var(--sp-4); } }
 .method{
   display:flex; align-items:center; gap:var(--sp-4);
   min-height:84px; padding:var(--sp-4) var(--sp-5);

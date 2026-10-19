@@ -1,5 +1,18 @@
 # Changelog
 
+## v5.0 · Go live on northbridgeglobalcampus.com (20 October 2026, branch `feature/go-live`)
+
+| File | Change |
+|---|---|
+| `assets/site.js` | Real contact details: WhatsApp 94778928895, phone +94 77 892 8895, email info@northbridgeglobalcampus.com. All WhatsApp buttons, phone links, email links and forms now use them. |
+| All pages | Footer phone and email show the real details in the HTML itself (no more "Loading…" before the script runs). Contact page phone and email cards too. |
+| All pages except `404.html` | Canonical link and `og:url` on `https://www.northbridgeglobalcampus.com`. |
+| All pages | Share image tags (`og:image` 1200×630 and `twitter:image`, `assets/og-image.png`); `twitter:card` is now `summary_large_image`. |
+| `sitemap.xml` | New: home, contact, Presence360, about and careers on `https://www.northbridgeglobalcampus.com`. |
+| `robots.txt` | Points to the sitemap. |
+| `_redirects` | New Netlify rules: README, CHANGELOG, MEETING-DECISIONS, CLAUDE-CODE-PROMPTS and FINAL-QA-REPORT return the 404 page instead of being readable on the website. |
+| All pages, `assets/site.js`, `assets/styles.css` | The email address wraps only at "@" or after "northbridge" (no more "northbridgeglobalcamp / us.com"). The three contact cards sit side by side from 1024px; on tablets they stack, so the email fits on one line. |
+
 ## v4.9 · Home page wording revision (19 October 2026, branch `content/home-wording`)
 
 From the Website Content Revision document (12 October 2026), home page section. Dashes in the supplied wording are replaced with commas so the site stays dash free.
