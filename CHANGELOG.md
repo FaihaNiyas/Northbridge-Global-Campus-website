@@ -11,6 +11,7 @@
 | `sitemap.xml` | New: home, contact, Presence360, about and careers on `https://www.northbridgeglobalcampus.com`. |
 | `robots.txt` | Points to the sitemap. |
 | `_redirects` | New Netlify rules: README, CHANGELOG, MEETING-DECISIONS, CLAUDE-CODE-PROMPTS and FINAL-QA-REPORT return the 404 page instead of being readable on the website. |
+| All pages, `assets/site.js`, `assets/styles.css` | The email address wraps only at "@" or after "northbridge" (no more "northbridgeglobalcamp / us.com"). The three contact cards sit side by side from 1024px; on tablets they stack, so the email fits on one line. |
 
 ## v4.9 · Home page wording revision (19 October 2026, branch `content/home-wording`)
 

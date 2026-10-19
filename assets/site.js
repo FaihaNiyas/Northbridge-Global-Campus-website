@@ -43,7 +43,7 @@ function fillContactDetails() {
   $$('[data-tel]').forEach(el => { el.href = `tel:${NB.phoneDial}`; });
   $$('[data-tel-text]').forEach(el => { el.textContent = NB.phoneDisplay; });
   $$('[data-email]').forEach(el => { el.href = `mailto:${NB.email}`; });
-  $$('[data-email-text]').forEach(el => { el.textContent = NB.email; });
+  $$('[data-email-text]').forEach(el => { if (el.textContent !== NB.email) el.textContent = NB.email; });
   $$('[data-year]').forEach(el => { el.textContent = new Date().getFullYear(); });
 }
 
