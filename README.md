@@ -59,7 +59,7 @@ northbridge-global-campus-final/
     ├── northbridge-brand-ambassador-1600.{jpg,webp}
     ├── northbridge-brand-ambassador-1000.{jpg,webp}
     ├── northbridge-brand-ambassador-640.{jpg,webp}
-    ├── og-image.png              Social share card, 1200×630
+    ├── og-image-global.png       Social share card, 1200×630
     ├── apple-touch-icon.png      iOS home-screen icon
     ├── favicon-32.png            Browser tab icon
     ├── favicon-16.png            Browser tab icon, small

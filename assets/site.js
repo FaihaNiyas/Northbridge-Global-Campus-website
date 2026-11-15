@@ -464,6 +464,34 @@ function initReveal() {
   marked.forEach(el => io.observe(el));
 }
 
+/* -------------------------------------------------------------- FAQ search */
+function initFaqSearch() {
+  const input = $('#faq-search');
+  if (!input) return;
+  const items = $$('.faq-page .faq-item');
+  const groups = $$('.faq-page .faq-group');
+  const empty = $('#faq-empty');
+  const count = $('#faq-count');
+  const topics = $('.faq-topics');
+  const start = count ? count.textContent : '';
+  items.forEach(it => { it.dataset.text = it.textContent.toLowerCase(); });
+  input.addEventListener('input', () => {
+    const words = input.value.toLowerCase().trim().split(/\s+/).filter(Boolean);
+    let shown = 0;
+    items.forEach(it => {
+      const match = words.every(w => it.dataset.text.includes(w));
+      it.hidden = !match;
+      if (match) shown++;
+    });
+    const few = words.length && shown <= 5;
+    items.forEach(it => { if (!it.hidden) it.open = !!few; });
+    groups.forEach(g => { g.hidden = !g.querySelector('.faq-item:not([hidden])'); });
+    if (empty) empty.hidden = shown > 0;
+    if (topics) topics.hidden = words.length > 0;
+    if (count) count.textContent = words.length ? `${shown} of ${items.length} questions match` : start;
+  });
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   fillContactDetails();
   initNav();
@@ -473,6 +501,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initForms();
   initFieldClearance();
   initFloat();
+  initFaqSearch();
 });
 
 /* Runs immediately rather than on DOMContentLoaded: this script sits at the

@@ -1,5 +1,33 @@
 # Changelog
 
+## v5.4 · Global share image (15 November 2026)
+
+| File | Change |
+|---|---|
+| `assets/og-image-global.png` | New link preview image for WhatsApp, Facebook and LinkedIn. The line under the logo now reads "Practical skills for global careers." (was "Sri Lankan careers"). New file name so apps fetch the new picture instead of a saved copy. |
+| `assets/og-image.png` | Removed (replaced by the file above). |
+| All pages, `README.md` | `og:image` and `twitter:image` point to the new file. |
+
+## v5.3 · Vacancies in the top menu (15 November 2026)
+
+| File | Change |
+|---|---|
+| All pages | Top menu now shows Vacancies between Teach With Us and Contact (marked as the current page on vacancies.html). |
+| `assets/styles.css` | Menu links and the Get Early Access button never break onto two lines; slightly tighter spacing on small laptops (960 to 1119px). |
+
+## v5.2 · New FAQ (15 November 2026, branch `feature/new-faq`)
+
+From "Northbridge Global Campus FAQ, clean edition 1.1" (14 November 2026).
+
+| File | Change |
+|---|---|
+| `faq.html` | New FAQ page: all 104 answers in 12 topics, with a search box and topic links, plus FAQPage structured data for search engines. Email addresses and the WhatsApp number in answers are links. |
+| `index.html` | The old six-question FAQ is removed. A new FAQ section shows 8 questions from "Start here", with "See all questions" and "Ask on WhatsApp" buttons. |
+| All pages | Footer "Explore" list has a new FAQ link; the 404 page lists it too. |
+| `assets/styles.css` | Styles for the FAQ page search, topic links and topic groups (existing tokens only). |
+| `assets/site.js` | `initFaqSearch()`: filters the questions as you type and hides empty topics. |
+| `sitemap.xml` | Adds faq.html. |
+
 ## v5.1 · Vacancies page (12 November 2026, branch `feature/vacancies`)
 
 | File | Change |

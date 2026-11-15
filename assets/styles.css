@@ -377,6 +377,15 @@ html.nav-open{ overflow:hidden; }
   .site-nav ul a:focus-visible{ outline-offset:0; }
   .site-nav ul a[aria-current="page"]{ font-weight:650; }
   .site-nav ul a[aria-current="page"]::after{ transform:scaleX(1); background:var(--gold); }
+  .site-nav ul a,
+  .btn.nav-cta{ white-space:nowrap; }
+}
+/* small laptops: five menu links plus the button, kept on one line */
+@media (min-width:60em) and (max-width:69.99em){
+  .nav-panel{ gap:var(--sp-3); }
+  .site-nav ul{ gap:0; }
+  .site-nav ul a{ padding:0 .55rem; font-size:.9375rem; }
+  .site-nav ul a::after{ left:.55rem; right:.55rem; }
 }
 
 /* ------------------------------------------------------------- 5. BUTTONS */
@@ -781,6 +790,20 @@ h2 + .section-lede{ margin-top:var(--sp-5); }
 .faq-answer{ padding-bottom:var(--sp-5); max-width:65ch; }
 .faq-answer p{ color:var(--ink-80); font-size:1rem; }
 .faq-answer a{ font-weight:600; }
+
+/* FAQ page: search, topic links and topic groups */
+.faq-search{ margin-bottom:var(--sp-2); }
+.faq-count{ margin-bottom:var(--sp-5); }
+.faq-topics{ list-style:none; margin:0; padding:0; display:flex; flex-wrap:wrap; gap:var(--sp-2) var(--sp-4); }
+.faq-topics[hidden]{ display:none; }
+.faq-topics a{ font-size:.9375rem; color:var(--ink-80); }
+.faq-topics a:hover{ color:var(--green); }
+@media (min-width:64em){ .faq-topics{ display:grid; gap:var(--sp-2); } }
+.faq-group{ scroll-margin-top:calc(var(--head-h) + var(--sp-5)); }
+.faq-group[hidden]{ display:none; }
+.faq-group + .faq-group{ margin-top:var(--sp-8); }
+.faq-group-title{ margin-bottom:var(--sp-3); font-size:1.5rem; }
+.faq-empty p{ color:var(--ink-80); }
 
 /* start here — four routes, each with its own next step */
 .route-grid{ list-style:none; margin-inline:0; margin-bottom:0; padding:0; display:grid; gap:var(--sp-4); }
