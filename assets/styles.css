@@ -377,6 +377,15 @@ html.nav-open{ overflow:hidden; }
   .site-nav ul a:focus-visible{ outline-offset:0; }
   .site-nav ul a[aria-current="page"]{ font-weight:650; }
   .site-nav ul a[aria-current="page"]::after{ transform:scaleX(1); background:var(--gold); }
+  .site-nav ul a,
+  .btn.nav-cta{ white-space:nowrap; }
+}
+/* small laptops: five menu links plus the button, kept on one line */
+@media (min-width:60em) and (max-width:69.99em){
+  .nav-panel{ gap:var(--sp-3); }
+  .site-nav ul{ gap:0; }
+  .site-nav ul a{ padding:0 .55rem; font-size:.9375rem; }
+  .site-nav ul a::after{ left:.55rem; right:.55rem; }
 }
 
 /* ------------------------------------------------------------- 5. BUTTONS */

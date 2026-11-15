@@ -1,5 +1,12 @@
 # Changelog
 
+## v5.3 · Vacancies in the top menu (15 November 2026)
+
+| File | Change |
+|---|---|
+| All pages | Top menu now shows Vacancies between Teach With Us and Contact (marked as the current page on vacancies.html). |
+| `assets/styles.css` | Menu links and the Get Early Access button never break onto two lines; slightly tighter spacing on small laptops (960 to 1119px). |
+
 ## v5.2 · New FAQ (15 November 2026, branch `feature/new-faq`)
 
 From "Northbridge Global Campus FAQ, clean edition 1.1" (14 November 2026).
