@@ -1,5 +1,14 @@
 # Changelog
 
+## v5.1 · Vacancies page (12 November 2026, branch `feature/vacancies`)
+
+| File | Change |
+|---|---|
+| `vacancies.html` | New page: lecturer vacancies for the Founding Practitioner Network. 100% online and open to applicants worldwide. One card per programme (all six), key requirements, why join, and how to apply (CV by email, review, then a 10-minute teaching demonstration video for shortlisted candidates). Apply buttons open an email to hr@northbridgeglobalcampus.com with the subject "Lecturer Application: [Programme]"; WhatsApp is offered as a second option. Built from the existing page components; no CSS changes. |
+| All pages | Footer "Explore" list has a new Vacancies link. |
+| `careers.html` | Teach With Us hero has a second button, "See open vacancies". |
+| `sitemap.xml` | Adds vacancies.html. |
+
 ## v5.0 · Go live on northbridgeglobalcampus.com (20 October 2026, branch `feature/go-live`)
 
 | File | Change |
