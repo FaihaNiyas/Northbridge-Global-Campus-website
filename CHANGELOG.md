@@ -1,5 +1,13 @@
 # Changelog
 
+## v5.4 · Global share image (15 November 2026)
+
+| File | Change |
+|---|---|
+| `assets/og-image-global.png` | New link preview image for WhatsApp, Facebook and LinkedIn. The line under the logo now reads "Practical skills for global careers." (was "Sri Lankan careers"). New file name so apps fetch the new picture instead of a saved copy. |
+| `assets/og-image.png` | Removed (replaced by the file above). |
+| All pages, `README.md` | `og:image` and `twitter:image` point to the new file. |
+
 ## v5.3 · Vacancies in the top menu (15 November 2026)
 
 | File | Change |
