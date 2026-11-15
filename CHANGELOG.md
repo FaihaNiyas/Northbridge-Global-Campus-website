@@ -1,5 +1,18 @@
 # Changelog
 
+## v5.2 · New FAQ (15 November 2026, branch `feature/new-faq`)
+
+From "Northbridge Global Campus FAQ, clean edition 1.1" (14 November 2026).
+
+| File | Change |
+|---|---|
+| `faq.html` | New FAQ page: all 104 answers in 12 topics, with a search box and topic links, plus FAQPage structured data for search engines. Email addresses and the WhatsApp number in answers are links. |
+| `index.html` | The old six-question FAQ is removed. A new FAQ section shows 8 questions from "Start here", with "See all questions" and "Ask on WhatsApp" buttons. |
+| All pages | Footer "Explore" list has a new FAQ link; the 404 page lists it too. |
+| `assets/styles.css` | Styles for the FAQ page search, topic links and topic groups (existing tokens only). |
+| `assets/site.js` | `initFaqSearch()`: filters the questions as you type and hides empty topics. |
+| `sitemap.xml` | Adds faq.html. |
+
 ## v5.1 · Vacancies page (12 November 2026, branch `feature/vacancies`)
 
 | File | Change |

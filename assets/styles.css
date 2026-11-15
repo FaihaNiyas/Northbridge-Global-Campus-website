@@ -782,6 +782,20 @@ h2 + .section-lede{ margin-top:var(--sp-5); }
 .faq-answer p{ color:var(--ink-80); font-size:1rem; }
 .faq-answer a{ font-weight:600; }
 
+/* FAQ page: search, topic links and topic groups */
+.faq-search{ margin-bottom:var(--sp-2); }
+.faq-count{ margin-bottom:var(--sp-5); }
+.faq-topics{ list-style:none; margin:0; padding:0; display:flex; flex-wrap:wrap; gap:var(--sp-2) var(--sp-4); }
+.faq-topics[hidden]{ display:none; }
+.faq-topics a{ font-size:.9375rem; color:var(--ink-80); }
+.faq-topics a:hover{ color:var(--green); }
+@media (min-width:64em){ .faq-topics{ display:grid; gap:var(--sp-2); } }
+.faq-group{ scroll-margin-top:calc(var(--head-h) + var(--sp-5)); }
+.faq-group[hidden]{ display:none; }
+.faq-group + .faq-group{ margin-top:var(--sp-8); }
+.faq-group-title{ margin-bottom:var(--sp-3); font-size:1.5rem; }
+.faq-empty p{ color:var(--ink-80); }
+
 /* start here — four routes, each with its own next step */
 .route-grid{ list-style:none; margin-inline:0; margin-bottom:0; padding:0; display:grid; gap:var(--sp-4); }
 @media (min-width:48em){ .route-grid{ grid-template-columns:repeat(2,minmax(0,1fr)); gap:var(--sp-5); } }
